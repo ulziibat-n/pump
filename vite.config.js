@@ -26,7 +26,7 @@ export default defineConfig({
           jquery: '$',
         },
       },
-      external: ['jquery', 'gsap', 'splitting'],
+      external: ['jquery', 'gsap', 'splitting', 'swiper'],
     },
   },
 })
