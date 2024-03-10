@@ -62,17 +62,15 @@
     p,
     a {
       position: relative;
+      display: flex;
       opacity: 0;
-      visibility: hidden;
-      transform: translateY(50px);
-      transition: transform 3s cubic-bezier(0.075, 0.82, 0.165, 1),
-        opacity 3s cubic-bezier(0.075, 0.82, 0.165, 1);
-      transition-delay: calc(0.2s * var(--item-index) + 0.3s);
+      transform: translateY(100px);
+      transition: transform 3s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition-delay: calc(0.1s * var(--item-index) + 0.4s);
 
       .is-inview & {
         opacity: 1;
         transform: translateY(0);
-        visibility: visible;
       }
     }
   }
@@ -95,6 +93,7 @@
   }
 
   &-item {
+    direction: ltr;
     .absolute-image.is-animate {
       transition: transform 10s cubic-bezier(0.075, 0.82, 0.165, 1);
       will-change: transform;
@@ -103,11 +102,6 @@
 
     &.swiper-slide-active .absolute-image {
       transform: scale(1);
-    }
-
-    &.is-bottom .swiper-slide-active{
-      width: 100%;
-      transform: scale(1.5);
     }
   }
 }
@@ -133,6 +127,24 @@
 
     .swiper-slide-active & {
       opacity: 1;
+    }
+  }
+}
+
+.hero-width {
+
+  &.is-main {
+    transform: translateY(20%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 4s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-delay: .8s;
+    position: relative;
+
+    .is-inview & {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
     }
   }
 }

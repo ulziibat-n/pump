@@ -8,7 +8,7 @@ function hero() {
     paginationEl.classList.add('swiper-pagination')
     paginationEl.classList.add('hero-pagination')
     slider.appendChild(paginationEl)
-    const mainSlider = new Swiper(slider, {
+    new Swiper(slider, {
       spaceBetween: 2,
       slidesPerView: 1,
       loop: true,
@@ -27,19 +27,23 @@ function hero() {
       },
     })
 
-    const sliderVisible = document.querySelector('.slider-visible')
-    const secondSlider = new Swiper(sliderVisible, {
-      spaceBetween: 24,
-      slidesPerView: 1,
-      loop: true,
-      centeredSlides: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: true,
-      },
-    })
-    mainSlider.controller.control = secondSlider
-    secondSlider.controller.control = mainSlider
+    // const sliderVisibleLeft = document.querySelector('.slider-visible-left')
+    // const secondSliderLeft = new Swiper(sliderVisibleLeft, {
+    //   spaceBetween: 0,
+    //   slidesPerView: 'auto',
+    //   loop: true,
+    // })
+    // secondSliderLeft.changeLanguageDirection('rtl')
+    // const sliderVisibleRight = document.querySelector('.slider-visible-right')
+    // const secondSliderRight = new Swiper(sliderVisibleRight, {
+    //   spaceBetween: 0,
+    //   slidesPerView: 'auto',
+    //   loop: true,
+    // })
+    // mainSlider.controller.control = secondSliderLeft
+    // mainSlider.controller.control = secondSliderRight
+    // secondSliderRight.controller.control = mainSlider
+    // secondSliderLeft.controller.control = mainSlider
   }
 }
 
