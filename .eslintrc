@@ -11,6 +11,12 @@
     "jest": true,
     "browser": true
   },
+  "globals": {
+    "Swiper": true,
+    "Splitting": true,
+    "gsap": true,
+    "ScrollTrigger": true
+  },
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "plugins": ["import", "sort-imports-es6-autofix"],
   "rules": {

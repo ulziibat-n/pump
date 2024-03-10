@@ -1,5 +1,3 @@
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 function viewportDetect() {
   const inViews = document.querySelectorAll('[data-inview]')

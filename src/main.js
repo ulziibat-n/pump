@@ -1,5 +1,3 @@
-import Splitting from 'splitting'
-
 import animateTitle from './features/animateTitle'
 import hero from './features/hero'
 import viewportDetect from './features/viewportDetect'

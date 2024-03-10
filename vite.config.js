@@ -26,7 +26,7 @@ export default defineConfig({
           jquery: '$',
         },
       },
-      external: ['jquery', 'gsap', 'splitting', 'swiper'],
+      external: ['jquery', 'gsap', 'splitting', 'swiper', 'gsap/ScrollTrigger'],
     },
   },
 })
