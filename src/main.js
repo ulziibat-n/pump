@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { CustomEase, ScrollTrigger, SplitText } from 'gsap/all'
 import Swiper from 'swiper'
 import { Pagination } from 'swiper/modules'
+import Typed from 'typed.js'
 import 'swiper/css'
 import './styles/style.scss'
 
@@ -146,6 +147,28 @@ function runSections() {
       scrollTrigger: {
         trigger: '.black-top',
         start: 'top 70%',
+      },
+      onComplete: () => {
+        new Typed('.typed-text', {
+          strings: [
+            'Quels objectifs financiers me fixer ?',
+            'Comment me créer des revenus complémentaires nets de fiscalité?',
+            'Comment réduire mes impôts ?',
+            'Je souhaiterais optimiser ma rémunération de dirigeant',
+            'Comment épargner intelligemment ? ',
+            'Est-ilpossible de transmettre mon patrimoine à moindre coût',
+            'Quelles recommandations pour protéger ma famille',
+            "J'ai besoin de me créer un patrimoine diversifié et solide",
+            'Comment créer un programme d’investissement adapté à ma situation perso',
+            "Est-il possible d'anticiper la cession de mon entreprise",
+            'Comment préparer ma retraite individuelle pour conserver mon niveau de vie',
+            'Quelles conseils pour commencer à investir ?',
+          ],
+          typeSpeed: 50,
+          loop: false,
+          loopCount: Infinity,
+          showCursor: false,
+        })
       },
     })
 
