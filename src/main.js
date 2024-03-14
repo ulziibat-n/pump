@@ -350,13 +350,14 @@ function runSections() {
       {
         opacity: 1,
         y: '0rem',
-        duration: 2,
+        duration: 1,
         stagger: 0.1,
-        delay: 0.1,
+        delay: 0.5,
+        ease: 'base',
         scrollTrigger: {
           trigger: '.cards',
-          start: 'top 70%',
-          end: 'bottom 70%',
+          start: 'top 10%',
+          end: 'top center',
         },
       }
     )
@@ -366,18 +367,22 @@ function runSections() {
       {
         opacity: 0,
         scale: 0.9,
-        y: '4rem',
+        y: '40%',
       },
       {
         opacity: 1,
         y: '0rem',
         scale: 1,
-        duration: 0.5,
+        duration: 1,
         stagger: 0.1,
+        delay: 1,
+        ease: 'base',
         scrollTrigger: {
           trigger: '.card-row',
-          start: 'top 80%',
-          end: 'top 10%',
+          start: 'top center',
+          end: 'bottom center',
+          scrub: 1,
+          once: true,
         },
       }
     )
