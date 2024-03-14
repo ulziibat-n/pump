@@ -36,7 +36,8 @@ window.onload = () => {
 }
 
 function runSections() {
-  // Get the element from the DOM
+  // Hero Section
+  // ---------------------------------------
   const sectionHero = document.querySelector('[data-section="hero"]')
 
   // If it exists, play the aniamtion
@@ -49,14 +50,9 @@ function runSections() {
     if (heroElements && heroTitle) {
       const heroTimeline = gsap.timeline({
         defaults: {
-          // children inherit these defaults
-          duration: 1,
           ease: 'base',
         },
       })
-
-      console.log(heroTitle)
-      console.log(heroElements)
 
       heroElements = gsap.utils.toArray(heroElements)
       heroElements.unshift(heroTitle.lines)
@@ -140,5 +136,80 @@ function runSections() {
         },
       })
     }
+
+    // Black Top Section
+    // ---------------------------------------
+    const blackTopTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+      scrollTrigger: {
+        trigger: '.black-top',
+        start: 'top 70%',
+      },
+    })
+
+    const blackTopTitle = new SplitText('.black-top h2', { type: 'lines' })
+
+    blackTopTimeline
+      .fromTo(
+        blackTopTitle.lines,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.1,
+        }
+      )
+      .fromTo(
+        '.black-top p.black-desciption',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.1,
+        },
+        '-=2'
+      )
+      .fromTo(
+        '.black-top .search',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.1,
+        },
+        '-=2'
+      )
+
+    // ScrollTrigger.create({
+    //   animation: blackTopTimeline,
+    //   trigger: '.black-top',
+    //   start: 'bottom 90%',
+    //   end: '+=' + document.querySelector('.black-top').offsetHeight,
+    //   markers: true, // only during development!
+    //   pin: true,
+    //   pinSpacing: true,
+    //   anticipatePin: 1,
+    //   pinType: 'transform',
+    //   pinReparent: '.black-top-pin',
+    //   pinnedContainer: '.black-top-pin',
+    //   toggleActions: 'play pause resume reverse',
+    // })
   }
 }
