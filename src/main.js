@@ -15,7 +15,9 @@ document.body.classList.add('is-loading')
 console.log('Welcome to Vite + JS + Webflow! 😍')
 
 window.onload = () => {
-  const lenis = new Lenis()
+  const lenis = new Lenis({
+    lerp: 1,
+  })
   // lenis.on('scroll', (e) => {
   //   console.log(e)
   // })
@@ -236,7 +238,14 @@ function runSections() {
     // ---------------------------------------
 
     const mediaItems = gsap.utils.toArray('.media-item')
-    const duration = 10
+    gsap.set('.black-image', {
+      scale: 1.5,
+    })
+    gsap.set('.message', {
+      opacity: 0,
+      scale: 0.9,
+      y: '1rem',
+    })
     const blackBottomTimeline = gsap.timeline({
       defaults: {
         ease: 'base',
@@ -322,13 +331,69 @@ function runSections() {
           mediaItems,
           {
             xPercent: -100 * (index - 1),
-            duration: duration,
+            duration: 3,
             ease: 'base',
             onStart: () => {
-              item.classList.add('show')
+              gsap.fromTo(
+                item.querySelector('.black-image'),
+                {
+                  scale: 1.1,
+                },
+                {
+                  scale: 1,
+                  duration: 3,
+                }
+              )
+              gsap.fromTo(
+                item.querySelectorAll('.message'),
+                {
+                  y: '1rem',
+                  opacity: 0,
+                  scale: 0.9,
+                  rotate: '3deg',
+                },
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  rotate: '0deg',
+                  duration: 0.35,
+                  stagger: 0.2,
+                  delay: 0.5,
+                  ease: 'base',
+                }
+              )
             },
             onReverseComplete: () => {
-              item.classList.remove('show')
+              gsap.fromTo(
+                item.querySelector('.black-image'),
+                {
+                  scale: 1,
+                },
+                {
+                  scale: 1.1,
+                  duration: 3,
+                }
+              )
+              gsap.fromTo(
+                item.querySelectorAll('.message'),
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  rotate: '0deg',
+                },
+                {
+                  y: '1rem',
+                  opacity: 0,
+                  scale: 0.9,
+                  rotate: '3deg',
+                  duration: 0.25,
+                  stagger: 0.2,
+                  delay: 0.5,
+                  ease: 'base',
+                }
+              )
             },
           },
           'label'
@@ -485,7 +550,8 @@ function runSections() {
           scale: 1,
           duration: 1,
           stagger: {
-            delay: 0.5,
+            each: 0.1,
+            grid: 'auto',
             from: 'center',
           },
           onReverseComplete: () => {
@@ -504,7 +570,8 @@ function runSections() {
           scale: 1,
           duration: 1,
           stagger: {
-            delay: 0.5,
+            each: 0.1,
+            grid: 'auto',
             from: 'center',
           },
           delay: 0.1,
