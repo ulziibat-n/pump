@@ -2,7 +2,7 @@ import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import { CustomEase, ScrollTrigger, SplitText } from 'gsap/all'
 import Swiper from 'swiper'
-import { Pagination } from 'swiper/modules'
+import { Pagination, EffectFade, Autoplay } from 'swiper/modules'
 import Typed from 'typed.js'
 import 'swiper/css'
 import './styles/style.scss'
@@ -119,14 +119,14 @@ function runSections() {
       paginationEl.classList.add('swiper-pagination')
       paginationEl.classList.add('hero-pagination')
       slider.appendChild(paginationEl)
-      new Swiper(slider, {
-        modules: [Pagination],
+      const heroSlider = new Swiper(slider, {
+        modules: [Pagination, EffectFade, Autoplay],
         spaceBetween: 2,
         slidesPerView: 1,
         loop: true,
         centeredSlides: true,
         autoplay: {
-          delay: 1000,
+          delay: 500,
           disableOnInteraction: true,
         },
         effect: 'fade',
@@ -138,6 +138,9 @@ function runSections() {
           clickable: true,
         },
       })
+
+      heroSlider.autoplay.start()
+      heroSlider.init()
     }
 
     // Black Top Section
@@ -387,7 +390,10 @@ function runSections() {
     // Icons Section
     // ---------------------------------------
 
-    //const iconsTitle = new SplitText('.icons-content h2', { type: 'lines' })
+    const iconsTitle = new SplitText('.icons-texts h2', { type: 'lines' })
+
+    let iconsTexts = gsap.utils.toArray(['.icons-texts a'])
+    iconsTexts.unshift(iconsTitle.lines)
 
     const iconsTimeline = gsap.timeline({
       defaults: {
@@ -396,26 +402,141 @@ function runSections() {
       scrollTrigger: {
         trigger: '.icons',
         pin: true,
-        scrub: 1,
-        snap: 1 / 3,
-        end: () => '+=' + document.querySelector('.cards').offsetHeight * 3,
+        scrub: 10,
+        snap: true,
+        end: () => '+=' + document.querySelector('.cards').offsetHeight * 2,
       },
     })
 
-    iconsTimeline.fromTo(
-      '.icons-rows',
-      {
-        opacity: 0,
-        scale: 3,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 2,
-        stagger: 0.1,
-        delay: 0.1,
-      }
-    )
+    gsap.set('.icon', { opacity: 0 })
+    gsap.set('.icon-featured', { opacity: 1 })
+    gsap.set(iconsTexts, { opacity: 0 })
+    gsap.set('.icon-bg', { opacity: 0 })
+    gsap.set('.icon-text', { opacity: 0 })
+    gsap.set('.icon-symbol', { opacity: 1 })
+
+    iconsTimeline
+      .fromTo(
+        '.icon-featured',
+        {
+          scale: 0,
+          opacity: 0,
+          y: '50%',
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.5,
+        },
+        '<50%'
+      )
+      .fromTo(
+        '.icons-vegnete',
+        {
+          opacity: 0.1,
+          scale: 1.1,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 4,
+          onComplete: () => {
+            document.querySelector('.icon-featured').classList.add('done')
+          },
+        }
+      )
+      .fromTo(
+        '.icons-rows',
+        {
+          scale: 2,
+        },
+        {
+          scale: 1,
+          duration: 2,
+          stagger: 0.1,
+        },
+        '<30%'
+      )
+      .fromTo(
+        '.row-primary .icon:not(.icon-featured)',
+        {
+          opacity: 0,
+          scale: 0.5,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.1,
+          stagger: {
+            delay: 0.1,
+            from: 'center',
+          },
+          onReverseComplete: () => {
+            document.querySelector('.icon-featured').classList.remove('done')
+          },
+        }
+      )
+      .fromTo(
+        '.row-secondary .icon',
+        {
+          opacity: 0,
+          scale: 0.5,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          stagger: {
+            delay: 0.1,
+            from: 'center',
+          },
+          delay: 0.1,
+        }
+      )
+      .fromTo(
+        iconsTexts,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.1,
+        }
+      )
+      .fromTo(
+        '.row-primary',
+        {
+          x: 0,
+          opacity: 1,
+        },
+        {
+          x: '-10%',
+          duration: 8,
+          delay: 0.1,
+          opacity: 0,
+        },
+        '<'
+      )
+      .fromTo(
+        '.row-secondary',
+        {
+          x: 0,
+          opacity: 1,
+        },
+        {
+          x: '10%',
+          opacity: 0,
+          duration: 8,
+          stagger: 0.1,
+          delay: 0.1,
+        },
+        '<'
+      )
 
     // ScrollTrigger.create({
     //   animation: blackTopTimeline,
