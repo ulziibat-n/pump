@@ -15,7 +15,9 @@ document.body.classList.add('is-loading')
 console.log('Welcome to Vite + JS + Webflow! 😍')
 
 window.onload = () => {
-  const lenis = new Lenis()
+  const lenis = new Lenis({
+    lerp: 0.75,
+  })
   // lenis.on('scroll', (e) => {
   //   console.log(e)
   // })
@@ -369,14 +371,14 @@ function runSections() {
       '.card',
       {
         opacity: 0,
-        scale: 0.8,
-        y: '5%',
+        scale: 0.7,
+        y: '3rem',
       },
       {
         opacity: 1,
         y: '0rem',
         scale: 1,
-        duration: 2,
+        duration: 1,
         stagger: 0.2,
         ease: 'base',
         scrollTrigger: {
@@ -397,14 +399,14 @@ function runSections() {
 
     const iconsTimeline = gsap.timeline({
       defaults: {
-        ease: 'base',
+        ease: 'power2',
       },
       scrollTrigger: {
         trigger: '.icons',
         pin: true,
-        scrub: 10,
+        scrub: 2,
         snap: true,
-        end: () => '+=' + document.querySelector('.cards').offsetHeight * 2,
+        end: () => '+=' + document.querySelector('.cards').offsetHeight * 1.2,
       },
     })
 
@@ -519,6 +521,7 @@ function runSections() {
           duration: 8,
           delay: 0.1,
           opacity: 0,
+          ease: 'power2',
         },
         '<'
       )
@@ -534,6 +537,7 @@ function runSections() {
           duration: 8,
           stagger: 0.1,
           delay: 0.1,
+          ease: 'power2',
         },
         '<'
       )
