@@ -350,13 +350,13 @@ function runSections() {
       {
         opacity: 1,
         y: '0rem',
-        duration: 1,
+        duration: 2,
         stagger: 0.1,
         delay: 0.5,
         ease: 'base',
         scrollTrigger: {
           trigger: '.cards',
-          start: 'top 10%',
+          start: 'top 80%',
           end: 'top center',
         },
       }
@@ -366,24 +366,54 @@ function runSections() {
       '.card',
       {
         opacity: 0,
-        scale: 0.9,
-        y: '40%',
+        scale: 0.8,
+        y: '5%',
       },
       {
         opacity: 1,
         y: '0rem',
         scale: 1,
-        duration: 1,
-        stagger: 0.1,
-        delay: 1,
+        duration: 2,
+        stagger: 0.2,
         ease: 'base',
         scrollTrigger: {
-          trigger: '.card-row',
-          start: 'top center',
+          trigger: '.card-col',
+          start: 'top 80%',
           end: 'bottom center',
-          scrub: 1,
-          once: true,
         },
+      }
+    )
+
+    // Icons Section
+    // ---------------------------------------
+
+    //const iconsTitle = new SplitText('.icons-content h2', { type: 'lines' })
+
+    const iconsTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+      scrollTrigger: {
+        trigger: '.icons',
+        pin: true,
+        scrub: 1,
+        snap: 1 / 3,
+        end: () => '+=' + document.querySelector('.cards').offsetHeight * 3,
+      },
+    })
+
+    iconsTimeline.fromTo(
+      '.icons-rows',
+      {
+        opacity: 0,
+        scale: 3,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 2,
+        stagger: 0.1,
+        delay: 0.1,
       }
     )
 
