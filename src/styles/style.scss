@@ -12,14 +12,18 @@
 .icon-featured svg > path,
 .icon-featured svg > rect {
   opacity: 0;
-  transform: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-  transform: scale(0.5);
+  visibility: hidden;
+  transform: transform 4s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: relative;
+  display: block;
+  transform: scale(0.2);
   transition-delay: 0.1s;
 }
 
 .icon-featured.done svg > path,
 .icon-featured.done svg > rect {
   opacity: 1;
+  visibility: visible;
   transform: scale(1);
   transition-delay: 0;
 }

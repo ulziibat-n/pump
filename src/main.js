@@ -15,9 +15,7 @@ document.body.classList.add('is-loading')
 console.log('Welcome to Vite + JS + Webflow! 😍')
 
 window.onload = () => {
-  const lenis = new Lenis({
-    lerp: 0.75,
-  })
+  const lenis = new Lenis()
   // lenis.on('scroll', (e) => {
   //   console.log(e)
   // })
@@ -36,6 +34,10 @@ window.onload = () => {
   console.log('Site Loaded ✅')
   runSections()
   console.log('Hero Section ✅')
+}
+
+window.onresize = function () {
+  location.reload()
 }
 
 function runSections() {
@@ -233,15 +235,53 @@ function runSections() {
     // Black Bottom Section
     // ---------------------------------------
 
+    const mediaItems = gsap.utils.toArray('.media-item')
+    const duration = 10
+    const sectionIncrement = duration / (mediaItems.length - 1)
     const blackBottomTimeline = gsap.timeline({
       defaults: {
         ease: 'base',
       },
       scrollTrigger: {
         trigger: '.black-bottom',
-        start: 'top 70%',
-        end: 'bottom 70%',
+        scrub: true,
+        pin: true,
+        snap: {
+          snapTo: 1 / (mediaItems.length - 1),
+          duration: 2,
+          directional: true,
+          ease: 'linear',
+        },
+        start: 'top top',
+        pinnedContainer: '.media-wrapper',
+        pinReparent: true,
+        pinSpacer: true,
+        pinSpacing:
+          document.querySelector('.media-item').offsetWidth * mediaItems.length,
+        end: () =>
+          '+=' +
+          document.querySelector('.media-item').offsetWidth *
+            (mediaItems.length - 1),
       },
+    })
+
+    mediaItems.forEach((section, index) => {
+      let tween = gsap.from(section, {
+        opacity: 0,
+        scale: 0.6,
+        duration: 1,
+        force3D: true,
+        paused: true,
+      })
+      addSectionCallbacks(blackBottomTimeline, {
+        start: sectionIncrement * (index - 0.99),
+        end: sectionIncrement * (index + 0.99),
+        onEnter: () => tween.play(),
+        onLeave: () => tween.reverse(),
+        onEnterBack: () => tween.play(),
+        onLeaveBack: () => tween.reverse(),
+      })
+      index || tween.progress(1) // the first tween should be at its end (already faded/scaled in)
     })
 
     const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
@@ -259,6 +299,7 @@ function runSections() {
           duration: 2,
           stagger: 0.1,
           delay: 0.1,
+          ease: 'base',
         }
       )
       .fromTo(
@@ -273,58 +314,54 @@ function runSections() {
           duration: 2,
           stagger: 0.1,
           delay: 0.1,
+          ease: 'base',
         },
         '-=2'
       )
-      .fromTo(
-        '.black-media',
+      .to(
+        mediaItems,
         {
-          opacity: 0,
-          scale: 0.95,
-          y: '3rem',
+          xPercent: -100 * (mediaItems.length - 1),
+          duration: duration,
+          ease: 'none',
+          onStart: () => {
+            console.log(this)
+          },
         },
-        {
-          opacity: 1,
-          scale: 1,
-          y: '0rem',
-          duration: 2,
-          stagger: 0.1,
-          delay: 0.1,
-        },
-        '-=2'
+        'HSS'
       )
-      .fromTo(
-        '.black-media .black-image',
-        {
-          scale: 1.5,
-        },
-        {
-          scale: 1,
-          duration: 3,
-          stagger: 0.1,
-          delay: 0.1,
-        },
-        '-=2'
-      )
-      .fromTo(
-        '.message',
-        {
-          y: '1rem',
-          opacity: 0,
-          scale: 0.9,
-          rotate: '3deg',
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotate: '0deg',
-          duration: 1,
-          stagger: 0.2,
-          delay: 0.5,
-        },
-        '-=2'
-      )
+      // .fromTo(
+      //   '.black-media .black-image',
+      //   {
+      //     scale: 1.5,
+      //   },
+      //   {
+      //     scale: 1,
+      //     duration: 3,
+      //     stagger: 0.1,
+      //     delay: 0.1,
+      //   },
+      //   '-=2'
+      // )
+      // .fromTo(
+      //   '.message',
+      //   {
+      //     y: '1rem',
+      //     opacity: 0,
+      //     scale: 0.9,
+      //     rotate: '3deg',
+      //   },
+      //   {
+      //     y: 0,
+      //     opacity: 1,
+      //     scale: 1,
+      //     rotate: '0deg',
+      //     duration: 1,
+      //     stagger: 0.2,
+      //     delay: 0.5,
+      //   },
+      //   '-=2'
+      // )
       .fromTo(
         '.black-bottom .button',
         {
@@ -405,7 +442,7 @@ function runSections() {
         trigger: '.icons',
         pin: true,
         scrub: 2,
-        snap: true,
+        snap: 1 / 3,
         end: () => '+=' + document.querySelector('.cards').offsetHeight * 1.2,
       },
     })
@@ -469,9 +506,9 @@ function runSections() {
         {
           opacity: 1,
           scale: 1,
-          duration: 0.1,
+          duration: 1,
           stagger: {
-            delay: 0.1,
+            delay: 0.5,
             from: 'center',
           },
           onReverseComplete: () => {
@@ -490,7 +527,7 @@ function runSections() {
           scale: 1,
           duration: 1,
           stagger: {
-            delay: 0.1,
+            delay: 0.5,
             from: 'center',
           },
           delay: 0.1,
@@ -557,4 +594,36 @@ function runSections() {
     //   toggleActions: 'play pause resume reverse',
     // })
   }
+}
+
+function addSectionCallbacks(
+  timeline,
+  { start, end, param, onEnter, onLeave, onEnterBack, onLeaveBack }
+) {
+  let trackDirection = (animation) => {
+      // just adds a "direction" property to the animation that tracks the moment-by-moment playback direction (1 = forward, -1 = backward)
+      let onUpdate = animation.eventCallback('onUpdate'), // in case it already has an onUpdate
+        prevTime = animation.time()
+      animation.direction = animation.reversed() ? -1 : 1
+      animation.eventCallback('onUpdate', () => {
+        let time = animation.time()
+        if (prevTime !== time) {
+          animation.direction = time < prevTime ? -1 : 1
+          prevTime = time
+        }
+        onUpdate && onUpdate.call(animation)
+      })
+    },
+    empty = (v) => v // in case one of the callbacks isn't defined
+  timeline.direction || trackDirection(timeline) // make sure direction tracking is enabled on the timeline
+  start >= 0 &&
+    timeline.add(
+      () => ((timeline.direction < 0 ? onLeaveBack : onEnter) || empty)(param),
+      start
+    )
+  end <= timeline.duration() &&
+    timeline.add(
+      () => ((timeline.direction < 0 ? onEnterBack : onLeave) || empty)(param),
+      end
+    )
 }
