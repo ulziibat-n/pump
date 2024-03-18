@@ -954,16 +954,31 @@ function runSections() {
           y: '0rem',
           duration: 2,
           stagger: 0.1,
-        }
-      )
-      .fromTo(
-        '.cta',
-        {
-          backgroundColor: 'transparent',
-        },
-        {
-          backgroundColor: '#333',
-          duration: 4,
+          onStart: () => {
+            gsap.fromTo(
+              '.cta',
+              {
+                backgroundColor: 'rgba(51, 51, 51, 0)',
+              },
+              {
+                backgroundColor: 'rgba(51, 51, 51, 1)',
+                duration: 3,
+                delay: 2,
+              }
+            )
+          },
+          onReverseComplete: () => {
+            gsap.fromTo(
+              '.cta',
+              {
+                backgroundColor: 'rgba(51, 51, 51, 1)',
+              },
+              {
+                backgroundColor: 'rgba(51, 51, 51, 0)',
+                duration: 2,
+              }
+            )
+          },
         }
       )
   }
