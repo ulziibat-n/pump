@@ -16,7 +16,7 @@ console.log('Welcome to Vite + JS + Webflow! 😍')
 
 window.onload = () => {
   const lenis = new Lenis({
-    lerp: 0.5,
+    lerp: 0.1,
   })
   // lenis.on('scroll', (e) => {
   //   console.log(e)
@@ -251,7 +251,7 @@ function runSections() {
         ease: 'base',
       },
       scrollTrigger: {
-        trigger: '.black-bottom',
+        trigger: '.media-wrapper',
         scrub: true,
         pin: true,
         snap: {
@@ -273,9 +273,20 @@ function runSections() {
       },
     })
 
-    const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
+    const blackBottomTimeline1 = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+      scrollTrigger: {
+        trigger: '.black-bottom',
+        start: 'top bottom',
+        end: 'bottom center',
+        scrub: 1,
+      },
+    })
 
-    blackBottomTimeline
+    const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
+    blackBottomTimeline1
       .fromTo(
         blackBtoomTitle.lines,
         {
@@ -304,25 +315,30 @@ function runSections() {
           stagger: 0.1,
           delay: 0.1,
           ease: 'base',
+          scrollTrigger: {
+            trigger: '.black-bottom',
+            top: 'top 90%',
+          },
         },
         '-=2'
       )
-      .fromTo(
-        mediaItems,
-        {
-          opacity: 0,
-          scale: 0.5,
-          y: '3rem',
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 2,
-          ease: 'base',
-        },
-        '-=2'
-      )
+
+    blackBottomTimeline.fromTo(
+      mediaItems,
+      {
+        opacity: 0,
+        scale: 0.5,
+        y: '3rem',
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 2,
+        ease: 'base',
+      },
+      '-=2'
+    )
 
     let index = 1
     mediaItems.forEach((item) => {
@@ -431,6 +447,7 @@ function runSections() {
         scrollTrigger: {
           trigger: '.cards',
           start: 'top 80%',
+          scrub: true,
           end: 'top center',
         },
       }
@@ -453,6 +470,7 @@ function runSections() {
         scrollTrigger: {
           trigger: '.card-col',
           start: 'top 80%',
+          scrub: true,
           end: 'bottom center',
         },
       }
