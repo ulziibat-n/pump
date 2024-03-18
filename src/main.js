@@ -16,7 +16,7 @@ console.log('Welcome to Vite + JS + Webflow! 😍')
 
 window.onload = () => {
   const lenis = new Lenis({
-    lerp: 1,
+    lerp: 0.5,
   })
   // lenis.on('scroll', (e) => {
   //   console.log(e)
@@ -335,16 +335,6 @@ function runSections() {
             ease: 'base',
             onStart: () => {
               gsap.fromTo(
-                item.querySelector('.black-image'),
-                {
-                  scale: 1.1,
-                },
-                {
-                  scale: 1,
-                  duration: 3,
-                }
-              )
-              gsap.fromTo(
                 item.querySelectorAll('.message'),
                 {
                   y: '1rem',
@@ -623,19 +613,79 @@ function runSections() {
         '<'
       )
 
-    // ScrollTrigger.create({
-    //   animation: blackTopTimeline,
-    //   trigger: '.black-top',
-    //   start: 'bottom 90%',
-    //   end: '+=' + document.querySelector('.black-top').offsetHeight,
-    //   markers: true, // only during development!
-    //   pin: true,
-    //   pinSpacing: true,
-    //   anticipatePin: 1,
-    //   pinType: 'transform',
-    //   pinReparent: '.black-top-pin',
-    //   pinnedContainer: '.black-top-pin',
-    //   toggleActions: 'play pause resume reverse',
+    // Black Bottom Section
+    // ---------------------------------------
+
+    const reasonTitle = new SplitText('.reason h2', { type: 'lines' })
+
+    let reasonElements = gsap.utils.toArray(['.reason-p', '.reason-block'])
+
+    reasonElements.unshift(reasonTitle.lines)
+
+    gsap.fromTo(
+      reasonElements,
+      {
+        opacity: 0,
+        y: '3rem',
+      },
+      {
+        opacity: 1,
+        y: '0rem',
+        duration: 2,
+        stagger: 0.1,
+        delay: 0.5,
+        ease: 'base',
+        scrollTrigger: {
+          trigger: '.reason',
+          start: 'top 80%',
+          end: 'top center',
+        },
+      }
+    )
+
+    // Price Section
+    // ---------------------------------------
+
+    // const priceElements = gsap.utils.toArray([
+    //   '.price-heading p',
+    //   '.price-feature',
+    //   '.price-flex a',
+    // ])
+
+    // const priceTimeline = gsap.timeline({
+    //   defaults: {
+    //     ease: 'power2',
+    //   },
+    //   scrollTrigger: {
+    //     trigger: '.price-content',
+    //     pin: true,
+    //     scrub: true,
+    //     snap: {
+    //       snapTo: '.price-heading',
+    //       duration: 1,
+    //       delay: 0.5,
+    //       ease: 'base',
+    //     },
+    //     start: 'top top',
+    //     pinnedContainer: '.price-flex',
+    //     // pinSpacer: true,
+    //     // pinSpacing: document.querySelector('.price').offsetWidth * 1.5,
+    //     end: () => '+=' + document.querySelector('.price').offsetWidth * 5,
+    //   },
     // })
+
+    // priceTimeline.fromTo(
+    //   priceElements,
+    //   {
+    //     opacity: 0,
+    //     y: '3rem',
+    //   },
+    //   {
+    //     opacity: 1,
+    //     y: '0rem',
+    //     duration: 2,
+    //     stagger: 0.1,
+    //   }
+    // )
   }
 }
