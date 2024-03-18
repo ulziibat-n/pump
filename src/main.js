@@ -756,7 +756,7 @@ function runSections() {
                   opacity: 1,
                   scale: 1,
                   duration: 0.35,
-                  delay: 0,
+                  delay: 0.25,
                   ease: 'base',
                 }
               )
@@ -810,7 +810,7 @@ function runSections() {
                   scale: 0.9,
                   duration: 0.35,
                   stagger: 0.2,
-                  delay: 0,
+                  delay: 0.25,
                   ease: 'base',
                 }
               )
