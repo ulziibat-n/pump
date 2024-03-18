@@ -907,5 +907,64 @@ function runSections() {
           duration: 6,
         }
       )
+
+    // Last Section
+    // ---------------------------------------
+    gsap.set('.cta', {
+      backgroundColor: 'transparent',
+    })
+
+    const ctaTitle = new SplitText('.cta h2', { type: 'lines' })
+
+    let ctaElements = gsap.utils.toArray(['.cta a'])
+
+    ctaElements.unshift(ctaTitle.lines)
+
+    const ctaTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+      scrollTrigger: {
+        trigger: '.cta',
+        scrub: 10,
+        start: 'top 70%',
+      },
+    })
+
+    ctaTimeline
+      .fromTo(
+        '.cta-logo',
+        {
+          scale: 6,
+          opacity: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+        }
+      )
+      .fromTo(
+        ctaElements,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+        }
+      )
+      .fromTo(
+        '.cta',
+        {
+          backgroundColor: 'transparent',
+        },
+        {
+          backgroundColor: '#333',
+          duration: 4,
+        }
+      )
   }
 }
