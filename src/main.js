@@ -447,8 +447,8 @@ function runSections() {
         scrollTrigger: {
           trigger: '.cards',
           start: 'top 80%',
-          scrub: true,
-          end: 'top center',
+          scrub: 1,
+          end: 'bottom center',
         },
       }
     )
@@ -467,10 +467,11 @@ function runSections() {
         duration: 1,
         stagger: 0.2,
         ease: 'base',
+        delay: 0.5,
         scrollTrigger: {
           trigger: '.card-col',
           start: 'top 80%',
-          scrub: true,
+          scrub: 3,
           end: 'bottom center',
         },
       }
@@ -636,12 +637,79 @@ function runSections() {
 
     const reasonTitle = new SplitText('.reason h2', { type: 'lines' })
 
-    let reasonElements = gsap.utils.toArray(['.reason-p', '.reason-block'])
+    let reasonElements = gsap.utils.toArray(['.reason-p'])
 
     reasonElements.unshift(reasonTitle.lines)
 
-    gsap.fromTo(
-      reasonElements,
+    const reasonTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.reason',
+        start: 'top center',
+        end: 'bottom center',
+        scrub: 3,
+      },
+    })
+
+    reasonTimeline
+      .fromTo(
+        reasonElements,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.5,
+          ease: 'base',
+        }
+      )
+      .fromTo(
+        '.reason-block',
+        {
+          opacity: 0,
+          scale: 0.7,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          scale: 1,
+          duration: 2,
+          stagger: 0.2,
+          ease: 'base',
+        },
+        '-=2'
+      )
+
+    // Mockup Section
+    // ---------------------------------------
+
+    const howTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+      scrollTrigger: {
+        trigger: '.how',
+        pin: true,
+        scrub: true,
+        snap: {
+          snapTo: 'labels',
+          duration: 0.5,
+          ease: 'base',
+        },
+        start: 'top top',
+        pinnedContainer: '.how',
+        pinSpacer: true,
+        pinSpacing: document.querySelector('.how-item').offsetWidth * 1.5,
+        end: () => '+=' + document.querySelector('.how-item').offsetWidth * 5,
+      },
+    })
+
+    howTimeline.fromTo(
+      '.how h2',
       {
         opacity: 0,
         y: '3rem',
@@ -651,59 +719,193 @@ function runSections() {
         y: '0rem',
         duration: 2,
         stagger: 0.1,
-        delay: 0.5,
-        ease: 'base',
-        scrollTrigger: {
-          trigger: '.reason',
-          start: 'top 80%',
-          end: 'top center',
-        },
       }
     )
 
-    // Price Section
+    gsap.set('.how-works', {
+      opacity: 0,
+      scale: 0.9,
+      y: '5%',
+    })
+
+    gsap.set('.how-mockup', {
+      opacity: 0,
+      scale: 0.9,
+      y: '5%',
+    })
+    let index2 = 1
+    const howItems = document.querySelectorAll('.how-item')
+    howItems.forEach((item) => {
+      howTimeline.add(
+        gsap.to(
+          howItems,
+          {
+            xPercent: -100 * (index2 - 1),
+            duration: 3,
+            ease: 'base',
+            onStart: () => {
+              gsap.fromTo(
+                item.querySelectorAll('.how-works'),
+                {
+                  x: '5%',
+                  opacity: 0,
+                  scale: 0.9,
+                },
+                {
+                  x: 0,
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.35,
+                  delay: 0,
+                  ease: 'base',
+                }
+              )
+
+              gsap.fromTo(
+                item.querySelectorAll('.how-mockup'),
+                {
+                  y: '5%',
+                  opacity: 0,
+                  scale: 0.9,
+                },
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.35,
+                  stagger: 0.2,
+                  delay: 0.5,
+                  ease: 'base',
+                }
+              )
+            },
+            onReverseComplete: () => {
+              gsap.fromTo(
+                item.querySelectorAll('.how-works'),
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                },
+                {
+                  y: '5%',
+                  opacity: 0,
+                  scale: 0.0,
+                  duration: 0.35,
+                  delay: 0.5,
+                  ease: 'base',
+                }
+              )
+
+              gsap.fromTo(
+                item.querySelectorAll('.how-mockup'),
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                },
+                {
+                  y: '5%',
+                  opacity: 0,
+                  scale: 0.9,
+                  duration: 0.35,
+                  stagger: 0.2,
+                  delay: 0,
+                  ease: 'base',
+                }
+              )
+            },
+          },
+          'howLabel'
+        )
+      )
+      index2++
+    })
+
+    // Reviews Section
     // ---------------------------------------
 
-    // const priceElements = gsap.utils.toArray([
-    //   '.price-heading p',
-    //   '.price-feature',
-    //   '.price-flex a',
-    // ])
+    const reviewsTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+      scrollTrigger: {
+        trigger: '.reviews',
+        pin: true,
+        scrub: true,
+        snap: {
+          snapTo: '.reviews',
+          duration: 0.5,
+          ease: 'base',
+        },
+        start: 'top top',
+        pinnedContainer: '.reviews',
+        pinSpacer: true,
+        pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
+        end: () =>
+          '+=' + document.querySelector('.review-item').offsetWidth * 5,
+      },
+    })
 
-    // const priceTimeline = gsap.timeline({
-    //   defaults: {
-    //     ease: 'power2',
-    //   },
-    //   scrollTrigger: {
-    //     trigger: '.price-content',
-    //     pin: true,
-    //     scrub: true,
-    //     snap: {
-    //       snapTo: '.price-heading',
-    //       duration: 1,
-    //       delay: 0.5,
-    //       ease: 'base',
-    //     },
-    //     start: 'top top',
-    //     pinnedContainer: '.price-flex',
-    //     // pinSpacer: true,
-    //     // pinSpacing: document.querySelector('.price').offsetWidth * 1.5,
-    //     end: () => '+=' + document.querySelector('.price').offsetWidth * 5,
-    //   },
-    // })
+    const reviewsTitle = new SplitText('.reviews h2', { type: 'lines' })
 
-    // priceTimeline.fromTo(
-    //   priceElements,
-    //   {
-    //     opacity: 0,
-    //     y: '3rem',
-    //   },
-    //   {
-    //     opacity: 1,
-    //     y: '0rem',
-    //     duration: 2,
-    //     stagger: 0.1,
-    //   }
-    // )
+    let reviewsElements = gsap.utils.toArray([
+      '.reviews-h',
+      '.rating-total-top',
+    ])
+
+    reviewsElements.unshift(reviewsTitle.lines)
+    const review = document.querySelector('.review-item')
+    const reviewItems = document.querySelectorAll('.review-item')
+    const reviewWrapper = document.querySelector('.reviews-row')
+    const reviewsWidth =
+      (review.offsetWidth * reviewItems.length - reviewWrapper.offsetWidth) * -1
+    console.log(reviewsWidth)
+    console.log(review.offsetWidth)
+
+    reviewsTimeline
+      .fromTo(
+        reviewsElements,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          ScrollTrigger: {
+            trigger: '.review',
+            scrub: true,
+          },
+        }
+      )
+      .fromTo(
+        '.review',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          ScrollTrigger: {
+            trigger: '.review',
+          },
+        }
+      )
+      .fromTo(
+        '.review-wrapper',
+        {
+          x: 0,
+        },
+        {
+          x: reviewsWidth,
+          duration: 6,
+        }
+      )
   }
 }
