@@ -39,7 +39,7 @@ window.onload = () => {
 }
 
 window.onresize = function () {
-  location.reload()
+  //location.reload()
 }
 
 function runSections() {
