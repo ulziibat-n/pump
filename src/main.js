@@ -238,9 +238,6 @@ function runSections() {
     // ---------------------------------------
 
     const mediaItems = gsap.utils.toArray('.media-item')
-    gsap.set('.black-image', {
-      scale: 1.5,
-    })
     gsap.set('.message', {
       opacity: 0,
       scale: 0.9,
@@ -512,21 +509,6 @@ function runSections() {
         '<50%'
       )
       .fromTo(
-        '.icons-vegnete',
-        {
-          opacity: 0.1,
-          scale: 1.1,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 4,
-          onComplete: () => {
-            document.querySelector('.icon-featured').classList.add('done')
-          },
-        }
-      )
-      .fromTo(
         '.icons-rows',
         {
           scale: 2,
@@ -535,6 +517,9 @@ function runSections() {
           scale: 1,
           duration: 2,
           stagger: 0.1,
+          onComplete: () => {
+            document.querySelector('.icon-featured').classList.add('done')
+          },
         },
         '<30%'
       )
@@ -574,6 +559,19 @@ function runSections() {
             from: 'center',
           },
           delay: 0.1,
+        }
+      )
+      .fromTo(
+        '.icons-vegnete',
+        {
+          opacity: 0.1,
+          scale: 1.1,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 4,
+          delay: 2,
         }
       )
       .fromTo(
