@@ -372,16 +372,6 @@ function runSections() {
             },
             onReverseComplete: () => {
               gsap.fromTo(
-                item.querySelector('.black-image'),
-                {
-                  scale: 1,
-                },
-                {
-                  scale: 1.1,
-                  duration: 3,
-                }
-              )
-              gsap.fromTo(
                 item.querySelectorAll('.message'),
                 {
                   y: 0,
