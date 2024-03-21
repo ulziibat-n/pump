@@ -7,14 +7,14 @@ import Typed from 'typed.js'
 import 'swiper/css'
 import './styles/style.scss'
 
-gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, Flip)
+document.addEventListener('DOMContentLoaded', function () {
+  gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, Flip)
 
-CustomEase.create('base', '0.075, 0.82, 0.165, 1')
+  CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
-document.body.classList.add('is-loading')
-console.log('Welcome to Vite + JS + Webflow! 😍')
-ScrollTrigger.normalizeScroll(true)
-window.onload = () => {
+  document.body.classList.add('is-loading')
+  console.log('Welcome to Vite + JS + Webflow! 😍')
+  ScrollTrigger.normalizeScroll(true)
   const lenis = new Lenis({
     lerp: 0.1,
   })
@@ -33,11 +33,24 @@ window.onload = () => {
   console.log('Site Loaded ✅')
   runSections()
   console.log('Hero Section ✅')
-}
 
-window.onresize = function () {
-  location.reload()
-}
+  // Store the window width
+  var windowWidth = window.innerWidth
+
+  // Resize Event
+  window.addEventListener('resize', function () {
+    // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+    if (window.innerWidth != windowWidth) {
+      // Update the window width for next time
+      windowWidth = window.innerWidth
+
+      // Do stuff here
+    }
+
+    // Otherwise do nothing
+    location.reload()
+  })
+})
 
 function runSections() {
   // Hero Section
@@ -168,6 +181,8 @@ function runSections() {
           },
           start: 'bottom bottom',
           pin: true,
+          anticipatePin: 1,
+          immediateRender: false,
           scrub: 1,
           pinnedContainer: '.hero',
           pinSpacing:
