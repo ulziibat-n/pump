@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Otherwise do nothing
-    location.reload()
+    //location.reload()
   })
 })
 
