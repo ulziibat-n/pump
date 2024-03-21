@@ -153,10 +153,10 @@ function runSections() {
 
       const sliderTimeline = gsap.timeline({
         defaults: {
-          ease: 'linear',
+          ease: 'base',
         },
         onComplete: () => {
-          heroSlider.slideTo(8)
+          heroSlider.slideTo(sliderItems.length)
           console.log('hey')
         },
         onReverseComplete: () => {
@@ -164,66 +164,57 @@ function runSections() {
         },
         scrollTrigger: {
           trigger: '.hero',
+          snap: {
+            snapTo: 'labelsDirectional',
+            duration: 0,
+            ease: 'linear',
+          },
           start: 'bottom bottom',
           pin: true,
           scrub: 1,
+          pinnedContainer: '.hero',
+          pinReparent: true,
+          pinSpacer: true,
+          pinSpacing:
+            document.querySelector('.slider-visible-left .slider-item')
+              .offsetWidth * sliderItems.length,
           end: () =>
             '+=' +
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth *
-              sliderItems.length,
+              sliderItems.length *
+              2,
         },
       })
       sliderItems.forEach((item, index) => {
-        console.log('added' + item)
         sliderTimeline.add(
-          gsap.fromTo(
-            '.slider-visible-right .slider-list',
-            {
-              x:
-                0 -
-                document.querySelector('.slider-visible-left .slider-item')
-                  .offsetWidth *
-                  index,
+          gsap.to('.slider-visible-right .slider-list', {
+            x:
+              0 -
+              document.querySelector('.slider-visible-left .slider-item')
+                .offsetWidth *
+                (index + 1),
+            duration: 1,
+            onComplete: () => {
+              console.log('next')
+              heroSlider.slideTo(index + 1)
             },
-            {
-              x:
-                0 -
-                document.querySelector('.slider-visible-left .slider-item')
-                  .offsetWidth *
-                  (index + 1),
-              duration: 1,
-              ease: 'linear',
+            onReverseComplete: () => {
+              console.log('prev')
+              heroSlider.slideTo(index + 1)
             },
-            '<'
-          )
+          })
         )
         sliderTimeline.add(
-          gsap.fromTo(
+          gsap.to(
             '.slider-visible-left .slider-list',
             {
               x:
                 0 +
                 document.querySelector('.slider-visible-left .slider-item')
                   .offsetWidth *
-                  index,
-            },
-            {
-              x:
-                0 +
-                document.querySelector('.slider-visible-left .slider-item')
-                  .offsetWidth *
                   (index + 1),
               duration: 1,
-              ease: 'linear',
-              onComplete: () => {
-                console.log('next')
-                heroSlider.slideTo(index + 1)
-              },
-              onReverseComplete: () => {
-                console.log('prev')
-                heroSlider.slideTo(index + 1)
-              },
             },
             '<'
           )
@@ -328,19 +319,19 @@ function runSections() {
     })
     const blackBottomTimeline = gsap.timeline({
       defaults: {
-        ease: 'base',
+        ease: 'linear',
       },
       scrollTrigger: {
         trigger: '.media-wrapper',
-        scrub: true,
+        scrub: 1,
         pin: true,
         snap: {
-          snapTo: 'labelsDirectional',
+          snapTo: 'labels',
           duration: 1,
           delay: 0.5,
-          ease: 'base',
+          ease: 'linear',
         },
-        start: 'bottom bottom',
+        start: 'center center',
         pinnedContainer: '.media-wrapper',
         pinReparent: true,
         pinSpacer: true,
