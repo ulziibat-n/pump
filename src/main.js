@@ -151,9 +151,9 @@ function runSections() {
         width: longWidth,
       })
 
-      const sliderTimeline = gsap.timeline({
+      const sliderTimelineRight = gsap.timeline({
         defaults: {
-          ease: 'base',
+          ease: 'linear',
         },
         onComplete: () => {
           heroSlider.slideTo(sliderItems.length)
@@ -165,7 +165,36 @@ function runSections() {
         scrollTrigger: {
           trigger: '.hero',
           snap: {
-            snapTo: 'labelsDirectional',
+            snapTo: 'labels',
+            duration: 0,
+            ease: 'linear',
+          },
+          start: 'bottom bottom',
+          pin: true,
+          scrub: 1,
+          pinnedContainer: '.hero',
+          pinReparent: true,
+          pinSpacer: true,
+          pinSpacing:
+            document.querySelector('.slider-visible-left .slider-item')
+              .offsetWidth * sliderItems.length,
+          end: () =>
+            '+=' +
+            document.querySelector('.slider-visible-left .slider-item')
+              .offsetWidth *
+              sliderItems.length *
+              2,
+        },
+      })
+
+      const sliderTimelineLeft = gsap.timeline({
+        defaults: {
+          ease: 'linear',
+        },
+        scrollTrigger: {
+          trigger: '.hero',
+          snap: {
+            snapTo: 'labels',
             duration: 0,
             ease: 'linear',
           },
@@ -187,7 +216,7 @@ function runSections() {
         },
       })
       sliderItems.forEach((item, index) => {
-        sliderTimeline.add(
+        sliderTimelineRight.add(
           gsap.to('.slider-visible-right .slider-list', {
             x:
               0 -
@@ -205,7 +234,11 @@ function runSections() {
             },
           })
         )
-        sliderTimeline.add(
+        sliderTimelineRight.addLabel('labelSlider')
+      })
+
+      sliderItems.forEach((item, index) => {
+        sliderTimelineLeft.add(
           gsap.to(
             '.slider-visible-left .slider-list',
             {
@@ -219,7 +252,6 @@ function runSections() {
             '<'
           )
         )
-        sliderTimeline.addLabel('labelSlider')
       })
     }
 
