@@ -55,6 +55,9 @@ function runSections() {
       '.hero-content a',
     ])
     if (heroElements && heroTitle) {
+      const sliderItems = document.querySelectorAll(
+        '.slider-visible-right .slider-item'
+      )
       const heroTimeline = gsap.timeline({
         defaults: {
           ease: 'base',
@@ -63,6 +66,29 @@ function runSections() {
 
       heroElements = gsap.utils.toArray(heroElements)
       heroElements.unshift(heroTitle.lines)
+
+      // Get the element from the DOM
+      const slider = document.querySelector('.slider')
+
+      // If it exists, play the aniamtion
+      const paginationEl = document.createElement('div')
+      paginationEl.classList.add('swiper-pagination')
+      paginationEl.classList.add('hero-pagination')
+      slider.appendChild(paginationEl)
+      const heroSlider = new Swiper(slider, {
+        modules: [Pagination, EffectFade, Autoplay],
+        spaceBetween: 2,
+        slidesPerView: 1,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true,
+        },
+        pagination: {
+          el: paginationEl,
+          clickable: true,
+        },
+      })
+      heroSlider.init()
 
       heroTimeline
         .fromTo(
@@ -114,39 +140,96 @@ function runSections() {
           },
           '-=1.5'
         )
-    }
-
-    // Get the element from the DOM
-    const slider = document.querySelector('.slider')
-
-    // If it exists, play the aniamtion
-    if (slider) {
-      const paginationEl = document.createElement('div')
-      paginationEl.classList.add('swiper-pagination')
-      paginationEl.classList.add('hero-pagination')
-      slider.appendChild(paginationEl)
-      const heroSlider = new Swiper(slider, {
-        modules: [Pagination, EffectFade, Autoplay],
-        spaceBetween: 2,
-        slidesPerView: 1,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-          delay: 500,
-          disableOnInteraction: true,
-        },
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true,
-        },
-        pagination: {
-          el: paginationEl,
-          clickable: true,
-        },
+      console.log('total:' + sliderItems.length)
+      const longWidth =
+        document.querySelector('.slider-visible-right .slider-item')
+          .offsetWidth * sliderItems.length
+      gsap.set('.slider-visible-right .slider-list', {
+        width: longWidth,
+      })
+      gsap.set('.slider-visible-left .slider-list', {
+        width: longWidth,
       })
 
-      heroSlider.autoplay.start()
-      heroSlider.init()
+      const sliderTimeline = gsap.timeline({
+        defaults: {
+          ease: 'linear',
+        },
+        onComplete: () => {
+          heroSlider.slideTo(8)
+          console.log('hey')
+        },
+        onReverseComplete: () => {
+          heroSlider.slideTo(0)
+        },
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'bottom bottom',
+          pin: true,
+          scrub: 1,
+          end: () =>
+            '+=' +
+            document.querySelector('.slider-visible-left .slider-item')
+              .offsetWidth *
+              sliderItems.length,
+        },
+      })
+      sliderItems.forEach((item, index) => {
+        console.log('added' + item)
+        sliderTimeline.add(
+          gsap.fromTo(
+            '.slider-visible-right .slider-list',
+            {
+              x:
+                0 -
+                document.querySelector('.slider-visible-left .slider-item')
+                  .offsetWidth *
+                  index,
+            },
+            {
+              x:
+                0 -
+                document.querySelector('.slider-visible-left .slider-item')
+                  .offsetWidth *
+                  (index + 1),
+              duration: 1,
+              ease: 'linear',
+            },
+            '<'
+          )
+        )
+        sliderTimeline.add(
+          gsap.fromTo(
+            '.slider-visible-left .slider-list',
+            {
+              x:
+                0 +
+                document.querySelector('.slider-visible-left .slider-item')
+                  .offsetWidth *
+                  index,
+            },
+            {
+              x:
+                0 +
+                document.querySelector('.slider-visible-left .slider-item')
+                  .offsetWidth *
+                  (index + 1),
+              duration: 1,
+              ease: 'linear',
+              onComplete: () => {
+                console.log('next')
+                heroSlider.slideTo(index + 1)
+              },
+              onReverseComplete: () => {
+                console.log('prev')
+                heroSlider.slideTo(index + 1)
+              },
+            },
+            '<'
+          )
+        )
+        sliderTimeline.addLabel('labelSlider')
+      })
     }
 
     // Black Top Section
@@ -257,7 +340,7 @@ function runSections() {
           delay: 0.5,
           ease: 'base',
         },
-        start: 'top top',
+        start: 'bottom bottom',
         pinnedContainer: '.media-wrapper',
         pinReparent: true,
         pinSpacer: true,
