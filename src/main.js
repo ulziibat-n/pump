@@ -1,3 +1,4 @@
+import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import { CustomEase, ScrollTrigger, SplitText, Flip } from 'gsap/all'
 import Swiper from 'swiper'
@@ -12,8 +13,20 @@ CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
 document.body.classList.add('is-loading')
 console.log('Welcome to Vite + JS + Webflow! 😍')
-
+ScrollTrigger.normalizeScroll(true)
 window.onload = () => {
+  const lenis = new Lenis({
+    lerp: 0.1,
+  })
+
+  lenis.on('scroll', ScrollTrigger.update)
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+  })
+
+  gsap.ticker.lagSmoothing(0)
+
   console.log('Lenis ✅')
   document.body.classList.remove('is-loading')
   document.body.classList.add('is-loaded')
@@ -23,7 +36,7 @@ window.onload = () => {
 }
 
 window.onresize = function () {
-  //location.reload()
+  location.reload()
 }
 
 function runSections() {
@@ -157,8 +170,6 @@ function runSections() {
           pin: true,
           scrub: 1,
           pinnedContainer: '.hero',
-          pinReparent: true,
-          pinSpacer: true,
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -344,6 +355,7 @@ function runSections() {
         snap: {
           snapTo: 'labels',
           duration: 1,
+          delay: 0.5,
           ease: 'linear',
         },
         start: 'center center',
