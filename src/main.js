@@ -1,13 +1,13 @@
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
-import { CustomEase, ScrollTrigger, SplitText } from 'gsap/all'
+import { CustomEase, ScrollTrigger, SplitText, Flip } from 'gsap/all'
 import Swiper from 'swiper'
 import { Pagination, EffectFade, Autoplay } from 'swiper/modules'
 import Typed from 'typed.js'
 import 'swiper/css'
 import './styles/style.scss'
 
-gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText)
+gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, Flip)
 
 CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
@@ -272,7 +272,7 @@ function runSections() {
         'Comment préparer ma retraite individuelle pour conserver mon niveau de vie',
         'Quelles conseils pour commencer à investir?',
       ],
-      typeSpeed: 70,
+      typeSpeed: 50,
       backDelay: 1400,
       loop: false,
       loopCount: Infinity,
@@ -360,12 +360,10 @@ function runSections() {
         snap: {
           snapTo: 'labels',
           duration: 1,
-          delay: 0.5,
           ease: 'linear',
         },
         start: 'center center',
-        pinnedContainer: '.media-wrapper',
-        pinReparent: true,
+        pinnedContainer: '.black-bottom',
         pinSpacer: true,
         pinSpacing:
           document.querySelector('.media-item').offsetWidth * mediaItems.length,
@@ -382,8 +380,8 @@ function runSections() {
       },
       scrollTrigger: {
         trigger: '.black-bottom',
-        start: 'top bottom',
-        end: 'bottom center',
+        start: 'top 90%',
+        end: 'top 20%',
         scrub: 1,
       },
     })
@@ -781,6 +779,9 @@ function runSections() {
     // Mockup Section
     // ---------------------------------------
 
+    gsap.set('.how-step', {
+      opacity: 0,
+    })
     const howTimeline = gsap.timeline({
       defaults: {
         ease: 'base',
@@ -788,133 +789,170 @@ function runSections() {
       scrollTrigger: {
         trigger: '.how',
         pin: true,
-        scrub: true,
+        scrub: 1,
         snap: {
           snapTo: 'labels',
-          duration: 0.5,
+          duration: 3,
           ease: 'base',
         },
-        start: 'top top',
+        start: 'top venter',
         pinnedContainer: '.how',
         pinSpacer: true,
-        pinSpacing: document.querySelector('.how-item').offsetWidth * 1.5,
-        end: () => '+=' + document.querySelector('.how-item').offsetWidth * 5,
+        pinSpacing: document.querySelector('.how-mockup').offsetHeight * 5,
+        end: () =>
+          '+=' + document.querySelector('.how-mockup').offsetHeight * 5,
       },
     })
 
-    howTimeline.fromTo(
-      '.how h2',
-      {
-        opacity: 0,
-        y: '3rem',
-      },
-      {
-        opacity: 1,
-        y: '0rem',
-        duration: 2,
-        stagger: 0.1,
-      }
-    )
-
-    gsap.set('.how-works', {
-      opacity: 0,
-      scale: 0.9,
-      y: '5%',
-    })
-
-    gsap.set('.how-mockup', {
-      opacity: 0,
-      scale: 0.9,
-      y: '5%',
-    })
-    let index2 = 1
-    const howItems = document.querySelectorAll('.how-item')
-    howItems.forEach((item) => {
-      howTimeline.add(
-        gsap.to(
-          howItems,
-          {
-            xPercent: -100 * (index2 - 1),
-            duration: 3,
-            ease: 'base',
-            onStart: () => {
-              gsap.fromTo(
-                item.querySelectorAll('.how-works'),
-                {
-                  x: '5%',
-                  opacity: 0,
-                  scale: 0.9,
-                },
-                {
-                  x: 0,
-                  opacity: 1,
-                  scale: 1,
-                  duration: 0.35,
-                  delay: 0.25,
-                  ease: 'base',
-                }
-              )
-
-              gsap.fromTo(
-                item.querySelectorAll('.how-mockup'),
-                {
-                  y: '5%',
-                  opacity: 0,
-                  scale: 0.9,
-                },
-                {
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                  duration: 0.35,
-                  stagger: 0.2,
-                  delay: 0.5,
-                  ease: 'base',
-                }
-              )
-            },
-            onReverseComplete: () => {
-              gsap.fromTo(
-                item.querySelectorAll('.how-works'),
-                {
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                },
-                {
-                  y: '5%',
-                  opacity: 0,
-                  scale: 0.0,
-                  duration: 0.35,
-                  delay: 0.5,
-                  ease: 'base',
-                }
-              )
-
-              gsap.fromTo(
-                item.querySelectorAll('.how-mockup'),
-                {
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                },
-                {
-                  y: '5%',
-                  opacity: 0,
-                  scale: 0.9,
-                  duration: 0.35,
-                  stagger: 0.2,
-                  delay: 0.25,
-                  ease: 'base',
-                }
-              )
-            },
-          },
-          'howLabel'
-        )
+    howTimeline
+      .fromTo(
+        '.how h2',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+        }
       )
-      index2++
-    })
+      .fromTo(
+        '.how-mockup',
+        {
+          scale: 1.5,
+          y: '100%',
+        },
+        {
+          opacity: 1,
+          scale: 1.2,
+          y: '10%',
+          duration: 8,
+          ease: 'base',
+        }
+      )
+      .fromTo(
+        '.how-step-1',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+          ease: 'base',
+        },
+        '-=4'
+      )
+      .addLabel('step1')
+      .fromTo(
+        '.how-step-1',
+        {
+          opacity: 1,
+          y: 0,
+        },
+        {
+          opacity: 0,
+          y: '-3rem',
+          duration: 2,
+          ease: 'base',
+        }
+      )
+      .fromTo(
+        '.how-mockup',
+        {
+          scale: 1.2,
+          y: '10%',
+        },
+        {
+          scale: 1,
+          y: 0,
+          duration: 4,
+          ease: 'base',
+        },
+        '-=2'
+      )
+      .fromTo(
+        '.how-step-2',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0',
+          duration: 2,
+          ease: 'base',
+        },
+        '-=4'
+      )
+      .addLabel('step2')
+      .fromTo(
+        '.how-step-2',
+        {
+          opacity: 1,
+          y: 0,
+        },
+        {
+          opacity: 0,
+          y: '-3rem',
+          duration: 2,
+          ease: 'base',
+          onComplete: () => {
+            const state = Flip.getState(
+              gsap.utils.toArray('.how-works, .how-mockup')
+            )
+
+            // Make DOM or styling changes (swap the squares in our case)
+            swap(gsap.utils.toArray('.how-works, .how-mockup'))
+
+            // Animate from the initial state to the end state
+            Flip.from(state, {
+              duration: 1,
+              ease: 'base',
+              onStart: () => {
+                gsap.to('.how-mockup', {
+                  rotate: '3deg',
+                  ease: 'back.out(1.7)',
+                })
+              },
+              onComplete: () => {
+                gsap.to('.how-mockup', {
+                  rotate: '0deg',
+                  ease: 'back.out(1.7)',
+                })
+              },
+            })
+          },
+        }
+      )
+      .fromTo(
+        '.how-step-3',
+        {
+          y: '3rem',
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 3,
+          delay: 3,
+          onReverseComplete: () => {
+            const state = Flip.getState(
+              gsap.utils.toArray('.how-works, .how-mockup')
+            )
+
+            // Make DOM or styling changes (swap the squares in our case)
+            swap(gsap.utils.toArray('.how-works, .how-mockup'))
+
+            // Animate from the initial state to the end state
+            Flip.from(state, { duration: 2, ease: 'base' })
+          },
+        }
+      )
+      .addLabel('step3')
 
     // Reviews Section
     // ---------------------------------------
@@ -1075,5 +1113,11 @@ function runSections() {
           },
         }
       )
+  }
+
+  function swap([a, b]) {
+    a.parentNode.children[0] === a
+      ? a.parentNode.appendChild(a)
+      : a.parentNode.appendChild(b)
   }
 }
