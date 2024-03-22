@@ -956,12 +956,8 @@ function runSections() {
       scrollTrigger: {
         trigger: '.reviews',
         pin: true,
-        scrub: true,
-        snap: {
-          snapTo: '.reviews',
-          duration: 0.5,
-          ease: 'base',
-        },
+        scrub: 2,
+        snap: 1 / 3,
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
