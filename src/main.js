@@ -986,6 +986,7 @@ function runSections() {
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
+        pinType: 'fixed',
         pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
         end: () =>
           '+=' + document.querySelector('.review-item').offsetWidth * 5,
