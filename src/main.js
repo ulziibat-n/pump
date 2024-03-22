@@ -595,7 +595,9 @@ function runSections() {
         trigger: '.icons',
         pin: true,
         scrub: 2,
-        snap: 1 / 3,
+        snap: {
+          snapTo: '.icons',
+        },
         end: () => '+=' + document.querySelector('.cards').offsetHeight * 1.2,
       },
     })
