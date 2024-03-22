@@ -604,9 +604,6 @@ function runSections() {
     gsap.set('.icon', { opacity: 0 })
     gsap.set('.icon-featured', { opacity: 1 })
     gsap.set(iconsTexts, { opacity: 0 })
-    // gsap.set('.icon-bg', { opacity: 0 })
-    // gsap.set('.icon-text', { opacity: 0 })
-    // gsap.set('.icon-symbol', { opacity: 1 })
 
     iconsTimeline
       .fromTo(
