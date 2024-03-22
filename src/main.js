@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
   document.body.classList.add('is-loading')
-  console.log('Welcome to Vite + JS + Webflow! 😍')
   document.body.classList.remove('is-loading')
   document.body.classList.add('is-loaded')
   console.log('Site Loaded ✅')
@@ -26,10 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', function () {
     // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
     if (window.innerWidth != windowWidth) {
-      // Update the window width for next time
       windowWidth = window.innerWidth
       location.reload()
-      // Do stuff here
     }
   })
 })
@@ -574,20 +571,22 @@ function runSections() {
         ease: 'power2',
       },
       scrollTrigger: {
-        trigger: '.icons',
+        trigger: '.icons-section',
         pin: true,
-        scrub: 2,
-        snap: 1 / 3,
-        end: () => '+=' + document.querySelector('.cards').offsetHeight * 1.2,
+        scrub: true,
+        snap: true,
+        pinnedContainer: '.icons-section',
+        pinSpacer: true,
+        pinSpacing: document.querySelector('.icons-section').offsetHeight * 5,
+        start: 'top top',
+        end: () =>
+          '+=' + document.querySelector('.icons-section').offsetHeight * 3,
       },
     })
 
     gsap.set('.icon', { opacity: 0 })
     gsap.set('.icon-featured', { opacity: 1 })
     gsap.set(iconsTexts, { opacity: 0 })
-    gsap.set('.icon-bg', { opacity: 0 })
-    gsap.set('.icon-text', { opacity: 0 })
-    gsap.set('.icon-symbol', { opacity: 1 })
 
     iconsTimeline
       .fromTo(
@@ -957,12 +956,8 @@ function runSections() {
       scrollTrigger: {
         trigger: '.reviews',
         pin: true,
-        scrub: true,
-        snap: {
-          snapTo: '.reviews',
-          duration: 0.5,
-          ease: 'base',
-        },
+        scrub: 2,
+        snap: 1 / 3,
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
@@ -1000,10 +995,6 @@ function runSections() {
           y: '0rem',
           duration: 2,
           stagger: 0.1,
-          ScrollTrigger: {
-            trigger: '.review',
-            scrub: true,
-          },
         }
       )
       .fromTo(
@@ -1017,9 +1008,6 @@ function runSections() {
           y: '0rem',
           duration: 2,
           stagger: 0.1,
-          ScrollTrigger: {
-            trigger: '.review',
-          },
         }
       )
       .fromTo(
