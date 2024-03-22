@@ -985,7 +985,6 @@ function runSections() {
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
-        pinType: 'fixed',
         pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
         end: () =>
           '+=' + document.querySelector('.review-item').offsetWidth * 5,
@@ -1020,10 +1019,6 @@ function runSections() {
           y: '0rem',
           duration: 2,
           stagger: 0.1,
-          ScrollTrigger: {
-            trigger: '.review',
-            scrub: true,
-          },
         }
       )
       .fromTo(
@@ -1037,9 +1032,6 @@ function runSections() {
           y: '0rem',
           duration: 2,
           stagger: 0.1,
-          ScrollTrigger: {
-            trigger: '.review',
-          },
         }
       )
       .fromTo(
