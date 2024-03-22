@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
   build: {
-    minify: true,
+    minify: false,
     manifest: true,
     rollupOptions: {
       input: './src/main.js',
@@ -21,7 +21,7 @@ export default defineConfig({
         format: 'umd',
         entryFileNames: 'main.js',
         esModule: false,
-        compact: false,
+        compact: true,
         globals: {
           jquery: '$',
         },
