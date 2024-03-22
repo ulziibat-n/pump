@@ -182,9 +182,6 @@ function runSections() {
           start: 'bottom bottom',
           pin: true,
           scrub: true,
-          pinReparent: true,
-          pinSpacer: true,
-          pinnedContainer: '.hero',
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -210,9 +207,6 @@ function runSections() {
           start: 'bottom bottom',
           pin: true,
           scrub: true,
-          pinReparent: true,
-          pinSpacer: true,
-          pinnedContainer: '.hero',
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -370,12 +364,10 @@ function runSections() {
         pin: true,
         snap: {
           snapTo: 'labels',
-          duration: 1,
+          duration: 2,
           ease: 'linear',
         },
         start: 'center center',
-        pinSpacer: true,
-        pinnedContainer: '.media-wrapper',
         pinSpacing:
           document.querySelector('.media-item').offsetWidth * mediaItems.length,
         end: () =>
@@ -595,9 +587,7 @@ function runSections() {
         trigger: '.icons',
         pin: true,
         scrub: 2,
-        snap: {
-          snapTo: '.icons',
-        },
+        snap: 1 / 3,
         end: () => '+=' + document.querySelector('.cards').offsetHeight * 1.2,
       },
     })
@@ -986,7 +976,6 @@ function runSections() {
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
-        pinType: 'fixed',
         pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
         end: () =>
           '+=' + document.querySelector('.review-item').offsetWidth * 5,
