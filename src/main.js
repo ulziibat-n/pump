@@ -25,14 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', function () {
     // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
     if (window.innerWidth != windowWidth) {
-      // Update the window width for next time
       windowWidth = window.innerWidth
       location.reload()
-      // Do stuff here
     }
-
-    // Otherwise do nothing
-    //location.reload()
   })
 })
 
