@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@studio-freight/lenis':
-    specifier: ^1.0.39
-    version: 1.0.39
   gsap:
     specifier: file:gsap-bonus.tgz
     version: file:gsap-bonus.tgz
@@ -157,10 +154,6 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
-
-  /@studio-freight/lenis@1.0.39:
-    resolution: {integrity: sha512-63LPZD087kFSiNS3lF6Uve8fFeshQwNCXrl7DUocoeUYiElVTzr9a+dLodNBa0Yn5NZ4umAoQQ6LOosB5I6AAQ==}
-    dev: false
 
   /@types/eslint@8.56.5:
     resolution: {integrity: sha512-u5/YPJHo1tvkSF2CE0USEkxon82Z5DBy2xR+qfyYNszpX9qcs4sT6uq2kBbj4BXY1+DBGDPnrhMZV3pKWGNukw==}

@@ -24,7 +24,6 @@
     "vite-plugin-eslint": "^1.3.0"
   },
   "dependencies": {
-    "@studio-freight/lenis": "^1.0.39",
     "gsap": "file:gsap-bonus.tgz",
     "splitting": "^1.0.6",
     "swiper": "^11.0.7",
