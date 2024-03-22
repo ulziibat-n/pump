@@ -594,11 +594,10 @@ function runSections() {
       scrollTrigger: {
         trigger: '.icons',
         pin: true,
-        scrub: 2,
-        snap: {
-          snapTo: '.icons',
-        },
-        end: () => '+=' + document.querySelector('.cards').offsetHeight * 1.2,
+        scrub: true,
+        snap: true,
+        start: 'top top',
+        end: () => '+=' + document.querySelector('.icons').offsetHeight * 3,
       },
     })
 
