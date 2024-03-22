@@ -1,4 +1,4 @@
-import Lenis from '@studio-freight/lenis'
+//import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import { CustomEase, ScrollTrigger, SplitText, Flip } from 'gsap/all'
 import Swiper from 'swiper'
@@ -14,20 +14,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.body.classList.add('is-loading')
   console.log('Welcome to Vite + JS + Webflow! 😍')
-  ScrollTrigger.normalizeScroll(true)
-  const lenis = new Lenis({
-    lerp: 0.1,
-  })
+  // ScrollTrigger.normalizeScroll(true)
+  // const lenis = new Lenis({
+  //   lerp: 0.1,
+  // })
 
-  lenis.on('scroll', ScrollTrigger.update)
+  // lenis.on('scroll', ScrollTrigger.update)
 
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000)
-  })
+  // gsap.ticker.add((time) => {
+  //   lenis.raf(time * 1000)
+  // })
 
-  gsap.ticker.lagSmoothing(0)
+  // gsap.ticker.lagSmoothing(0)
 
-  console.log('Lenis ✅')
+  //console.log('Lenis ✅')
   document.body.classList.remove('is-loading')
   document.body.classList.add('is-loaded')
   console.log('Site Loaded ✅')
@@ -181,10 +181,7 @@ function runSections() {
           },
           start: 'bottom bottom',
           pin: true,
-          scrub: 1,
-          pinnedContainer: '.hero .container',
-          pinReparent: true,
-          pinSpacer: true,
+          scrub: true,
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -209,10 +206,7 @@ function runSections() {
           },
           start: 'bottom bottom',
           pin: true,
-          scrub: 1,
-          pinnedContainer: '.hero .container',
-          pinReparent: true,
-          pinSpacer: true,
+          scrub: true,
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -371,12 +365,9 @@ function runSections() {
         snap: {
           snapTo: 'labels',
           duration: 1,
-          delay: 0.5,
           ease: 'linear',
         },
         start: 'center center',
-        pinnedContainer: '.black-bottom',
-        pinSpacer: true,
         pinSpacing:
           document.querySelector('.media-item').offsetWidth * mediaItems.length,
         end: () =>
