@@ -571,12 +571,16 @@ function runSections() {
         ease: 'power2',
       },
       scrollTrigger: {
-        trigger: '.icons',
+        trigger: '.icons-section',
         pin: true,
         scrub: true,
         snap: true,
+        pinnedContainer: '.icons-section',
+        pinSpacer: true,
+        pinSpacing: document.querySelector('.icons-section').offsetHeight * 5,
         start: 'top top',
-        end: () => '+=' + document.querySelector('.icons').offsetHeight * 3,
+        end: () =>
+          '+=' + document.querySelector('.icons-section').offsetHeight * 3,
       },
     })
 
