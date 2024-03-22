@@ -181,10 +181,10 @@ function runSections() {
           },
           start: 'bottom bottom',
           pin: true,
-          anticipatePin: 1,
-          immediateRender: false,
           scrub: 1,
-          pinnedContainer: '.hero',
+          pinnedContainer: '.hero .container',
+          pinReparent: true,
+          pinSpacer: true,
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -192,8 +192,7 @@ function runSections() {
             '+=' +
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth *
-              sliderItems.length *
-              2,
+              sliderItems.length,
         },
       })
 
@@ -211,7 +210,7 @@ function runSections() {
           start: 'bottom bottom',
           pin: true,
           scrub: 1,
-          pinnedContainer: '.hero',
+          pinnedContainer: '.hero .container',
           pinReparent: true,
           pinSpacer: true,
           pinSpacing:
@@ -221,8 +220,7 @@ function runSections() {
             '+=' +
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth *
-              sliderItems.length *
-              2,
+              sliderItems.length,
         },
       })
       sliderItems.forEach((item, index) => {
@@ -267,6 +265,9 @@ function runSections() {
 
     // Black Top Section
     // ---------------------------------------
+    gsap.set('.section-black', {
+      width: window.innerWidth,
+    })
     new Typed('.typed-text', {
       strings: [
         'Quels objectifs financiers me fixer?',
