@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.innerWidth != windowWidth) {
       // Update the window width for next time
       windowWidth = window.innerWidth
-
+      location.reload()
       // Do stuff here
     }
 
