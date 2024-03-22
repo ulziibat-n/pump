@@ -1,8 +1,5 @@
 @import 'hero';
 
-.body {
-  overflow-x: hidden;
-}
 .typed-cursoe {
   visibility: hidden !important;
   opacity: 0 !important;
@@ -19,7 +16,10 @@
   transform: transform 4s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
   display: block;
-  transform: scale(0.2);
+  transform: translate3d(0,0,0), translateZ(0), scale(0.2);
+  -webkit-transform: translate3d(0,0,0), translateZ(0), scale(0.2);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
   transition-delay: 0.1s;
 }
 

@@ -364,7 +364,7 @@ function runSections() {
         pin: true,
         snap: {
           snapTo: 'labels',
-          duration: 1,
+          duration: 2,
           ease: 'linear',
         },
         start: 'center center',
