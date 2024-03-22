@@ -182,9 +182,9 @@ function runSections() {
           start: 'bottom bottom',
           pin: true,
           scrub: true,
+          pinnedContainer: '.hero',
           pinReparent: true,
           pinSpacer: true,
-          pinnedContainer: '.hero',
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -210,9 +210,6 @@ function runSections() {
           start: 'bottom bottom',
           pin: true,
           scrub: true,
-          pinReparent: true,
-          pinSpacer: true,
-          pinnedContainer: '.hero',
           pinSpacing:
             document.querySelector('.slider-visible-left .slider-item')
               .offsetWidth * sliderItems.length,
@@ -370,12 +367,10 @@ function runSections() {
         pin: true,
         snap: {
           snapTo: 'labels',
-          duration: 1,
+          duration: 2,
           ease: 'linear',
         },
         start: 'center center',
-        pinSpacer: true,
-        pinnedContainer: '.media-wrapper',
         pinSpacing:
           document.querySelector('.media-item').offsetWidth * mediaItems.length,
         end: () =>
