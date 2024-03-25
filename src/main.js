@@ -1036,7 +1036,8 @@ function runSections() {
         },
         {
           x: reviewsWidth,
-          duration: 6,
+          duration: 16,
+          ease: 'linear',
         }
       )
 
