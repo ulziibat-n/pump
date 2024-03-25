@@ -19,6 +19,9 @@ dependencies:
     version: 2.1.0
 
 devDependencies:
+  '@studio-freight/lenis':
+    specifier: ^1.0.42
+    version: 1.0.42
   eslint:
     specifier: ^8.7.0
     version: 8.57.0
@@ -153,6 +156,10 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: true
+
+  /@studio-freight/lenis@1.0.42:
+    resolution: {integrity: sha512-HJAGf2DeM+BTvKzHv752z6Z7zy6bA643nZM7W88Ft9tnw2GsJSp6iJ+3cekjyMIWH+cloL2U9X82dKXgdU8kPg==}
     dev: true
 
   /@types/eslint@8.56.5:

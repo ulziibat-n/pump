@@ -1,3 +1,4 @@
+import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import { CustomEase, ScrollTrigger, SplitText } from 'gsap/all'
 import Swiper from 'swiper'
@@ -9,6 +10,23 @@ document.addEventListener('DOMContentLoaded', function () {
   gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText)
 
   CustomEase.create('base', '0.075, 0.82, 0.165, 1')
+
+  const lenis = new Lenis({
+    lerp: 0.1,
+  })
+  // lenis.on('scroll', (e) => {
+  //   console.log(e)
+  // })
+
+  lenis.on('scroll', ScrollTrigger.update)
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+  })
+
+  gsap.ticker.lagSmoothing(0)
+
+  console.log('Lenis ✅')
 
   document.body.classList.add('is-loading')
   document.body.classList.remove('is-loading')
@@ -120,7 +138,7 @@ function runSections() {
             opacity: 1,
             y: '0rem',
             scale: 1,
-            duration: 2,
+            duration: 0.5,
             stagger: {
               each: 0.1,
               from: 'center',
