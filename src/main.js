@@ -1,12 +1,12 @@
 import gsap from 'gsap'
-import { CustomEase, ScrollTrigger, SplitText, Flip } from 'gsap/all'
+import { CustomEase, ScrollTrigger, SplitText } from 'gsap/all'
 import Swiper from 'swiper'
 import { Pagination, EffectFade, Autoplay } from 'swiper/modules'
 import Typed from 'typed.js'
 import './styles/style.scss'
 
 document.addEventListener('DOMContentLoaded', function () {
-  gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, Flip)
+  gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText)
 
   CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
@@ -128,118 +128,118 @@ function runSections() {
           },
           '-=1.5'
         )
-      console.log('total:' + sliderItems.length)
-      const longWidth =
-        document.querySelector('.slider-visible-right .slider-item')
-          .offsetWidth * sliderItems.length
-      gsap.set('.slider-visible-right .slider-list', {
-        width: longWidth,
-      })
-      gsap.set('.slider-visible-left .slider-list', {
-        width: longWidth,
-      })
+    //   console.log('total:' + sliderItems.length)
+    //   const longWidth =
+    //     document.querySelector('.slider-visible-right .slider-item')
+    //       .offsetWidth * sliderItems.length
+    //   gsap.set('.slider-visible-right .slider-list', {
+    //     width: longWidth,
+    //   })
+    //   gsap.set('.slider-visible-left .slider-list', {
+    //     width: longWidth,
+    //   })
 
-      const sliderTimelineRight = gsap.timeline({
-        defaults: {
-          ease: 'linear',
-        },
-        onComplete: () => {
-          heroSlider.slideTo(sliderItems.length)
-          console.log('hey')
-        },
-        onReverseComplete: () => {
-          heroSlider.slideTo(0)
-        },
-        scrollTrigger: {
-          trigger: '.hero',
-          snap: {
-            snapTo: 'labels',
-            duration: 0,
-            ease: 'linear',
-          },
-          start: 'bottom bottom',
-          pin: true,
-          scrub: true,
-          pinReparent: true,
-          pinSpacer: true,
-          pinnedContainer: '.hero',
-          pinSpacing:
-            document.querySelector('.slider-visible-left .slider-item')
-              .offsetWidth * sliderItems.length,
-          end: () =>
-            '+=' +
-            document.querySelector('.slider-visible-left .slider-item')
-              .offsetWidth *
-              sliderItems.length,
-        },
-      })
+    //   const sliderTimelineRight = gsap.timeline({
+    //     defaults: {
+    //       ease: 'linear',
+    //     },
+    //     onComplete: () => {
+    //       heroSlider.slideTo(sliderItems.length)
+    //       console.log('hey')
+    //     },
+    //     onReverseComplete: () => {
+    //       heroSlider.slideTo(0)
+    //     },
+    //     scrollTrigger: {
+    //       trigger: '.hero',
+    //       snap: {
+    //         snapTo: 'labels',
+    //         duration: 0,
+    //         ease: 'linear',
+    //       },
+    //       start: 'bottom bottom',
+    //       pin: true,
+    //       scrub: true,
+    //       pinReparent: true,
+    //       pinSpacer: true,
+    //       pinnedContainer: '.hero',
+    //       pinSpacing:
+    //         document.querySelector('.slider-visible-left .slider-item')
+    //           .offsetWidth * sliderItems.length,
+    //       end: () =>
+    //         '+=' +
+    //         document.querySelector('.slider-visible-left .slider-item')
+    //           .offsetWidth *
+    //           sliderItems.length,
+    //     },
+    //   })
 
-      const sliderTimelineLeft = gsap.timeline({
-        defaults: {
-          ease: 'linear',
-        },
-        scrollTrigger: {
-          trigger: '.hero',
-          snap: {
-            snapTo: 'labels',
-            duration: 0,
-            ease: 'linear',
-          },
-          start: 'bottom bottom',
-          pin: true,
-          scrub: true,
-          pinReparent: true,
-          pinSpacer: true,
-          pinnedContainer: '.hero',
-          pinSpacing:
-            document.querySelector('.slider-visible-left .slider-item')
-              .offsetWidth * sliderItems.length,
-          end: () =>
-            '+=' +
-            document.querySelector('.slider-visible-left .slider-item')
-              .offsetWidth *
-              sliderItems.length,
-        },
-      })
-      sliderItems.forEach((item, index) => {
-        sliderTimelineRight.add(
-          gsap.to('.slider-visible-right .slider-list', {
-            x:
-              0 -
-              document.querySelector('.slider-visible-left .slider-item')
-                .offsetWidth *
-                (index + 1),
-            duration: 1,
-            onComplete: () => {
-              console.log('next')
-              heroSlider.slideTo(index + 1)
-            },
-            onReverseComplete: () => {
-              console.log('prev')
-              heroSlider.slideTo(index + 1)
-            },
-          })
-        )
-        sliderTimelineRight.addLabel('labelSlider')
-      })
+    //   const sliderTimelineLeft = gsap.timeline({
+    //     defaults: {
+    //       ease: 'linear',
+    //     },
+    //     scrollTrigger: {
+    //       trigger: '.hero',
+    //       snap: {
+    //         snapTo: 'labels',
+    //         duration: 0,
+    //         ease: 'linear',
+    //       },
+    //       start: 'bottom bottom',
+    //       pin: true,
+    //       scrub: true,
+    //       pinReparent: true,
+    //       pinSpacer: true,
+    //       pinnedContainer: '.hero',
+    //       pinSpacing:
+    //         document.querySelector('.slider-visible-left .slider-item')
+    //           .offsetWidth * sliderItems.length,
+    //       end: () =>
+    //         '+=' +
+    //         document.querySelector('.slider-visible-left .slider-item')
+    //           .offsetWidth *
+    //           sliderItems.length,
+    //     },
+    //   })
+    //   sliderItems.forEach((item, index) => {
+    //     sliderTimelineRight.add(
+    //       gsap.to('.slider-visible-right .slider-list', {
+    //         x:
+    //           0 -
+    //           document.querySelector('.slider-visible-left .slider-item')
+    //             .offsetWidth *
+    //             (index + 1),
+    //         duration: 1,
+    //         onComplete: () => {
+    //           console.log('next')
+    //           heroSlider.slideTo(index + 1)
+    //         },
+    //         onReverseComplete: () => {
+    //           console.log('prev')
+    //           heroSlider.slideTo(index + 1)
+    //         },
+    //       })
+    //     )
+    //     sliderTimelineRight.addLabel('labelSlider')
+    //   })
 
-      sliderItems.forEach((item, index) => {
-        sliderTimelineLeft.add(
-          gsap.to(
-            '.slider-visible-left .slider-list',
-            {
-              x:
-                0 +
-                document.querySelector('.slider-visible-left .slider-item')
-                  .offsetWidth *
-                  (index + 1),
-              duration: 1,
-            },
-            '<'
-          )
-        )
-      })
-    }
+    //   sliderItems.forEach((item, index) => {
+    //     sliderTimelineLeft.add(
+    //       gsap.to(
+    //         '.slider-visible-left .slider-list',
+    //         {
+    //           x:
+    //             0 +
+    //             document.querySelector('.slider-visible-left .slider-item')
+    //               .offsetWidth *
+    //               (index + 1),
+    //           duration: 1,
+    //         },
+    //         '<'
+    //       )
+    //     )
+    //   })
+    // }
 
     // Black Top Section
     // ---------------------------------------
@@ -892,30 +892,28 @@ function runSections() {
           duration: 2,
           ease: 'base',
           onComplete: () => {
-            const state = Flip.getState(
-              gsap.utils.toArray('.how-works, .how-mockup')
-            )
-
-            // Make DOM or styling changes (swap the squares in our case)
-            swap(gsap.utils.toArray('.how-works, .how-mockup'))
-
-            // Animate from the initial state to the end state
-            Flip.from(state, {
-              duration: 1,
-              ease: 'base',
-              onStart: () => {
-                gsap.to('.how-mockup', {
-                  rotate: '3deg',
-                  ease: 'back.out(1.7)',
-                })
-              },
-              onComplete: () => {
-                gsap.to('.how-mockup', {
-                  rotate: '0deg',
-                  ease: 'back.out(1.7)',
-                })
-              },
-            })
+            // const state = Flip.getState(
+            //   gsap.utils.toArray('.how-works, .how-mockup')
+            // )
+            // // Make DOM or styling changes (swap the squares in our case)
+            // swap(gsap.utils.toArray('.how-works, .how-mockup'))
+            // // Animate from the initial state to the end state
+            // Flip.from(state, {
+            //   duration: 1,
+            //   ease: 'base',
+            //   onStart: () => {
+            //     gsap.to('.how-mockup', {
+            //       rotate: '3deg',
+            //       ease: 'back.out(1.7)',
+            //     })
+            //   },
+            //   onComplete: () => {
+            //     gsap.to('.how-mockup', {
+            //       rotate: '0deg',
+            //       ease: 'back.out(1.7)',
+            //     })
+            //   },
+            // })
           },
         }
       )
@@ -931,15 +929,13 @@ function runSections() {
           duration: 3,
           delay: 3,
           onReverseComplete: () => {
-            const state = Flip.getState(
-              gsap.utils.toArray('.how-works, .how-mockup')
-            )
-
-            // Make DOM or styling changes (swap the squares in our case)
-            swap(gsap.utils.toArray('.how-works, .how-mockup'))
-
-            // Animate from the initial state to the end state
-            Flip.from(state, { duration: 2, ease: 'base' })
+            // const state = Flip.getState(
+            //   gsap.utils.toArray('.how-works, .how-mockup')
+            // )
+            // // Make DOM or styling changes (swap the squares in our case)
+            // swap(gsap.utils.toArray('.how-works, .how-mockup'))
+            // // Animate from the initial state to the end state
+            // Flip.from(state, { duration: 2, ease: 'base' })
           },
         }
       )
@@ -1095,9 +1091,9 @@ function runSections() {
       )
   }
 
-  function swap([a, b]) {
-    a.parentNode.children[0] === a
-      ? a.parentNode.appendChild(a)
-      : a.parentNode.appendChild(b)
-  }
+  // function swap([a, b]) {
+  //   a.parentNode.children[0] === a
+  //     ? a.parentNode.appendChild(a)
+  //     : a.parentNode.appendChild(b)
+  // }
 }
