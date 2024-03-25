@@ -1,4 +1,4 @@
-import Lenis from '@studio-freight/lenis'
+//import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
 import { CustomEase, ScrollTrigger, SplitText, Flip } from 'gsap/all'
 import Swiper from 'swiper'
@@ -11,20 +11,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
-  const lenis = new Lenis({
-    lerp: 0.1,
-  })
-  // lenis.on('scroll', (e) => {
-  //   console.log(e)
+  // const lenis = new Lenis({
+  //   lerp: 0.1,
+  // })
+  // // lenis.on('scroll', (e) => {
+  // //   console.log(e)
+  // // })
+
+  // lenis.on('scroll', ScrollTrigger.update)
+
+  // gsap.ticker.add((time) => {
+  //   lenis.raf(time * 1000)
   // })
 
-  lenis.on('scroll', ScrollTrigger.update)
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000)
-  })
-
-  gsap.ticker.lagSmoothing(0)
+  // gsap.ticker.lagSmoothing(0)
 
   console.log('Lenis ✅')
 
@@ -755,211 +755,258 @@ function runSections() {
     // Mockup Section
     // ---------------------------------------
 
-    gsap.set('.how-step', {
-      opacity: 0,
-    })
-    const howTimeline = gsap.timeline({
-      defaults: {
-        ease: 'base',
-      },
-      scrollTrigger: {
-        trigger: '.how',
-        pin: true,
-        scrub: 1,
-        snap: {
-          snapTo: 'labels',
-          ease: 'linear',
+    let howMatchMedia = gsap.matchMedia()
+
+    howMatchMedia.add('(min-width: 769px)', () => {
+      gsap.set('.how-step', {
+        opacity: 0,
+      })
+      const howTimeline = gsap.timeline({
+        defaults: {
+          ease: 'base',
         },
-        start: 'top venter',
-        pinnedContainer: '.how-flex',
-        pinSpacer: true,
-        pinSpacing: document.querySelector('.how').offsetHeight * 5,
-        end: () => '+=' + document.querySelector('.how').offsetHeight * 5,
-      },
+        scrollTrigger: {
+          trigger: '.how',
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 'labels',
+            ease: 'linear',
+          },
+          start: 'top venter',
+          pinnedContainer: '.how-flex',
+          pinSpacer: true,
+          pinSpacing: document.querySelector('.how').offsetHeight * 5,
+          end: () => '+=' + document.querySelector('.how').offsetHeight * 5,
+        },
+      })
+
+      howTimeline
+        .fromTo(
+          '.how h2',
+          {
+            opacity: 0,
+            y: '3rem',
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            duration: 2,
+            stagger: 0.1,
+          }
+        )
+        .fromTo(
+          '.how-mockup',
+          {
+            opacity: 0,
+            scale: 1.5,
+            y: '100%',
+          },
+          {
+            opacity: 1,
+            scale: 1.2,
+            y: '10%',
+            duration: 8,
+            ease: 'base',
+          }
+        )
+        .fromTo(
+          '.how-step-1',
+          {
+            opacity: 0,
+            y: '3rem',
+            height: 0,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            height: 'auto',
+            duration: 2,
+            ease: 'base',
+            onStart: () => {
+              document.querySelector('.how-step-1').classList.add('active')
+            },
+            onReverseComplete: () => {
+              document.querySelector('.how-step-1').classList.remove('active')
+            },
+          },
+          '-=4'
+        )
+        .addLabel('step1')
+        .fromTo(
+          '.how-step-1',
+          {
+            opacity: 1,
+            y: 0,
+            height: 'auto',
+          },
+          {
+            opacity: 0,
+            y: '-3rem',
+            height: 0,
+            duration: 2,
+            ease: 'base',
+            onStart: () => {
+              document.querySelector('.how-step-1').classList.remove('active')
+            },
+            onReverseComplete: () => {
+              document.querySelector('.how-step-1').classList.add('active')
+            },
+          }
+        )
+        .fromTo(
+          '.how-mockup',
+          {
+            scale: 1.2,
+            y: '10%',
+          },
+          {
+            scale: 1,
+            y: 0,
+            duration: 4,
+            ease: 'base',
+          },
+          '-=2'
+        )
+        .fromTo(
+          '.how-step-2',
+          {
+            opacity: 0,
+            y: '3rem',
+            height: 0,
+          },
+          {
+            opacity: 1,
+            y: '0',
+            height: 'auto',
+            duration: 2,
+            ease: 'base',
+            onStart: () => {
+              document.querySelector('.how-step-2').classList.add('active')
+            },
+            onReverseComplete: () => {
+              document.querySelector('.how-step-2').classList.remove('active')
+            },
+          },
+          '-=4'
+        )
+        .addLabel('step2')
+        .fromTo(
+          '.how-step-2',
+          {
+            opacity: 1,
+            y: 0,
+            height: 'auto',
+          },
+          {
+            opacity: 0,
+            y: '-3rem',
+            height: 0,
+            duration: 2,
+            ease: 'base',
+            onStart: () => {
+              document.querySelector('.how-step-2').classList.remove('active')
+              document.querySelector('.how-step-3').classList.add('active')
+            },
+            onReverseComplete: () => {
+              document.querySelector('.how-step-2').classList.add('active')
+              document.querySelector('.how-step-3').classList.remove('active')
+            },
+            onComplete: () => {
+              const state = Flip.getState(
+                gsap.utils.toArray('.how-works, .how-mockup')
+              )
+              // Make DOM or styling changes (swap the squares in our case)
+              swap(gsap.utils.toArray('.how-works, .how-mockup'))
+              // Animate from the initial state to the end state
+              Flip.from(state, {
+                duration: 1,
+                ease: 'base',
+                onStart: () => {
+                  gsap.to('.how-mockup', {
+                    rotate: '3deg',
+                    ease: 'back.out(1.7)',
+                  })
+                },
+                onComplete: () => {
+                  gsap.to('.how-mockup', {
+                    rotate: '0deg',
+                    ease: 'back.out(1.7)',
+                  })
+                },
+              })
+            },
+          }
+        )
+        .fromTo(
+          '.how-step-3',
+          {
+            y: '3rem',
+            opacity: 0,
+            height: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 3,
+            height: 'auto',
+            delay: 3,
+            onReverseComplete: () => {
+              const state = Flip.getState(
+                gsap.utils.toArray('.how-works, .how-mockup')
+              )
+              // Make DOM or styling changes (swap the squares in our case)
+              swap(gsap.utils.toArray('.how-works, .how-mockup'))
+              // Animate from the initial state to the end state
+              Flip.from(state, { duration: 2, ease: 'base' })
+            },
+          }
+        )
+        .addLabel('step3')
     })
 
-    howTimeline
-      .fromTo(
-        '.how h2',
-        {
-          opacity: 0,
-          y: '3rem',
-        },
-        {
-          opacity: 1,
-          y: '0rem',
-          duration: 2,
-          stagger: 0.1,
-        }
-      )
-      .fromTo(
-        '.how-mockup',
-        {
-          opacity: 0,
-          scale: 1.5,
-          y: '100%',
-        },
-        {
-          opacity: 1,
-          scale: 1.2,
-          y: '10%',
-          duration: 8,
-          ease: 'base',
-        }
-      )
-      .fromTo(
-        '.how-step-1',
-        {
-          opacity: 0,
-          y: '3rem',
-          height: 0,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          height: 'auto',
-          duration: 2,
-          ease: 'base',
-          onStart: () => {
-            document.querySelector('.how-step-1').classList.add('active')
-          },
-          onReverseComplete: () => {
-            document.querySelector('.how-step-1').classList.remove('active')
-          },
-        },
-        '-=4'
-      )
-      .addLabel('step1')
-      .fromTo(
-        '.how-step-1',
-        {
-          opacity: 1,
-          y: 0,
-          height: 'auto',
-        },
-        {
-          opacity: 0,
-          y: '-3rem',
-          height: 0,
-          duration: 2,
-          ease: 'base',
-          onStart: () => {
-            document.querySelector('.how-step-1').classList.remove('active')
-          },
-          onReverseComplete: () => {
-            document.querySelector('.how-step-1').classList.add('active')
-          },
-        }
-      )
-      .fromTo(
-        '.how-mockup',
-        {
-          scale: 1.2,
-          y: '10%',
-        },
-        {
-          scale: 1,
-          y: 0,
-          duration: 4,
-          ease: 'base',
-        },
-        '-=2'
-      )
-      .fromTo(
-        '.how-step-2',
-        {
-          opacity: 0,
-          y: '3rem',
-          height: 0,
-        },
-        {
-          opacity: 1,
-          y: '0',
-          height: 'auto',
-          duration: 2,
-          ease: 'base',
-          onStart: () => {
-            document.querySelector('.how-step-2').classList.add('active')
-          },
-          onReverseComplete: () => {
-            document.querySelector('.how-step-2').classList.remove('active')
-          },
-        },
-        '-=4'
-      )
-      .addLabel('step2')
-      .fromTo(
-        '.how-step-2',
-        {
-          opacity: 1,
-          y: 0,
-          height: 'auto',
-        },
-        {
-          opacity: 0,
-          y: '-3rem',
-          height: 0,
-          duration: 2,
-          ease: 'base',
-          onStart: () => {
-            document.querySelector('.how-step-2').classList.remove('active')
-            document.querySelector('.how-step-3').classList.add('active')
-          },
-          onReverseComplete: () => {
-            document.querySelector('.how-step-2').classList.add('active')
-            document.querySelector('.how-step-3').classList.remove('active')
-          },
-          onComplete: () => {
-            const state = Flip.getState(
-              gsap.utils.toArray('.how-works, .how-mockup')
-            )
-            // Make DOM or styling changes (swap the squares in our case)
-            swap(gsap.utils.toArray('.how-works, .how-mockup'))
-            // Animate from the initial state to the end state
-            Flip.from(state, {
-              duration: 1,
-              ease: 'base',
-              onStart: () => {
-                gsap.to('.how-mockup', {
-                  rotate: '3deg',
-                  ease: 'back.out(1.7)',
-                })
-              },
-              onComplete: () => {
-                gsap.to('.how-mockup', {
-                  rotate: '0deg',
-                  ease: 'back.out(1.7)',
-                })
-              },
-            })
-          },
-        }
-      )
-      .fromTo(
-        '.how-step-3',
-        {
-          y: '3rem',
-          opacity: 0,
-          height: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 3,
-          height: 'auto',
-          delay: 3,
-          onReverseComplete: () => {
-            const state = Flip.getState(
-              gsap.utils.toArray('.how-works, .how-mockup')
-            )
-            // Make DOM or styling changes (swap the squares in our case)
-            swap(gsap.utils.toArray('.how-works, .how-mockup'))
-            // Animate from the initial state to the end state
-            Flip.from(state, { duration: 2, ease: 'base' })
-          },
-        }
-      )
-      .addLabel('step3')
+    // howMatchMedia.add('(max-width: 768px)', () => {
+    //   const howMobile = gsap.timeline()
+    //   howMobile.add(
+    //     gsap.fromTo(
+    //       '.how-step-1 .how-mobile',
+    //       {
+    //         height: 0,
+    //         opacity: 1,
+    //       },
+    //       {
+    //         opacity: 1,
+    //         height: 'auto',
+    //         duration: 3,
+    //         scrollTrigger: {
+    //           trigger: '.how-flex',
+    //           start: 'top top',
+    //           end: 'bottom bottom',
+    //         },
+    //       },
+    //       'stop-1'
+    //     )
+    //   )
+    //   howMobile.add(
+    //     gsap.fromTo(
+    //       '.how-step-2 .how-mobile',
+    //       {
+    //         height: 0,
+    //         opacity: 1,
+    //       },
+    //       {
+    //         opacity: 1,
+    //         height: 'auto',
+    //         duration: 4,
+    //         scrollTrigger: {
+    //           trigger: '.how-flex',
+    //           start: 'top top',
+    //           end: 'bottom bottom',
+    //         },
+    //       }
+    //     )
+    //   )
+    // })
 
     // Reviews Section
     // ---------------------------------------
@@ -972,13 +1019,13 @@ function runSections() {
         trigger: '.reviews',
         pin: true,
         scrub: 2,
-        snap: 1 / 3,
+        snap: 1 / 5,
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
-        pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
+        pinSpacing: document.querySelector('.review-item').offsetWidth * 10,
         end: () =>
-          '+=' + document.querySelector('.review-item').offsetWidth * 5,
+          '+=' + document.querySelector('.review-item').offsetWidth * 10,
       },
     })
 
@@ -1032,7 +1079,8 @@ function runSections() {
         },
         {
           x: reviewsWidth,
-          duration: 6,
+          duration: 16,
+          ease: 'linear',
         }
       )
 
