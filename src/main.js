@@ -43,9 +43,9 @@ function runSections() {
       '.hero-content a',
     ])
     if (heroElements && heroTitle) {
-      // const sliderItems = document.querySelectorAll(
-      //   '.slider-visible-right .slider-item'
-      // )
+      const sliderItems = document.querySelectorAll(
+        '.slider-visible-right .slider-item'
+      )
       const heroTimeline = gsap.timeline({
         defaults: {
           ease: 'base',
@@ -128,117 +128,84 @@ function runSections() {
           },
           '-=1.5'
         )
-      // console.log('total:' + sliderItems.length)
-      // const longWidth =
-      //   document.querySelector('.slider-visible-right .slider-item')
-      //     .offsetWidth * sliderItems.length
-      // gsap.set('.slider-visible-right .slider-list', {
-      //   width: longWidth,
-      // })
-      // gsap.set('.slider-visible-left .slider-list', {
-      //   width: longWidth,
-      // })
+      console.log('total:' + sliderItems.length)
+      const longWidth =
+        document.querySelector('.slider-visible-right .slider-item')
+          .offsetWidth * sliderItems.length
+      gsap.set('.slider-visible-right .slider-list', {
+        width: longWidth,
+      })
+      gsap.set('.slider-visible-left .slider-list', {
+        width: longWidth,
+      })
 
-      // const sliderTimelineRight = gsap.timeline({
-      //   defaults: {
-      //     ease: 'linear',
-      //   },
-      //   onComplete: () => {
-      //     heroSlider.slideTo(sliderItems.length)
-      //     console.log('hey')
-      //   },
-      //   onReverseComplete: () => {
-      //     heroSlider.slideTo(0)
-      //   },
-      //   scrollTrigger: {
-      //     trigger: '.hero',
-      //     snap: {
-      //       snapTo: 'labels',
-      //       duration: 0,
-      //       ease: 'linear',
-      //     },
-      //     start: 'bottom bottom',
-      //     pin: true,
-      //     scrub: true,
-      //     pinReparent: true,
-      //     pinSpacer: true,
-      //     pinnedContainer: '.hero',
-      //     pinSpacing:
-      //       document.querySelector('.slider-visible-left .slider-item')
-      //         .offsetWidth * sliderItems.length,
-      //     end: () =>
-      //       '+=' +
-      //       document.querySelector('.slider-visible-left .slider-item')
-      //         .offsetWidth *
-      //         sliderItems.length,
-      //   },
-      // })
+      const heroTimeline2 = gsap.timeline({
+        defaults: {
+          ease: 'linear',
+        },
+        onComplete: () => {
+          heroSlider.slideTo(sliderItems.length)
+          console.log('hey')
+        },
+        onReverseComplete: () => {
+          heroSlider.slideTo(0)
+        },
+        scrollTrigger: {
+          trigger: '.hero',
+          snap: {
+            snapTo: 'labels',
+            duration: 0,
+            ease: 'linear',
+          },
+          start: 'bottom bottom',
+          pin: true,
+          scrub: true,
+          pinReparent: true,
+          pinSpacer: true,
+          pinnedContainer: '.hero',
+          pinSpacing:
+            document.querySelector('.slider-visible-left .slider-item')
+              .offsetWidth * sliderItems.length,
+          end: () =>
+            '+=' +
+            document.querySelector('.slider-visible-left .slider-item')
+              .offsetWidth *
+              sliderItems.length,
+        },
+      })
 
-      // const sliderTimelineLeft = gsap.timeline({
-      //   defaults: {
-      //     ease: 'linear',
-      //   },
-      //   scrollTrigger: {
-      //     trigger: '.hero',
-      //     snap: {
-      //       snapTo: 'labels',
-      //       duration: 0,
-      //       ease: 'linear',
-      //     },
-      //     start: 'bottom bottom',
-      //     pin: true,
-      //     scrub: true,
-      //     pinReparent: true,
-      //     pinSpacer: true,
-      //     pinnedContainer: '.hero',
-      //     pinSpacing:
-      //       document.querySelector('.slider-visible-left .slider-item')
-      //         .offsetWidth * sliderItems.length,
-      //     end: () =>
-      //       '+=' +
-      //       document.querySelector('.slider-visible-left .slider-item')
-      //         .offsetWidth *
-      //         sliderItems.length,
-      //   },
-      // })
-      // sliderItems.forEach((item, index) => {
-      //   sliderTimelineRight.add(
-      //     gsap.to('.slider-visible-right .slider-list', {
-      //       x:
-      //         0 -
-      //         document.querySelector('.slider-visible-left .slider-item')
-      //           .offsetWidth *
-      //           (index + 1),
-      //       duration: 1,
-      //       onComplete: () => {
-      //         console.log('next')
-      //         heroSlider.slideTo(index + 1)
-      //       },
-      //       onReverseComplete: () => {
-      //         console.log('prev')
-      //         heroSlider.slideTo(index + 1)
-      //       },
-      //     })
-      //   )
-      //   sliderTimelineRight.addLabel('labelSlider')
-      // })
-
-      // sliderItems.forEach((item, index) => {
-      //   sliderTimelineLeft.add(
-      //     gsap.to(
-      //       '.slider-visible-left .slider-list',
-      //       {
-      //         x:
-      //           0 +
-      //           document.querySelector('.slider-visible-left .slider-item')
-      //             .offsetWidth *
-      //             (index + 1),
-      //         duration: 1,
-      //       },
-      //       '<'
-      //     )
-      //   )
-      // })
+      sliderItems.forEach((item, index) => {
+        heroTimeline2.add(
+          gsap.to('.slider-visible-right .slider-list', {
+            x:
+              0 -
+              document.querySelector('.slider-visible-left .slider-item')
+                .offsetWidth *
+                (index + 1),
+            duration: 1,
+            onComplete: () => {
+              console.log('next')
+              heroSlider.slideTo(index + 1)
+            },
+            onReverseComplete: () => {
+              console.log('prev')
+              heroSlider.slideTo(index + 1)
+            },
+          })
+        )
+        heroTimeline2.add(
+          gsap.to('.slider-visible-left .slider-list', {
+            x:
+              0 +
+              document.querySelector('.slider-visible-left .slider-item')
+                .offsetWidth *
+                (index + 1),
+            duration: 1,
+          }),
+          '-=100%'
+        )
+        heroTimeline2.addLabel('labelSlider')
+      })
     }
 
     // Black Top Section
