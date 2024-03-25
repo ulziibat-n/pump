@@ -1,13 +1,13 @@
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
-import { CustomEase, ScrollTrigger, SplitText } from 'gsap/all'
+import { CustomEase, ScrollTrigger, SplitText, Flip } from 'gsap/all'
 import Swiper from 'swiper'
 import { Pagination, EffectFade, Autoplay } from 'swiper/modules'
 import Typed from 'typed.js'
 import './styles/style.scss'
 
 document.addEventListener('DOMContentLoaded', function () {
-  gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText)
+  gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, Flip)
 
   CustomEase.create('base', '0.075, 0.82, 0.165, 1')
 
@@ -768,15 +768,13 @@ function runSections() {
         scrub: 1,
         snap: {
           snapTo: 'labels',
-          duration: 3,
-          ease: 'base',
+          ease: 'linear',
         },
         start: 'top venter',
-        pinnedContainer: '.how',
+        pinnedContainer: '.how-flex',
         pinSpacer: true,
-        pinSpacing: document.querySelector('.how-mockup').offsetHeight * 5,
-        end: () =>
-          '+=' + document.querySelector('.how-mockup').offsetHeight * 5,
+        pinSpacing: document.querySelector('.how').offsetHeight * 5,
+        end: () => '+=' + document.querySelector('.how').offsetHeight * 5,
       },
     })
 
@@ -797,6 +795,7 @@ function runSections() {
       .fromTo(
         '.how-mockup',
         {
+          opacity: 0,
           scale: 1.5,
           y: '100%',
         },
@@ -813,12 +812,20 @@ function runSections() {
         {
           opacity: 0,
           y: '3rem',
+          height: 0,
         },
         {
           opacity: 1,
           y: 0,
+          height: 'auto',
           duration: 2,
           ease: 'base',
+          onStart: () => {
+            document.querySelector('.how-step-1').classList.add('active')
+          },
+          onReverseComplete: () => {
+            document.querySelector('.how-step-1').classList.remove('active')
+          },
         },
         '-=4'
       )
@@ -828,12 +835,20 @@ function runSections() {
         {
           opacity: 1,
           y: 0,
+          height: 'auto',
         },
         {
           opacity: 0,
           y: '-3rem',
+          height: 0,
           duration: 2,
           ease: 'base',
+          onStart: () => {
+            document.querySelector('.how-step-1').classList.remove('active')
+          },
+          onReverseComplete: () => {
+            document.querySelector('.how-step-1').classList.add('active')
+          },
         }
       )
       .fromTo(
@@ -855,12 +870,20 @@ function runSections() {
         {
           opacity: 0,
           y: '3rem',
+          height: 0,
         },
         {
           opacity: 1,
           y: '0',
+          height: 'auto',
           duration: 2,
           ease: 'base',
+          onStart: () => {
+            document.querySelector('.how-step-2').classList.add('active')
+          },
+          onReverseComplete: () => {
+            document.querySelector('.how-step-2').classList.remove('active')
+          },
         },
         '-=4'
       )
@@ -870,35 +893,45 @@ function runSections() {
         {
           opacity: 1,
           y: 0,
+          height: 'auto',
         },
         {
           opacity: 0,
           y: '-3rem',
+          height: 0,
           duration: 2,
           ease: 'base',
+          onStart: () => {
+            document.querySelector('.how-step-2').classList.remove('active')
+            document.querySelector('.how-step-3').classList.add('active')
+          },
+          onReverseComplete: () => {
+            document.querySelector('.how-step-2').classList.add('active')
+            document.querySelector('.how-step-3').classList.remove('active')
+          },
           onComplete: () => {
-            // const state = Flip.getState(
-            //   gsap.utils.toArray('.how-works, .how-mockup')
-            // )
-            // // Make DOM or styling changes (swap the squares in our case)
-            // swap(gsap.utils.toArray('.how-works, .how-mockup'))
-            // // Animate from the initial state to the end state
-            // Flip.from(state, {
-            //   duration: 1,
-            //   ease: 'base',
-            //   onStart: () => {
-            //     gsap.to('.how-mockup', {
-            //       rotate: '3deg',
-            //       ease: 'back.out(1.7)',
-            //     })
-            //   },
-            //   onComplete: () => {
-            //     gsap.to('.how-mockup', {
-            //       rotate: '0deg',
-            //       ease: 'back.out(1.7)',
-            //     })
-            //   },
-            // })
+            const state = Flip.getState(
+              gsap.utils.toArray('.how-works, .how-mockup')
+            )
+            // Make DOM or styling changes (swap the squares in our case)
+            swap(gsap.utils.toArray('.how-works, .how-mockup'))
+            // Animate from the initial state to the end state
+            Flip.from(state, {
+              duration: 1,
+              ease: 'base',
+              onStart: () => {
+                gsap.to('.how-mockup', {
+                  rotate: '3deg',
+                  ease: 'back.out(1.7)',
+                })
+              },
+              onComplete: () => {
+                gsap.to('.how-mockup', {
+                  rotate: '0deg',
+                  ease: 'back.out(1.7)',
+                })
+              },
+            })
           },
         }
       )
@@ -907,20 +940,22 @@ function runSections() {
         {
           y: '3rem',
           opacity: 0,
+          height: 0,
         },
         {
           y: 0,
           opacity: 1,
           duration: 3,
+          height: 'auto',
           delay: 3,
           onReverseComplete: () => {
-            // const state = Flip.getState(
-            //   gsap.utils.toArray('.how-works, .how-mockup')
-            // )
-            // // Make DOM or styling changes (swap the squares in our case)
-            // swap(gsap.utils.toArray('.how-works, .how-mockup'))
-            // // Animate from the initial state to the end state
-            // Flip.from(state, { duration: 2, ease: 'base' })
+            const state = Flip.getState(
+              gsap.utils.toArray('.how-works, .how-mockup')
+            )
+            // Make DOM or styling changes (swap the squares in our case)
+            swap(gsap.utils.toArray('.how-works, .how-mockup'))
+            // Animate from the initial state to the end state
+            Flip.from(state, { duration: 2, ease: 'base' })
           },
         }
       )
@@ -1076,9 +1111,9 @@ function runSections() {
       )
   }
 
-  // function swap([a, b]) {
-  //   a.parentNode.children[0] === a
-  //     ? a.parentNode.appendChild(a)
-  //     : a.parentNode.appendChild(b)
-  // }
+  function swap([a, b]) {
+    a.parentNode.children[0] === a
+      ? a.parentNode.appendChild(a)
+      : a.parentNode.appendChild(b)
+  }
 }
