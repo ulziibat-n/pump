@@ -965,49 +965,6 @@ function runSections() {
         .addLabel('step3')
     })
 
-    // howMatchMedia.add('(max-width: 768px)', () => {
-    //   const howMobile = gsap.timeline()
-    //   howMobile.add(
-    //     gsap.fromTo(
-    //       '.how-step-1 .how-mobile',
-    //       {
-    //         height: 0,
-    //         opacity: 1,
-    //       },
-    //       {
-    //         opacity: 1,
-    //         height: 'auto',
-    //         duration: 3,
-    //         scrollTrigger: {
-    //           trigger: '.how-flex',
-    //           start: 'top top',
-    //           end: 'bottom bottom',
-    //         },
-    //       },
-    //       'stop-1'
-    //     )
-    //   )
-    //   howMobile.add(
-    //     gsap.fromTo(
-    //       '.how-step-2 .how-mobile',
-    //       {
-    //         height: 0,
-    //         opacity: 1,
-    //       },
-    //       {
-    //         opacity: 1,
-    //         height: 'auto',
-    //         duration: 4,
-    //         scrollTrigger: {
-    //           trigger: '.how-flex',
-    //           start: 'top top',
-    //           end: 'bottom bottom',
-    //         },
-    //       }
-    //     )
-    //   )
-    // })
-
     // Reviews Section
     // ---------------------------------------
 
@@ -1019,13 +976,13 @@ function runSections() {
         trigger: '.reviews',
         pin: true,
         scrub: 2,
-        snap: 1 / 5,
+        snap: 1 / 3,
         start: 'top top',
         pinnedContainer: '.reviews',
         pinSpacer: true,
-        pinSpacing: document.querySelector('.review-item').offsetWidth * 10,
+        pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
         end: () =>
-          '+=' + document.querySelector('.review-item').offsetWidth * 10,
+          '+=' + document.querySelector('.review-item').offsetWidth * 5,
       },
     })
 
@@ -1079,8 +1036,7 @@ function runSections() {
         },
         {
           x: reviewsWidth,
-          duration: 16,
-          ease: 'linear',
+          duration: 6,
         }
       )
 
