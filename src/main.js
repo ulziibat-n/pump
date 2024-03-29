@@ -1212,7 +1212,7 @@ function runReview() {
         scrub: 2,
         snap: 1 / 3,
         start: 'top top',
-        pinnedContainer: '.about-image-pin',
+        pinnedContainer: '.reviews',
         pinReparent: true,
         pinSpacer: true,
         pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
