@@ -998,9 +998,15 @@ function runAbout() {
       defaults: {
         ease: 'base',
       },
+      scrollTrigger: {
+        trigger: '.about-hero',
+      },
     })
 
+    gsap.set('.about-logo', { opacity: 0, scale: 2.5, y: '4rem' })
+
     const aboutHeroTitle = new SplitText('.about-h1', { type: 'lines' })
+    gsap.set(aboutHeroTitle.lines, { opacity: 0, y: '3rem' })
     aboutHeroTimeline
       .fromTo(
         '.about-logo',
@@ -1036,6 +1042,7 @@ function runAbout() {
   const aboutUsText = document.querySelector('.about-us-text')
   if (aboutUsText) {
     const aboutUsTextItems = gsap.utils.toArray('.about-h2, .about-us-p')
+    gsap.set(aboutUsTextItems, { opacity: 0, y: '4rem' })
 
     gsap.fromTo(
       aboutUsTextItems,
