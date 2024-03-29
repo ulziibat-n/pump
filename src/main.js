@@ -1171,9 +1171,11 @@ function runAbout() {
       '.p1-bg',
       {
         bottom: '-40%',
+        opacity: 0,
       },
       {
         bottom: '30%',
+        opacity: 1,
         ease: 'linear',
         scrollTrigger: {
           trigger: '.philosophie',
@@ -1189,9 +1191,11 @@ function runAbout() {
       '.p2-bg',
       {
         bottom: '-50%',
+        opacity: 0,
       },
       {
         bottom: '60%',
+        opacity: 1,
         ease: 'linear',
         scrollTrigger: {
           trigger: '.philosophie',
