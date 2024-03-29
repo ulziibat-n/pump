@@ -1130,23 +1130,67 @@ function runAbout() {
           pinnedContainer: '.about-image-pin',
           end: () => '+=' + aboutImage.offsetHeight * 1,
         },
+      }
+    )
+  }
 
-        // scrub: 1,
-        // pin: true,
-        // snap: {
-        //   snapTo: 'labels',
-        //   duration: 1,
-        //   ease: 'linear',
-        // },
-        // start: 'center center',
-        // pinSpacer: true,
-        // pinnedContainer: '.media-wrapper',
-        // pinSpacing:
-        //   document.querySelector('.media-item').offsetWidth * mediaItems.length,
-        // end: () =>
-        //   '+=' +
-        //   document.querySelector('.media-item').offsetWidth *
-        //     (mediaItems.length - 1),
+  const philosophie = document.querySelector('.philosophie')
+  if (philosophie) {
+    const philosophieItems = gsap.utils.toArray(
+      '.philosophie-h2, .philosophie-p'
+    )
+    gsap.fromTo(
+      philosophieItems,
+      {
+        opacity: 0,
+        y: '5rem',
+      },
+      {
+        opacity: 1,
+        y: '0rem',
+        duration: 2,
+        stagger: 0.2,
+        delay: 0.1,
+        ease: 'base',
+        scrollTrigger: {
+          trigger: '.philosophie',
+          start: 'top center',
+        },
+      }
+    )
+
+    gsap.fromTo(
+      '.p1-bg',
+      {
+        bottom: '-40%',
+      },
+      {
+        bottom: '30%',
+        ease: 'linear',
+        scrollTrigger: {
+          trigger: '.philosophie',
+          start: 'top bottom',
+          end: 'bottom center',
+          scrub: 12,
+        },
+      }
+    )
+
+    gsap.set('.p2-bg', { top: 'auto' })
+    gsap.fromTo(
+      '.p2-bg',
+      {
+        bottom: '-50%',
+      },
+      {
+        bottom: '60%',
+        ease: 'linear',
+        scrollTrigger: {
+          trigger: '.philosophie',
+          start: 'top bottom',
+          end: 'bottom center',
+          scrub: 6,
+        },
       }
     )
   }
