@@ -32,13 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.remove('is-loading')
   document.body.classList.add('is-loaded')
   console.log('Site Loaded ✅')
-  runHero()
-  runBlackTop()
-  runCards()
-  runIcons()
-  runReason()
-  runBlackBottom()
-  runMockup()
+  runHome()
+  runAbout()
   runReview()
   runCta()
   console.log('Sections Initialized ✅')
@@ -56,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-function runHero() {
+function runHome() {
   // Hero Section
   // ---------------------------------------
   const sectionHero = document.querySelector('[data-section="hero"]')
@@ -234,8 +229,6 @@ function runHero() {
       })
     }
   }
-}
-function runBlackTop() {
   const blackTopSection = document.querySelector('.black-top')
   if (blackTopSection) {
     // Black Top Section
@@ -326,9 +319,7 @@ function runBlackTop() {
         '-=2'
       )
   }
-}
 
-function runBlackBottom() {
   const blackBottom = document.querySelector('.black-bottom')
   if (blackBottom) {
     // Black Bottom Section
@@ -508,9 +499,7 @@ function runBlackBottom() {
       )
     )
   }
-}
 
-function runCards() {
   const cardsSection = document.querySelector('.cards')
   if (cardsSection) {
     console.log('cards')
@@ -568,9 +557,7 @@ function runCards() {
       }
     )
   }
-}
 
-function runIcons() {
   const iconsSection = document.querySelector('.icons-section')
   if (iconsSection) {
     // Icons Section
@@ -731,9 +718,7 @@ function runIcons() {
         '<'
       )
   }
-}
 
-function runReason() {
   const reasonSection = document.querySelector('.reason')
   if (reasonSection) {
     // Reason
@@ -788,9 +773,7 @@ function runReason() {
         '-=2'
       )
   }
-}
 
-function runMockup() {
   const how = document.querySelector('.how')
   if (how) {
     // Mockup Section
@@ -1008,6 +991,167 @@ function runMockup() {
   }
 }
 
+function runAbout() {
+  const aboutHero = document.querySelector('.about-hero')
+  if (aboutHero) {
+    const aboutHeroTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+    })
+
+    const aboutHeroTitle = new SplitText('.about-h1', { type: 'lines' })
+    aboutHeroTimeline
+      .fromTo(
+        '.about-logo',
+        {
+          opacity: 0,
+          scale: 2.5,
+          y: '4rem',
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 2,
+          delay: 0.5,
+        }
+      )
+      .fromTo(
+        aboutHeroTitle.lines,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.1,
+        }
+      )
+  }
+
+  const aboutUsText = document.querySelector('.about-us-text')
+  if (aboutUsText) {
+    const aboutUsTextItems = gsap.utils.toArray('.about-h2, .about-us-p')
+
+    gsap.fromTo(
+      aboutUsTextItems,
+      {
+        opacity: 0,
+        y: '4rem',
+      },
+      {
+        opacity: 1,
+        y: '0rem',
+        duration: 2,
+        stagger: 0.1,
+        delay: 0.1,
+        ease: 'base',
+        scrollTrigger: {
+          trigger: '.about-us-text',
+          start: 'top center',
+        },
+      }
+    )
+  }
+
+  const aboutImage = document.querySelector('.about-us-image')
+  if (aboutImage) {
+    gsap.set('.about-us-image .message', {
+      opacity: 0,
+      y: '1rem',
+    })
+
+    const aboutMessages = gsap.utils.toArray('.about-us-image .message')
+
+    gsap.fromTo(
+      aboutImage,
+      {
+        opacity: 0,
+        scale: 0.5,
+        y: '3rem',
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 2,
+        ease: 'base',
+        onStart: () => {
+          gsap.fromTo(
+            aboutMessages,
+            {
+              y: '1rem',
+              opacity: 0,
+              scale: 0.9,
+              rotate: '3deg',
+            },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              rotate: '0deg',
+              duration: 0.35,
+              stagger: 0.2,
+              delay: 0.5,
+              ease: 'base',
+            }
+          )
+        },
+        onReverseComplete: () => {
+          gsap.fromTo(
+            aboutMessages,
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              rotate: '0deg',
+            },
+            {
+              y: '1rem',
+              opacity: 0,
+              scale: 0.9,
+              rotate: '3deg',
+              duration: 0.35,
+              stagger: 0.2,
+              ease: 'base',
+            }
+          )
+        },
+        scrollTrigger: {
+          trigger: '.about-image-pin',
+          start: 'center center',
+          scrub: 2,
+          pin: true,
+          pinSpacer: true,
+          pinnedContainer: '.about-image-pin',
+          end: () => '+=' + aboutImage.offsetHeight * 1,
+        },
+
+        // scrub: 1,
+        // pin: true,
+        // snap: {
+        //   snapTo: 'labels',
+        //   duration: 1,
+        //   ease: 'linear',
+        // },
+        // start: 'center center',
+        // pinSpacer: true,
+        // pinnedContainer: '.media-wrapper',
+        // pinSpacing:
+        //   document.querySelector('.media-item').offsetWidth * mediaItems.length,
+        // end: () =>
+        //   '+=' +
+        //   document.querySelector('.media-item').offsetWidth *
+        //     (mediaItems.length - 1),
+      }
+    )
+  }
+}
+
 function runReview() {
   const reviewSection = document.querySelector('.reviews')
   if (reviewSection) {
@@ -1024,7 +1168,8 @@ function runReview() {
         scrub: 2,
         snap: 1 / 3,
         start: 'top top',
-        pinnedContainer: '.reviews',
+        pinnedContainer: '.about-image-pin',
+        pinReparent: true,
         pinSpacer: true,
         pinSpacing: document.querySelector('.review-item').offsetWidth * 1.5,
         end: () =>
