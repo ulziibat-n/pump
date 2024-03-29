@@ -1146,11 +1146,12 @@ function runAbout() {
     const philosophieItems = gsap.utils.toArray(
       '.philosophie-h2, .philosophie-p'
     )
+    gsap.set(philosophieItems, { opacity: 0, y: '4rem' })
     gsap.fromTo(
       philosophieItems,
       {
         opacity: 0,
-        y: '5rem',
+        y: '4rem',
       },
       {
         opacity: 1,
