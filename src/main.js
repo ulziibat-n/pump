@@ -32,8 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
   document.body.classList.remove('is-loading')
   document.body.classList.add('is-loaded')
   console.log('Site Loaded ✅')
-  runSections()
-  console.log('Hero Section ✅')
+  runHero()
+  runBlackTop()
+  runCards()
+  runIcons()
+  runReason()
+  runBlackBottom()
+  runMockup()
+  runReview()
+  runCta()
+  console.log('Sections Initialized ✅')
 
   // Store the window width
   var windowWidth = window.innerWidth
@@ -48,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-function runSections() {
+function runHero() {
   // Hero Section
   // ---------------------------------------
   const sectionHero = document.querySelector('[data-section="hero"]')
@@ -225,7 +233,11 @@ function runSections() {
         heroTimeline2.addLabel('labelSlider')
       })
     }
-
+  }
+}
+function runBlackTop() {
+  const blackTopSection = document.querySelector('.black-top')
+  if (blackTopSection) {
     // Black Top Section
     // ---------------------------------------
     gsap.set('.section-black', {
@@ -313,7 +325,12 @@ function runSections() {
         },
         '-=2'
       )
+  }
+}
 
+function runBlackBottom() {
+  const blackBottom = document.querySelector('.black-bottom')
+  if (blackBottom) {
     // Black Bottom Section
     // ---------------------------------------
 
@@ -490,8 +507,14 @@ function runSections() {
         '<'
       )
     )
+  }
+}
 
-    // Black Bottom Section
+function runCards() {
+  const cardsSection = document.querySelector('.cards')
+  if (cardsSection) {
+    console.log('cards')
+    // Cards
     // ---------------------------------------
 
     const cardTitle = new SplitText('.cards h2', { type: 'lines' })
@@ -509,6 +532,9 @@ function runSections() {
         stagger: 0.1,
         delay: 0.5,
         ease: 'base',
+        onComplete: () => {
+          console.log('cardsyes')
+        },
         scrollTrigger: {
           trigger: '.cards',
           start: 'top 80%',
@@ -541,7 +567,12 @@ function runSections() {
         },
       }
     )
+  }
+}
 
+function runIcons() {
+  const iconsSection = document.querySelector('.icons-section')
+  if (iconsSection) {
     // Icons Section
     // ---------------------------------------
 
@@ -699,8 +730,13 @@ function runSections() {
         },
         '<'
       )
+  }
+}
 
-    // Black Bottom Section
+function runReason() {
+  const reasonSection = document.querySelector('.reason')
+  if (reasonSection) {
+    // Reason
     // ---------------------------------------
 
     const reasonTitle = new SplitText('.reason h2', { type: 'lines' })
@@ -751,7 +787,12 @@ function runSections() {
         },
         '-=2'
       )
+  }
+}
 
+function runMockup() {
+  const how = document.querySelector('.how')
+  if (how) {
     // Mockup Section
     // ---------------------------------------
 
@@ -964,7 +1005,12 @@ function runSections() {
         )
         .addLabel('step3')
     })
+  }
+}
 
+function runReview() {
+  const reviewSection = document.querySelector('.reviews')
+  if (reviewSection) {
     // Reviews Section
     // ---------------------------------------
 
@@ -1040,7 +1086,12 @@ function runSections() {
           ease: 'linear',
         }
       )
+  }
+}
 
+function runCta() {
+  const cta = document.querySelector('.cta')
+  if (cta) {
     // Last Section
     // ---------------------------------------
     gsap.set('.cta', {
@@ -1115,10 +1166,10 @@ function runSections() {
         }
       )
   }
+}
 
-  function swap([a, b]) {
-    a.parentNode.children[0] === a
-      ? a.parentNode.appendChild(a)
-      : a.parentNode.appendChild(b)
-  }
+function swap([a, b]) {
+  a.parentNode.children[0] === a
+    ? a.parentNode.appendChild(a)
+    : a.parentNode.appendChild(b)
 }
