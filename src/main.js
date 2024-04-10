@@ -131,8 +131,8 @@ function runHome() {
             y: '0rem',
             scale: 1,
             delay: 0,
-            duration: 2,
-            onStart: () => {
+            duration: 1,
+            onComplete: () => {
               new Typed('#heroTyped1', {
                 strings: [
                   'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
