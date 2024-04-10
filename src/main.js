@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   runAbout()
   runReview()
   runCta()
+  runFaq(lenis)
   console.log('Sections Initialized ✅')
 
   // Store the window width
@@ -1420,4 +1421,203 @@ function swap([a, b]) {
   a.parentNode.children[0] === a
     ? a.parentNode.appendChild(a)
     : a.parentNode.appendChild(b)
+}
+
+function runFaq(lenis) {
+  const faq = document.querySelector('.faq')
+  if (faq) {
+    console.log('faq')
+    const faqTimeline = gsap.timeline({
+      defaults: {
+        ease: 'base',
+      },
+    })
+    const faqTitle = new SplitText('.faq-title', { type: 'lines' })
+    gsap.set(faqTitle.lines, { opacity: 0, y: '3rem' })
+    faqTimeline.fromTo(
+      faqTitle.lines,
+      {
+        opacity: 0,
+        y: '3rem',
+      },
+      {
+        opacity: 1,
+        y: '0rem',
+        duration: 2,
+        stagger: 0.1,
+        delay: 0.1,
+      }
+    )
+
+    const tabNavItems = document.querySelectorAll('[data-nav]')
+    const tabContentItems = document.querySelectorAll('[data-category]')
+    let visibleFaqs = []
+    if (tabNavItems && tabContentItems) {
+      tabNavItems.forEach((tabNavItem, index) => {
+        if (index == 0) {
+          tabNavItem.classList.add('is-active')
+          let activeCat = tabNavItem.dataset.nav
+          tabContentItems.forEach((tabContentItem) => {
+            if (tabContentItem.dataset.category !== activeCat) {
+              tabContentItem.classList.add('hidden')
+            } else {
+              visibleFaqs.push(tabContentItem)
+              gsap.set(tabContentItem, { opacity: 0, y: '3rem' })
+            }
+          })
+        }
+      })
+
+      gsap.fromTo(
+        visibleFaqs,
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 1,
+          stagger: 0.1,
+          ease: 'base',
+          onComplete: () => {
+            lenis.resize()
+          },
+        }
+      )
+      lenis.resize()
+      tabNavItems.forEach((tabNavItem) => {
+        tabNavItem.addEventListener('click', (e) => {
+          visibleFaqs = []
+          tabNavItems.forEach((tabNavButton) => {
+            if (tabNavButton.classList.contains('is-active')) {
+              tabNavButton.classList.remove('is-active')
+            }
+          })
+          e.currentTarget.classList.add('is-active')
+          tabContentItems.forEach((tabContentItem) => {
+            if (
+              tabContentItem.dataset.category !== e.currentTarget.dataset.nav
+            ) {
+              gsap.set(tabContentItem, { opacity: 0, y: '3rem' })
+              gsap.set(tabContentItem.querySelector('.faq-toggle'), {
+                rotate: 0,
+              })
+              gsap.set(tabContentItem.querySelector('.faq-item-content'), {
+                opacity: 0,
+                maxHeight: 0,
+              })
+              tabContentItem.classList.add('hidden')
+              tabContentItem
+                .querySelector('.faq-item')
+                .classList.remove('is-open')
+            } else {
+              tabContentItem.classList.remove('hidden')
+              gsap.set(tabContentItem, { opacity: 0, y: '3rem' })
+              visibleFaqs.push(tabContentItem)
+            }
+          })
+          gsap.killTweensOf('[data-category]')
+          gsap.fromTo(
+            visibleFaqs,
+            {
+              opacity: 0,
+              y: '3rem',
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              stagger: 0.1,
+              ease: 'base',
+              onComplete: () => {
+                lenis.resize()
+              },
+            }
+          )
+        })
+      })
+
+      tabContentItems.forEach((faqItem) => {
+        const faqTitle = faqItem.querySelector('.faq-item-header')
+        const faqContent = faqItem.querySelector('.faq-item-content')
+        gsap.set(faqContent, {
+          opacity: 0,
+          maxHeight: 0,
+        })
+        faqContent.classList.remove('is-open')
+
+        if (faqTitle && faqContent) {
+          faqTitle.addEventListener('click', (e) => {
+            const faqElement = e.currentTarget.parentNode
+            const faqToggle = e.currentTarget.querySelector('.faq-toggle')
+            const faqText = e.currentTarget.nextElementSibling
+            if (faqElement) {
+              if (faqElement.classList.contains('is-open')) {
+                console.log('contains')
+                if (faqToggle) {
+                  gsap.fromTo(
+                    faqToggle,
+                    {
+                      rotate: '180deg',
+                    },
+                    {
+                      rotate: 0,
+                    }
+                  )
+                }
+                if (faqText) {
+                  gsap.fromTo(
+                    faqText,
+                    {
+                      opacity: 1,
+                      maxHeight: 1000,
+                    },
+                    {
+                      maxHeight: 0,
+                      opacity: 0,
+                      onComplete: () => {
+                        faqElement.classList.remove('is-open')
+                      },
+                    }
+                  )
+                }
+              } else {
+                console.log('not contains')
+                if (faqToggle) {
+                  gsap.fromTo(
+                    faqToggle,
+                    {
+                      rotate: 0,
+                    },
+                    {
+                      rotate: '180deg',
+                    }
+                  )
+                }
+                if (faqText) {
+                  gsap.fromTo(
+                    faqText,
+                    {
+                      maxHeight: 0,
+                      opacity: 0,
+                    },
+                    {
+                      opacity: 1,
+                      maxHeight: 1000,
+                      onComplete: () => {
+                        faqElement.classList.add('is-open')
+                        lenis.resize()
+                      },
+                    }
+                  )
+                }
+              }
+            }
+          })
+        }
+      })
+    }
+  }
 }
