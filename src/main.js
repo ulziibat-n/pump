@@ -131,24 +131,23 @@ function runHome() {
             y: '0rem',
             scale: 1,
             delay: 0,
-            duration: 1,
+            duration: 0.5,
             onComplete: () => {
               new Typed('#heroTyped1', {
                 strings: [
                   'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
                 ],
-                typeSpeed: 15,
+                typeSpeed: 10,
                 loop: false,
                 fadeOut: true,
                 showCursor: false,
                 fadeOutClass: 'typed-fade-out',
-                fadeOutDelay: 500,
                 onComplete: () => {
                   new Typed('#heroTyped2', {
                     strings: [
                       'Comme pour le sport, fixons des objectifs à atteindre :',
                     ],
-                    typeSpeed: 15,
+                    typeSpeed: 10,
                     showCursor: true,
                     loop: false,
                     fadeOut: true,
@@ -165,7 +164,8 @@ function runHome() {
                           opacity: 1,
                           y: '0rem',
                           delay: 0,
-                          duration: 2,
+                          ease: 'base',
+                          duration: 0.5,
                         }
                       )
                     },
@@ -174,7 +174,7 @@ function runHome() {
               })
             },
           },
-          '-=1'
+          '-=1.5'
         )
       console.log('total:' + sliderItems.length)
       const longWidth =
@@ -314,6 +314,7 @@ function runHome() {
       scrollTrigger: {
         trigger: '.black-top',
         start: 'top 70%',
+        scrub: 1,
       },
     })
 
@@ -407,9 +408,9 @@ function runHome() {
         ease: 'base',
       },
       scrollTrigger: {
-        trigger: '.black-bottom',
-        start: 'top 90%',
-        end: 'top 20%',
+        trigger: '.black-bottom-header',
+        start: 'top center',
+        end: 'bottom center',
         scrub: 1,
       },
     })
