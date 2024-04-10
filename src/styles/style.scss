@@ -31,6 +31,15 @@
   transition-delay: 0;
 }
 
+.slider-visible-right .slider-item.swiper-slide-active {
+  flex: 0 0 35.75rem;
+  opacity: 0;
+}
+
+.slider-visible-right .slider-item {
+  opacity: 1;
+}
+
 // .how-mobile {
 //   opacity: 0;
 //   overflow: hidden;
