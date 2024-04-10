@@ -95,7 +95,7 @@ function runHome() {
         },
         pagination: {
           el: paginationEl,
-          clickable: true,
+          clickable: false,
         },
       })
       heroSlider.init()
@@ -108,6 +108,10 @@ function runHome() {
       heroSliderLong.init()
 
       gsap.set('.hero-images .swiper', {
+        opacity: 0,
+        y: '1rem',
+      })
+      gsap.set('.slider-visible-right .slider-item', {
         opacity: 0,
         y: '1rem',
       })
@@ -174,6 +178,20 @@ function runHome() {
                           delay: 0,
                           ease: 'base',
                           duration: 0.5,
+                        }
+                      )
+                      gsap.fromTo(
+                        '.slider-visible-right .slider-item',
+                        {
+                          opacity: 0,
+                          y: '1rem',
+                        },
+                        {
+                          opacity: 1,
+                          y: '0rem',
+                          stagger: 0.25,
+                          ease: 'base',
+                          duration: 1,
                         }
                       )
                     },

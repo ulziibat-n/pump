@@ -33,11 +33,11 @@
 
 .slider-visible-right .slider-item.swiper-slide-active {
   flex: 0 0 35.75rem;
-  opacity: 0;
+  visibility: hidden;
 }
 
 .slider-visible-right .slider-item {
-  opacity: 1;
+  visibility: visible;
 }
 
 // .how-mobile {
