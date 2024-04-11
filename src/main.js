@@ -116,6 +116,9 @@ function runHome() {
         y: '1rem',
       })
 
+      gsap.set(heroElements, { opacity: 0, y: '3rem' })
+      gsap.set('.hero-width.is-main',, { opacity: 0, y: '3rem', scale: 0.95 })
+
       heroTimeline
         .fromTo(
           heroElements,
@@ -327,7 +330,20 @@ function runHome() {
     })
 
     const blackTopTitle = new SplitText('.black-top h2', { type: 'lines' })
-
+    gsap.set(blackTopTitle.lines,{
+      opacity: 0,
+      y: '3rem',
+    })
+    gsap.set('.black-top p.black-desciption',
+    {
+      opacity: 0,
+      y: '3rem',
+    })
+    gsap.set('.black-top .search',
+    {
+      opacity: 0,
+      y: '3rem',
+    })
     blackTopTimeline
       .fromTo(
         blackTopTitle.lines,
@@ -422,7 +438,16 @@ function runHome() {
         scrub: 1,
       },
     })
-
+    gsap.set(blackBtoomTitle.lines,
+      {
+        opacity: 0,
+        y: '3rem',
+      })
+      gsap.set('.black-bottom p',
+      {
+        opacity: 0,
+        y: '3rem',
+      })
     const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
     blackBottomTimeline1
       .fromTo(
