@@ -434,6 +434,7 @@ function runHome() {
         scrub: 1,
       },
     })
+    const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
     gsap.set(blackBtoomTitle.lines, {
       opacity: 0,
       y: '3rem',
@@ -442,7 +443,11 @@ function runHome() {
       opacity: 0,
       y: '3rem',
     })
-    const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
+    gsap.set(mediaItems, {
+      opacity: 0,
+      scale: 0.5,
+      y: '3rem',
+    })
     blackBottomTimeline1
       .fromTo(
         blackBtoomTitle.lines,
