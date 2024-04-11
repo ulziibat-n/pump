@@ -185,10 +185,12 @@ function runHome() {
                         {
                           opacity: 0,
                           y: '1rem',
+                          x: '-50%',
                         },
                         {
                           opacity: 1,
                           y: '0rem',
+                          x: '-50%',
                           stagger: 0.25,
                           ease: 'base',
                           duration: 1,
