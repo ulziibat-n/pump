@@ -117,7 +117,7 @@ function runHome() {
       })
 
       gsap.set(heroElements, { opacity: 0, y: '3rem' })
-      gsap.set('.hero-width.is-main',, { opacity: 0, y: '3rem', scale: 0.95 })
+      gsap.set('.hero-width.is-main', { opacity: 0, y: '3rem', scale: 0.95 })
 
       heroTimeline
         .fromTo(
@@ -188,12 +188,10 @@ function runHome() {
                         {
                           opacity: 0,
                           y: '1rem',
-                          x: '-50%',
                         },
                         {
                           opacity: 1,
                           y: '0rem',
-                          x: '-50%',
                           stagger: 0.25,
                           ease: 'base',
                           duration: 1,
@@ -269,7 +267,7 @@ function runHome() {
       sliderItems.forEach((item, index) => {
         heroTimeline2.add(
           gsap.to('.slider-visible-right', {
-            x: 0,
+            x: '-50%',
             duration: 1,
             onComplete: () => {
               console.log('next')
@@ -330,17 +328,15 @@ function runHome() {
     })
 
     const blackTopTitle = new SplitText('.black-top h2', { type: 'lines' })
-    gsap.set(blackTopTitle.lines,{
+    gsap.set(blackTopTitle.lines, {
       opacity: 0,
       y: '3rem',
     })
-    gsap.set('.black-top p.black-desciption',
-    {
+    gsap.set('.black-top p.black-desciption', {
       opacity: 0,
       y: '3rem',
     })
-    gsap.set('.black-top .search',
-    {
+    gsap.set('.black-top .search', {
       opacity: 0,
       y: '3rem',
     })
@@ -438,16 +434,14 @@ function runHome() {
         scrub: 1,
       },
     })
-    gsap.set(blackBtoomTitle.lines,
-      {
-        opacity: 0,
-        y: '3rem',
-      })
-      gsap.set('.black-bottom p',
-      {
-        opacity: 0,
-        y: '3rem',
-      })
+    gsap.set(blackBtoomTitle.lines, {
+      opacity: 0,
+      y: '3rem',
+    })
+    gsap.set('.black-bottom p', {
+      opacity: 0,
+      y: '3rem',
+    })
     const blackBtoomTitle = new SplitText('.black-bottom h3', { type: 'lines' })
     blackBottomTimeline1
       .fromTo(
