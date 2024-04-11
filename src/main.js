@@ -267,7 +267,7 @@ function runHome() {
       sliderItems.forEach((item, index) => {
         heroTimeline2.add(
           gsap.to('.slider-visible-right', {
-            x: '-50%',
+            opacity: 1,
             duration: 1,
             onComplete: () => {
               console.log('next')
