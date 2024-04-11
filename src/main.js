@@ -119,169 +119,326 @@ function runHome() {
       gsap.set(heroElements, { opacity: 0, y: '3rem' })
       gsap.set('.hero-width.is-main', { opacity: 0, y: '3rem', scale: 0.95 })
 
-      heroTimeline
-        .fromTo(
-          heroElements,
-          {
-            opacity: 0,
-            y: '3rem',
-          },
-          {
-            opacity: 1,
-            y: '0rem',
-            duration: 2,
-            stagger: 0.1,
-            delay: 0.1,
-          }
-        )
-        .fromTo(
-          '.hero-width.is-main',
-          {
-            opacity: 0,
-            y: '1rem',
-            scale: 0.95,
-          },
-          {
-            opacity: 1,
-            y: '0rem',
-            scale: 1,
-            delay: 0,
-            duration: 0.5,
-            onComplete: () => {
-              new Typed('#heroTyped1', {
-                strings: [
-                  'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
-                ],
-                typeSpeed: 10,
-                loop: false,
-                fadeOut: true,
-                showCursor: false,
-                fadeOutClass: 'typed-fade-out',
-                onComplete: () => {
-                  new Typed('#heroTyped2', {
-                    strings: [
-                      'Comme pour le sport, fixons des objectifs à atteindre :',
-                    ],
-                    typeSpeed: 10,
-                    showCursor: true,
-                    loop: false,
-                    fadeOut: true,
-                    fadeOutClass: 'typed-fade-out',
-                    fadeOutDelay: 500,
-                    onComplete: () => {
-                      gsap.fromTo(
-                        '.hero-images .swiper',
-                        {
-                          opacity: 0,
-                          y: '1rem',
-                        },
-                        {
-                          opacity: 1,
-                          y: '0rem',
-                          delay: 0,
-                          ease: 'base',
-                          duration: 0.5,
-                        }
-                      )
-                      gsap.fromTo(
-                        '.slider-visible-right .slider-item',
-                        {
-                          opacity: 0,
-                          y: '1rem',
-                        },
-                        {
-                          opacity: 1,
-                          y: '0rem',
-                          stagger: 0.25,
-                          ease: 'base',
-                          duration: 1,
-                        }
-                      )
-                    },
-                  })
-                },
-              })
-            },
-          },
-          '-=1.5'
-        )
-      console.log('total:' + sliderItems.length)
-
-      const heroTimeline2 = gsap.timeline({
-        defaults: {
-          ease: 'linear',
-        },
-        onComplete: () => {
-          heroSlider.slideTo(sliderItems.length)
-          heroSliderLong.slideTo(sliderItems.length)
-          console.log('hey')
-        },
-        onReverseComplete: () => {
-          heroSlider.slideTo(0)
-          heroSliderLong.slideTo(0)
-        },
-        scrollTrigger: {
-          trigger: '.hero',
-          snap: {
-            snapTo: 'labels',
-            duration: 0,
-            ease: 'linear',
-          },
-          start: 'bottom bottom',
-          pin: true,
-          scrub: true,
-          pinReparent: true,
-          pinSpacer: true,
-          pinnedContainer: '.hero',
-          pinSpacing:
-            document.querySelector('.slider-visible-right .slider-item')
-              .offsetWidth * sliderItems.length,
-          end: () =>
-            '+=' +
-            document.querySelector('.slider-visible-right .slider-item')
-              .offsetWidth *
-              sliderItems.length,
-        },
-      })
-
-      heroTimeline2.fromTo(
-        '.hero-width.is-grow .hero-slider-item',
+      heroTimeline.fromTo(
+        heroElements,
         {
           opacity: 0,
-          y: '1rem',
-          scale: 0.95,
+          y: '3rem',
         },
         {
           opacity: 1,
           y: '0rem',
-          scale: 1,
-          duration: 0.5,
-          stagger: {
-            each: 0.1,
-            from: 'center',
-          },
-        },
-        '-=1.5'
+          duration: 2,
+          stagger: 0.1,
+          delay: 0.1,
+        }
       )
+      console.log('total:' + sliderItems.length)
 
-      sliderItems.forEach((item, index) => {
-        heroTimeline2.add(
-          gsap.to('.slider-visible-right', {
-            opacity: 1,
-            duration: 1,
-            onComplete: () => {
-              console.log('next')
-              heroSlider.slideTo(index + 1)
-              heroSliderLong.slideTo(index + 1)
+      let heroMatchMedia = gsap.matchMedia()
+
+      heroMatchMedia.add('(min-width: 769px)', () => {
+        const heroTimeline2 = gsap.timeline({
+          defaults: {
+            ease: 'linear',
+          },
+          onComplete: () => {
+            heroSlider.slideTo(sliderItems.length)
+            heroSliderLong.slideTo(sliderItems.length)
+            console.log('hey')
+          },
+          onReverseComplete: () => {
+            heroSlider.slideTo(0)
+            heroSliderLong.slideTo(0)
+          },
+          scrollTrigger: {
+            trigger: '.hero',
+            snap: {
+              snapTo: 'labels',
+              duration: 0,
+              ease: 'linear',
             },
-            onReverseComplete: () => {
-              console.log('prev')
-              heroSlider.slideTo(index + 1)
-              heroSliderLong.slideTo(index + 1)
+            start: 'bottom bottom',
+            pin: true,
+            scrub: true,
+            pinReparent: true,
+            pinSpacer: true,
+            pinnedContainer: '.hero',
+            pinSpacing:
+              document.querySelector('.slider-visible-right .slider-item')
+                .offsetWidth *
+              sliderItems.length *
+              3,
+            end: () =>
+              '+=' +
+              document.querySelector('.slider-visible-right .slider-item')
+                .offsetWidth *
+                sliderItems.length *
+                3,
+          },
+        })
+
+        heroTimeline2
+          .fromTo(
+            '.hero-width.is-main',
+            {
+              opacity: 0,
+              y: '1rem',
+              scale: 0.95,
             },
-          })
-        )
-        heroTimeline2.addLabel('labelSlider')
+            {
+              opacity: 1,
+              y: '0rem',
+              scale: 1,
+              delay: 0,
+              duration: 0.5,
+              onComplete: () => {
+                new Typed('#heroTyped1', {
+                  strings: [
+                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
+                  ],
+                  typeSpeed: 10,
+                  loop: false,
+                  fadeOut: true,
+                  showCursor: false,
+                  fadeOutClass: 'typed-fade-out',
+                  onComplete: () => {
+                    new Typed('#heroTyped2', {
+                      strings: [
+                        'Comme pour le sport, fixons des objectifs à atteindre :',
+                      ],
+                      typeSpeed: 10,
+                      showCursor: true,
+                      loop: false,
+                      fadeOut: true,
+                      fadeOutClass: 'typed-fade-out',
+                      fadeOutDelay: 500,
+                      onComplete: () => {
+                        gsap.fromTo(
+                          '.hero-images .swiper',
+                          {
+                            opacity: 0,
+                            y: '1rem',
+                          },
+                          {
+                            opacity: 1,
+                            y: '0rem',
+                            delay: 0,
+                            ease: 'base',
+                            duration: 0.5,
+                          }
+                        )
+                        gsap.fromTo(
+                          '.slider-visible-right .slider-item',
+                          {
+                            opacity: 0,
+                            y: '1rem',
+                          },
+                          {
+                            opacity: 1,
+                            y: '0rem',
+                            stagger: 0.25,
+                            ease: 'base',
+                            duration: 1,
+                          }
+                        )
+                      },
+                    })
+                  },
+                })
+              },
+            },
+            '-=1.5'
+          )
+          .fromTo(
+            '.hero-width.is-grow .hero-slider-item',
+            {
+              opacity: 0,
+              y: '1rem',
+              scale: 0.95,
+            },
+            {
+              opacity: 1,
+              y: '0rem',
+              scale: 1,
+              duration: 0.5,
+              stagger: {
+                each: 0.1,
+                from: 'center',
+              },
+            },
+            '-=1.5'
+          )
+          .fromTo(
+            '.slider-visible-right .slider-item',
+            {
+              opacity: 0,
+              y: '1rem',
+            },
+            {
+              opacity: 1,
+              y: '0rem',
+              stagger: 0.25,
+              ease: 'base',
+              duration: 1,
+            }
+          )
+
+        sliderItems.forEach((item, index) => {
+          heroTimeline2.add(
+            gsap.to('.slider-visible-right', {
+              opacity: 1,
+              duration: 1,
+              onComplete: () => {
+                console.log('next')
+                heroSlider.slideTo(index + 1)
+                heroSliderLong.slideTo(index + 1)
+              },
+              onReverseComplete: () => {
+                console.log('prev')
+                heroSlider.slideTo(index + 1)
+                heroSliderLong.slideTo(index + 1)
+              },
+            })
+          )
+          heroTimeline2.addLabel('labelSlider')
+        })
+      })
+      heroMatchMedia.add('(max-width: 768px)', () => {
+        const heroTimeline2 = gsap.timeline({
+          defaults: {
+            ease: 'linear',
+          },
+          onComplete: () => {
+            heroSlider.slideTo(sliderItems.length)
+            heroSliderLong.slideTo(sliderItems.length)
+            console.log('hey')
+          },
+          onReverseComplete: () => {
+            heroSlider.slideTo(0)
+            heroSliderLong.slideTo(0)
+          },
+          scrollTrigger: {
+            trigger: '.hero',
+            snap: {
+              snapTo: 'labels',
+              duration: 0,
+              ease: 'linear',
+            },
+            start: 'bottom bottom',
+            pin: true,
+            scrub: true,
+            pinReparent: true,
+            pinSpacer: true,
+            pinnedContainer: '.hero',
+            pinSpacing:
+              document.querySelector('.slider-visible-right .slider-item')
+                .offsetWidth * sliderItems.length,
+            end: () =>
+              '+=' +
+              document.querySelector('.slider-visible-right .slider-item')
+                .offsetWidth *
+                sliderItems.length,
+          },
+        })
+
+        heroTimeline2
+          .fromTo(
+            '.hero-width.is-main',
+            {
+              opacity: 0,
+              y: '1rem',
+              scale: 0.95,
+            },
+            {
+              opacity: 1,
+              y: '0rem',
+              scale: 1,
+              delay: 0,
+              duration: 0.5,
+              onComplete: () => {
+                new Typed('#heroTyped1', {
+                  strings: [
+                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
+                  ],
+                  typeSpeed: 10,
+                  loop: false,
+                  fadeOut: true,
+                  showCursor: false,
+                  fadeOutClass: 'typed-fade-out',
+                  onComplete: () => {
+                    new Typed('#heroTyped2', {
+                      strings: [
+                        'Comme pour le sport, fixons des objectifs à atteindre :',
+                      ],
+                      typeSpeed: 10,
+                      showCursor: true,
+                      loop: false,
+                      fadeOut: true,
+                      fadeOutClass: 'typed-fade-out',
+                      fadeOutDelay: 500,
+                      onComplete: () => {
+                        gsap.fromTo(
+                          '.hero-images .swiper',
+                          {
+                            opacity: 0,
+                            y: '1rem',
+                          },
+                          {
+                            opacity: 1,
+                            y: '0rem',
+                            delay: 0,
+                            ease: 'base',
+                            duration: 0.5,
+                          }
+                        )
+                      },
+                    })
+                  },
+                })
+              },
+            },
+            '-=1.5'
+          )
+          .fromTo(
+            '.hero-width.is-grow .hero-slider-item',
+            {
+              opacity: 0,
+              y: '1rem',
+              scale: 0.95,
+            },
+            {
+              opacity: 1,
+              y: '0rem',
+              scale: 1,
+              duration: 0.5,
+              stagger: {
+                each: 0.1,
+                from: 'center',
+              },
+            },
+            '-=1.5'
+          )
+
+        sliderItems.forEach((item, index) => {
+          heroTimeline2.add(
+            gsap.to('.slider-visible-right', {
+              opacity: 1,
+              duration: 1,
+              onComplete: () => {
+                console.log('next')
+                heroSlider.slideTo(index + 1)
+                heroSliderLong.slideTo(index + 1)
+              },
+              onReverseComplete: () => {
+                console.log('prev')
+                heroSlider.slideTo(index + 1)
+                heroSliderLong.slideTo(index + 1)
+              },
+            })
+          )
+          heroTimeline2.addLabel('labelSlider')
+        })
       })
     }
   }
@@ -415,11 +572,14 @@ function runHome() {
         pinSpacer: true,
         pinnedContainer: '.media-wrapper',
         pinSpacing:
-          document.querySelector('.media-item').offsetWidth * mediaItems.length,
+          document.querySelector('.media-item').offsetWidth *
+          mediaItems.length *
+          3,
         end: () =>
           '+=' +
           document.querySelector('.media-item').offsetWidth *
-            (mediaItems.length - 1),
+            (mediaItems.length - 1) *
+            3,
       },
     })
 
@@ -501,63 +661,125 @@ function runHome() {
       },
       '-=2'
     )
-
+    let mm = gsap.matchMedia()
     let index = 1
-    mediaItems.forEach((item) => {
-      blackBottomTimeline.add(
-        gsap.to(
-          mediaItems,
-          {
-            xPercent: -100 * (index - 1),
-            duration: 3,
-            ease: 'base',
-            onStart: () => {
-              gsap.fromTo(
-                item.querySelectorAll('.message'),
-                {
-                  y: '1rem',
-                  opacity: 0,
-                  scale: 0.9,
-                  rotate: '3deg',
-                },
-                {
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                  rotate: '0deg',
-                  duration: 0.35,
-                  stagger: 0.2,
-                  delay: 0.5,
-                  ease: 'base',
-                }
-              )
+
+    // add a media query. When it matches, the associated function will run
+    mm.add('(min-width: 769px)', () => {
+      mediaItems.forEach((item) => {
+        blackBottomTimeline.add(
+          gsap.to(
+            mediaItems,
+            {
+              xPercent: -100 * (index - 1),
+              duration: 3,
+              ease: 'base',
+              onStart: () => {
+                gsap.fromTo(
+                  item.querySelectorAll('.message'),
+                  {
+                    y: '1rem',
+                    opacity: 0,
+                    scale: 0.9,
+                    rotate: '3deg',
+                  },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    rotate: '0deg',
+                    duration: 0.35,
+                    stagger: 0.2,
+                    delay: 0.5,
+                    ease: 'base',
+                  }
+                )
+              },
+              onReverseComplete: () => {
+                gsap.fromTo(
+                  item.querySelectorAll('.message'),
+                  {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    rotate: '0deg',
+                  },
+                  {
+                    y: '1rem',
+                    opacity: 0,
+                    scale: 0.9,
+                    rotate: '3deg',
+                    duration: 0.25,
+                    stagger: 0.2,
+                    delay: 0.5,
+                    ease: 'base',
+                  }
+                )
+              },
             },
-            onReverseComplete: () => {
-              gsap.fromTo(
-                item.querySelectorAll('.message'),
-                {
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                  rotate: '0deg',
-                },
-                {
-                  y: '1rem',
-                  opacity: 0,
-                  scale: 0.9,
-                  rotate: '3deg',
-                  duration: 0.25,
-                  stagger: 0.2,
-                  delay: 0.5,
-                  ease: 'base',
-                }
-              )
-            },
-          },
-          'label'
+            'label'
+          )
         )
-      )
-      index++
+        index++
+      })
+    })
+    mm.add('(max-width: 768px)', () => {
+      mediaItems.forEach((item) => {
+        blackBottomTimeline.add(
+          gsap.to(
+            mediaItems,
+            {
+              xPercent: -100 * (index - 1),
+              duration: 3,
+              ease: 'base',
+              onStart: () => {
+                gsap.fromTo(
+                  item.querySelectorAll('.message'),
+                  {
+                    y: '1rem',
+                    opacity: 0,
+                    scale: 0.9,
+                    rotate: '3deg',
+                  },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    rotate: '0deg',
+                    duration: 0.35,
+                    stagger: 0.2,
+                    delay: 0.5,
+                    ease: 'base',
+                  }
+                )
+              },
+              onReverseComplete: () => {
+                gsap.fromTo(
+                  item.querySelectorAll('.message'),
+                  {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    rotate: '0deg',
+                  },
+                  {
+                    y: '1rem',
+                    opacity: 0,
+                    scale: 0.9,
+                    rotate: '3deg',
+                    duration: 0.25,
+                    stagger: 0.2,
+                    delay: 0.5,
+                    ease: 'base',
+                  }
+                )
+              },
+            },
+            'label'
+          )
+        )
+        index++
+      })
     })
 
     blackBottomTimeline.add(
