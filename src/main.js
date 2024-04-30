@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   runAbout()
   runReview()
   runCta()
+  run404()
   runFaq(lenis)
   console.log('Sections Initialized ✅')
 
@@ -1507,6 +1508,60 @@ function runAbout() {
       }
     )
   }
+
+  const valuesTl = gsap.timeline({
+    defaults: {
+      ease: 'base',
+    },
+    scrollTrigger: {
+      trigger: '.values-content',
+      start: 'top center',
+      end: 'bottom center',
+    },
+  })
+
+  const valuesItems = gsap.utils.toArray('.values-h2, .values-p, .values-item')
+  const valuesCollection = document.querySelector('.values-collection')
+  const valuesItem = document.querySelector('.values-item')
+  const valuesListItems = document.querySelectorAll('.values-item')
+  const valuesWidth =
+    (valuesItem.offsetWidth * valuesListItems.length -
+      valuesCollection.offsetWidth) *
+    -1
+  console.log(valuesWidth)
+  console.log(valuesCollection.offsetWidth)
+  if (valuesItems) {
+    valuesTl.fromTo(
+      valuesItems,
+      {
+        opacity: 0,
+        y: '2rem',
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 1,
+      }
+    )
+
+    gsap.fromTo(
+      '.values-list',
+      {
+        x: 0,
+      },
+      {
+        x: valuesWidth,
+        ease: 'linear',
+        scrollTrigger: {
+          trigger: '.values-list',
+          start: 'top center',
+          end: 'bottom center',
+          scrub: true,
+        },
+      }
+    )
+  }
 }
 
 function runReview() {
@@ -1547,8 +1602,6 @@ function runReview() {
     const reviewWrapper = document.querySelector('.reviews-row')
     const reviewsWidth =
       (review.offsetWidth * reviewItems.length - reviewWrapper.offsetWidth) * -1
-    console.log(reviewsWidth)
-    console.log(review.offsetWidth)
 
     reviewsTimeline
       .fromTo(
@@ -1872,5 +1925,60 @@ function runFaq(lenis) {
         }
       })
     }
+  }
+}
+
+function run404() {
+  const nfWrapper = document.querySelector('._404-wrapper')
+  if (nfWrapper) {
+    const nfTl = gsap.timeline({
+      defaults: {
+        defaults: {
+          ease: 'base',
+        },
+      },
+    })
+
+    gsap.set('._404-content .button', { opacity: 0, y: '2rem' })
+
+    nfTl
+      .fromTo(
+        '._404-image',
+        {
+          opacity: 0,
+          scale: 0,
+          y: '2rem',
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+        }
+      )
+      .fromTo(
+        '.is-404 .message',
+        {
+          opacity: 0,
+          y: '2rem',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          delay: 0.1,
+        }
+      )
+      .fromTo(
+        '._404-content .button',
+        {
+          opacity: 0,
+          y: '1rem',
+        },
+        {
+          opacity: 1,
+          y: 0,
+        }
+      )
   }
 }
