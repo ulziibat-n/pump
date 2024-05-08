@@ -549,12 +549,12 @@ function runHome() {
         pinSpacing:
           document.querySelector('.media-item').offsetWidth *
           mediaItems.length *
-          3,
+          1.5,
         end: () =>
           '+=' +
           document.querySelector('.media-item').offsetWidth *
             (mediaItems.length - 1) *
-            3,
+            1.5,
       },
     })
 
