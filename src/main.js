@@ -1528,8 +1528,6 @@ function runAbout() {
     (valuesItem.offsetWidth * valuesListItems.length -
       valuesCollection.offsetWidth) *
     -1
-  console.log(valuesWidth)
-  console.log(valuesCollection.offsetWidth)
   if (valuesItems) {
     valuesTl.fromTo(
       valuesItems,
