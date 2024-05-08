@@ -204,47 +204,34 @@ function runHome() {
                   showCursor: false,
                   fadeOutClass: 'typed-fade-out',
                   onComplete: () => {
-                    new Typed('#heroTyped2', {
-                      strings: [
-                        'Comme pour le sport, fixons des objectifs à atteindre :',
-                      ],
-                      typeSpeed: 10,
-                      showCursor: true,
-                      loop: false,
-                      fadeOut: true,
-                      fadeOutClass: 'typed-fade-out',
-                      fadeOutDelay: 500,
-                      onComplete: () => {
-                        gsap.fromTo(
-                          '.hero-images .swiper',
-                          {
-                            opacity: 0,
-                            y: '1rem',
-                          },
-                          {
-                            opacity: 1,
-                            y: '0rem',
-                            delay: 0,
-                            ease: 'base',
-                            duration: 0.5,
-                          }
-                        )
-                        gsap.fromTo(
-                          '.slider-visible-right .slider-item',
-                          {
-                            opacity: 0,
-                            y: '1rem',
-                          },
-                          {
-                            opacity: 1,
-                            y: '0rem',
-                            stagger: 0.25,
-                            ease: 'base',
-                            duration: 1,
-                          }
-                        )
+                    gsap.fromTo(
+                      '.hero-images .swiper',
+                      {
+                        opacity: 0,
+                        y: '1rem',
                       },
-                    })
+                      {
+                        opacity: 1,
+                        y: '0rem',
+                        delay: 0,
+                        ease: 'base',
+                        duration: 0.5,
+                      }
+                    )
+                    gsap.fromTo(
+                      '.slider-visible-right .slider-item',
+                      {
+                        opacity: 0,
+                        y: '1rem',
+                      },
+                      {
+                        opacity: 1,
+                        y: '0rem',
+                        stagger: 0.25,
+                        ease: 'base',
+                        duration: 1,
+                      }
+                    )
                   },
                 })
               },
