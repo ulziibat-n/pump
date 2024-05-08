@@ -848,7 +848,7 @@ function runHome() {
       scrollTrigger: {
         trigger: '.icons-section',
         pin: true,
-        scrub: true,
+        scrub: 10,
         snap: true,
         pinnedContainer: '.icons-section',
         pinSpacer: true,
