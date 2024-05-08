@@ -547,14 +547,11 @@ function runHome() {
         pinSpacer: true,
         pinnedContainer: '.media-wrapper',
         pinSpacing:
-          document.querySelector('.media-item').offsetWidth *
-          mediaItems.length *
-          1.5,
+          document.querySelector('.media-item').offsetWidth * mediaItems.length,
         end: () =>
           '+=' +
           document.querySelector('.media-item').offsetWidth *
-            (mediaItems.length - 1) *
-            1.5,
+            (mediaItems.length - 1),
       },
     })
 
