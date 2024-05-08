@@ -438,7 +438,7 @@ function runHome() {
         'Comment me créer des revenus complémentaires nets de fiscalité ?',
         'Comment réduire mes impôts ?',
       ],
-      typeSpeed: 150,
+      typeSpeed: 15,
       backDelay: 1400,
       loop: true,
       loopCount: Infinity,
