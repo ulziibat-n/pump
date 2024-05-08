@@ -196,7 +196,7 @@ function runHome() {
               onComplete: () => {
                 new Typed('#heroTyped1', {
                   strings: [
-                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
+                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !',
                   ],
                   typeSpeed: 10,
                   loop: false,
