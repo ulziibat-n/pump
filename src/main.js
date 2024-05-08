@@ -1529,6 +1529,10 @@ function runAbout() {
       valuesCollection.offsetWidth) *
     -1
   if (valuesItems) {
+    gsap.set('.values-item'. {
+      opacity: 0,
+      y: "2rem"
+    })
     valuesTl.fromTo(
       valuesItems,
       {
