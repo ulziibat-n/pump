@@ -852,10 +852,10 @@ function runHome() {
         snap: true,
         pinnedContainer: '.icons-section',
         pinSpacer: true,
-        pinSpacing: document.querySelector('.icons-section').offsetHeight * 5,
+        pinSpacing: document.querySelector('.icons-section').offsetHeight * 8,
         start: 'top top',
         end: () =>
-          '+=' + document.querySelector('.icons-section').offsetHeight * 3,
+          '+=' + document.querySelector('.icons-section').offsetHeight * 6,
       },
     })
 
