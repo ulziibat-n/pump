@@ -1078,6 +1078,8 @@ function runHome() {
         },
       })
 
+      gsap.set('.how-image', { opacity: 0 })
+
       howTimeline
         .fromTo(
           '.how h2',
@@ -1122,6 +1124,9 @@ function runHome() {
             ease: 'base',
             onStart: () => {
               document.querySelector('.how-step-1').classList.add('active')
+              gsap.to('.how-image-1', { opacity: 1 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 0 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-1').classList.remove('active')
@@ -1145,6 +1150,9 @@ function runHome() {
             ease: 'base',
             onStart: () => {
               document.querySelector('.how-step-1').classList.remove('active')
+              gsap.to('.how-image-1', { opacity: 1 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 0 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-1').classList.add('active')
@@ -1204,6 +1212,9 @@ function runHome() {
             onStart: () => {
               document.querySelector('.how-step-2').classList.remove('active')
               document.querySelector('.how-step-3').classList.add('active')
+              gsap.to('.how-image-1', { opacity: 0 })
+              gsap.to('.how-image-2', { opacity: 1 })
+              gsap.to('.how-image-3', { opacity: 0 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-2').classList.add('active')
@@ -1248,6 +1259,11 @@ function runHome() {
             duration: 3,
             height: 'auto',
             delay: 3,
+            onStart: () => {
+              gsap.to('.how-image-1', { opacity: 0 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 1 })
+            },
             onReverseComplete: () => {
               const state = Flip.getState(
                 gsap.utils.toArray('.how-works, .how-mockup')
