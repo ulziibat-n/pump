@@ -347,7 +347,7 @@ function runHome() {
               onComplete: () => {
                 new Typed('#heroTyped1', {
                   strings: [
-                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances.',
+                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !.',
                   ],
                   typeSpeed: 10,
                   loop: false,
@@ -355,33 +355,20 @@ function runHome() {
                   showCursor: false,
                   fadeOutClass: 'typed-fade-out',
                   onComplete: () => {
-                    new Typed('#heroTyped2', {
-                      strings: [
-                        'Comme pour le sport, fixons des objectifs à atteindre :',
-                      ],
-                      typeSpeed: 10,
-                      showCursor: true,
-                      loop: false,
-                      fadeOut: true,
-                      fadeOutClass: 'typed-fade-out',
-                      fadeOutDelay: 500,
-                      onComplete: () => {
-                        gsap.fromTo(
-                          '.hero-images .swiper',
-                          {
-                            opacity: 0,
-                            y: '1rem',
-                          },
-                          {
-                            opacity: 1,
-                            y: '0rem',
-                            delay: 0,
-                            ease: 'base',
-                            duration: 0.5,
-                          }
-                        )
+                    gsap.fromTo(
+                      '.hero-images .swiper',
+                      {
+                        opacity: 0,
+                        y: '1rem',
                       },
-                    })
+                      {
+                        opacity: 1,
+                        y: '0rem',
+                        delay: 0,
+                        ease: 'base',
+                        duration: 0.5,
+                      }
+                    )
                   },
                 })
               },
