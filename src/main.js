@@ -1498,11 +1498,11 @@ function runAbout() {
   const valuesCollection = document.querySelector('.values-collection')
   const valuesItem = document.querySelector('.values-item')
   const valuesListItems = document.querySelectorAll('.values-item')
-  const valuesWidth =
-    (valuesItem.offsetWidth * valuesListItems.length -
-      valuesCollection.offsetWidth) *
-    -1
-  if (valuesItems) {
+  if (valuesItems && valuesCollection && valuesItem && valuesListItems) {
+    const valuesWidth =
+      (valuesItem.offsetWidth * valuesListItems.length -
+        valuesCollection.offsetWidth) *
+      -1
     gsap.set('.values-item', {
       opacity: 0,
       y: '2rem',
