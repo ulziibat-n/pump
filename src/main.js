@@ -1222,9 +1222,6 @@ function runHome() {
             onStart: () => {
               document.querySelector('.how-step-2').classList.remove('active')
               document.querySelector('.how-step-3').classList.add('active')
-              gsap.to('.how-image-1', { opacity: 0 })
-              gsap.to('.how-image-2', { opacity: 0 })
-              gsap.to('.how-image-3', { opacity: 1 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-2').classList.add('active')
@@ -1248,6 +1245,9 @@ function runHome() {
                     rotate: '3deg',
                     ease: 'back.out(1.7)',
                   })
+                  gsap.to('.how-image-1', { opacity: 0 })
+                  gsap.to('.how-image-2', { opacity: 0 })
+                  gsap.to('.how-image-3', { opacity: 1 })
                 },
                 onComplete: () => {
                   gsap.to('.how-mockup', {
