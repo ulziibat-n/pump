@@ -1058,12 +1058,30 @@ function runHome() {
       gsap.set('.how-step', {
         opacity: 0,
       })
+
+      gsap.fromTo(
+        '.how h2',
+        {
+          opacity: 0,
+          y: '3rem',
+        },
+        {
+          opacity: 1,
+          y: '0rem',
+          duration: 2,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: '.how',
+          },
+        }
+      )
+
       const howTimeline = gsap.timeline({
         defaults: {
           ease: 'base',
         },
         scrollTrigger: {
-          trigger: '.how',
+          trigger: '.how-slider',
           pin: true,
           scrub: 1,
           snap: {
@@ -1081,19 +1099,6 @@ function runHome() {
       gsap.set('.how-image', { opacity: 0 })
 
       howTimeline
-        .fromTo(
-          '.how h2',
-          {
-            opacity: 0,
-            y: '3rem',
-          },
-          {
-            opacity: 1,
-            y: '0rem',
-            duration: 2,
-            stagger: 0.1,
-          }
-        )
         .fromTo(
           '.how-mockup',
           {
