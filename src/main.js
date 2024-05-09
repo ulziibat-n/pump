@@ -1107,6 +1107,16 @@ function runHome() {
             y: '10%',
             duration: 8,
             ease: 'base',
+            onStart: () => {
+              gsap.to('.how-image-1', { opacity: 1 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 0 })
+            },
+            onReverseComplete: () => {
+              gsap.to('.how-image-1', { opacity: 1 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 0 })
+            },
           }
         )
         .fromTo(
@@ -1124,9 +1134,6 @@ function runHome() {
             ease: 'base',
             onStart: () => {
               document.querySelector('.how-step-1').classList.add('active')
-              gsap.to('.how-image-1', { opacity: 1 })
-              gsap.to('.how-image-2', { opacity: 0 })
-              gsap.to('.how-image-3', { opacity: 0 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-1').classList.remove('active')
@@ -1150,12 +1157,15 @@ function runHome() {
             ease: 'base',
             onStart: () => {
               document.querySelector('.how-step-1').classList.remove('active')
-              gsap.to('.how-image-1', { opacity: 1 })
-              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-1', { opacity: 0 })
+              gsap.to('.how-image-2', { opacity: 1 })
               gsap.to('.how-image-3', { opacity: 0 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-1').classList.add('active')
+              gsap.to('.how-image-1', { opacity: 1 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 0 })
             },
           }
         )
@@ -1213,12 +1223,15 @@ function runHome() {
               document.querySelector('.how-step-2').classList.remove('active')
               document.querySelector('.how-step-3').classList.add('active')
               gsap.to('.how-image-1', { opacity: 0 })
-              gsap.to('.how-image-2', { opacity: 1 })
-              gsap.to('.how-image-3', { opacity: 0 })
+              gsap.to('.how-image-2', { opacity: 0 })
+              gsap.to('.how-image-3', { opacity: 1 })
             },
             onReverseComplete: () => {
               document.querySelector('.how-step-2').classList.add('active')
               document.querySelector('.how-step-3').classList.remove('active')
+              gsap.to('.how-image-1', { opacity: 0 })
+              gsap.to('.how-image-2', { opacity: 1 })
+              gsap.to('.how-image-3', { opacity: 0 })
             },
             onComplete: () => {
               const state = Flip.getState(
@@ -1259,12 +1272,10 @@ function runHome() {
             duration: 3,
             height: 'auto',
             delay: 3,
-            onStart: () => {
-              gsap.to('.how-image-1', { opacity: 0 })
-              gsap.to('.how-image-2', { opacity: 0 })
-              gsap.to('.how-image-3', { opacity: 1 })
-            },
             onReverseComplete: () => {
+              gsap.to('.how-image-1', { opacity: 0 })
+              gsap.to('.how-image-2', { opacity: 1 })
+              gsap.to('.how-image-3', { opacity: 0 })
               const state = Flip.getState(
                 gsap.utils.toArray('.how-works, .how-mockup')
               )
