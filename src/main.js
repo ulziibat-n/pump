@@ -198,7 +198,7 @@ function runHome() {
                   strings: [
                     'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !',
                   ],
-                  typeSpeed: 10,
+                  typeSpeed: 2,
                   loop: false,
                   fadeOut: true,
                   showCursor: false,
