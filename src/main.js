@@ -718,9 +718,9 @@ function runHome() {
                     opacity: 1,
                     scale: 1,
                     rotate: '0deg',
-                    duration: 0.35,
-                    stagger: 0.2,
-                    delay: 0.5,
+                    duration: 0.1,
+                    stagger: 0.1,
+                    delay: 0.1,
                     ease: 'base',
                   }
                 )
@@ -739,9 +739,9 @@ function runHome() {
                     opacity: 0,
                     scale: 0.9,
                     rotate: '3deg',
-                    duration: 0.25,
-                    stagger: 0.2,
-                    delay: 0.5,
+                    duration: 0.1,
+                    stagger: 0.1,
+                    delay: 0.1,
                     ease: 'base',
                   }
                 )
