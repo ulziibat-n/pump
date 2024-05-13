@@ -167,110 +167,91 @@ function runHome() {
             pinnedContainer: '.hero',
             pinSpacing:
               document.querySelector('.slider-visible-right .slider-item')
-                .offsetWidth *
-              sliderItems.length *
-              3,
+                .offsetWidth * sliderItems.length,
             end: () =>
               '+=' +
               document.querySelector('.slider-visible-right .slider-item')
                 .offsetWidth *
-                sliderItems.length *
-                3,
+                sliderItems.length,
           },
         })
 
-        heroTimeline2
-          .fromTo(
-            '.hero-width.is-main',
-            {
-              opacity: 0,
-              y: '1rem',
-              scale: 0.95,
+        gsap.fromTo(
+          '.hero-width.is-main',
+          {
+            opacity: 0,
+            y: '1rem',
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            scale: 1,
+            delay: 0,
+            duration: 0.5,
+            onComplete: () => {
+              new Typed('#heroTyped1', {
+                strings: [
+                  'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !',
+                ],
+                typeSpeed: 2,
+                loop: false,
+                fadeOut: true,
+                showCursor: false,
+                fadeOutClass: 'typed-fade-out',
+              })
             },
-            {
-              opacity: 1,
-              y: '0rem',
-              scale: 1,
-              delay: 0,
-              duration: 0.5,
-              onComplete: () => {
-                new Typed('#heroTyped1', {
-                  strings: [
-                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !',
-                  ],
-                  typeSpeed: 2,
-                  loop: false,
-                  fadeOut: true,
-                  showCursor: false,
-                  fadeOutClass: 'typed-fade-out',
-                  onComplete: () => {
-                    gsap.fromTo(
-                      '.hero-images .swiper',
-                      {
-                        opacity: 0,
-                        y: '1rem',
-                      },
-                      {
-                        opacity: 1,
-                        y: '0rem',
-                        delay: 0,
-                        ease: 'base',
-                        duration: 0.5,
-                      }
-                    )
-                    gsap.fromTo(
-                      '.slider-visible-right .slider-item',
-                      {
-                        opacity: 0,
-                        y: '1rem',
-                      },
-                      {
-                        opacity: 1,
-                        y: '0rem',
-                        stagger: 0.25,
-                        ease: 'base',
-                        duration: 1,
-                      }
-                    )
-                  },
-                })
-              },
+          },
+          '-=1.5'
+        )
+        gsap.fromTo(
+          '.hero-width.is-grow .hero-slider-item',
+          {
+            opacity: 0,
+            y: '1rem',
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            scale: 1,
+            duration: 0.5,
+            stagger: {
+              each: 0.1,
+              from: 'center',
             },
-            '-=1.5'
-          )
-          .fromTo(
-            '.hero-width.is-grow .hero-slider-item',
-            {
-              opacity: 0,
-              y: '1rem',
-              scale: 0.95,
-            },
-            {
-              opacity: 1,
-              y: '0rem',
-              scale: 1,
-              duration: 0.5,
-              stagger: {
-                each: 0.1,
-                from: 'center',
-              },
-            },
-            '-=1.5'
-          )
-          .fromTo(
-            '.slider-visible-right .slider-item',
-            {
-              opacity: 0,
-              y: '1rem',
-            },
-            {
-              opacity: 1,
-              y: '0rem',
-              stagger: 0.25,
-              ease: 'base',
-              duration: 1,
-            }
-          )
+          },
+          '-=1.5'
+        )
+
+        gsap.fromTo(
+          '.hero-images .swiper',
+          {
+            opacity: 0,
+            y: '1rem',
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            delay: 0,
+            ease: 'base',
+            duration: 0.5,
+          }
+        )
+        gsap.fromTo(
+          '.slider-visible-right .slider-item',
+          {
+            opacity: 0,
+            y: '1rem',
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            stagger: 0.25,
+            ease: 'base',
+            duration: 1,
+          }
+        )
 
         sliderItems.forEach((item, index) => {
           heroTimeline2.add(
@@ -330,70 +311,67 @@ function runHome() {
           },
         })
 
-        heroTimeline2
-          .fromTo(
-            '.hero-width.is-main',
-            {
-              opacity: 0,
-              y: '1rem',
-              scale: 0.95,
+        gsap.fromTo(
+          '.hero-width.is-main',
+          {
+            opacity: 0,
+            y: '1rem',
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            scale: 1,
+            delay: 0,
+            duration: 0.5,
+            onComplete: () => {
+              new Typed('#heroTyped1', {
+                strings: [
+                  'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !.',
+                ],
+                typeSpeed: 10,
+                loop: false,
+                fadeOut: true,
+                showCursor: false,
+                fadeOutClass: 'typed-fade-out',
+              })
             },
-            {
-              opacity: 1,
-              y: '0rem',
-              scale: 1,
-              delay: 0,
-              duration: 0.5,
-              onComplete: () => {
-                new Typed('#heroTyped1', {
-                  strings: [
-                    'Bonjour, je suis Pump votre coach financier qui vous aide à muscler vos finances et à atteindre vos objectifs !.',
-                  ],
-                  typeSpeed: 10,
-                  loop: false,
-                  fadeOut: true,
-                  showCursor: false,
-                  fadeOutClass: 'typed-fade-out',
-                  onComplete: () => {
-                    gsap.fromTo(
-                      '.hero-images .swiper',
-                      {
-                        opacity: 0,
-                        y: '1rem',
-                      },
-                      {
-                        opacity: 1,
-                        y: '0rem',
-                        delay: 0,
-                        ease: 'base',
-                        duration: 0.5,
-                      }
-                    )
-                  },
-                })
-              },
+          },
+          '-=1.5'
+        )
+        gsap.fromTo(
+          '.hero-images .swiper',
+          {
+            opacity: 0,
+            y: '1rem',
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            delay: 0,
+            ease: 'base',
+            duration: 0.5,
+          }
+        )
+        gsap.fromTo(
+          '.hero-width.is-grow .hero-slider-item',
+          {
+            opacity: 0,
+            y: '1rem',
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: '0rem',
+            scale: 1,
+            duration: 0.5,
+            stagger: {
+              each: 0.1,
+              from: 'center',
             },
-            '-=1.5'
-          )
-          .fromTo(
-            '.hero-width.is-grow .hero-slider-item',
-            {
-              opacity: 0,
-              y: '1rem',
-              scale: 0.95,
-            },
-            {
-              opacity: 1,
-              y: '0rem',
-              scale: 1,
-              duration: 0.5,
-              stagger: {
-                each: 0.1,
-                from: 'center',
-              },
-            },
-            '-=1.5'
-          )
+          },
+          '-=1.5'
+        )
 
         sliderItems.forEach((item, index) => {
           heroTimeline2.add(
@@ -547,11 +525,14 @@ function runHome() {
         pinSpacer: true,
         pinnedContainer: '.media-wrapper',
         pinSpacing:
-          document.querySelector('.media-item').offsetWidth * mediaItems.length,
+          document.querySelector('.media-item').offsetWidth *
+          mediaItems.length *
+          2,
         end: () =>
           '+=' +
           document.querySelector('.media-item').offsetWidth *
-            (mediaItems.length - 1),
+            (mediaItems.length - 1) *
+            2,
       },
     })
 
