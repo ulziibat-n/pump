@@ -199,38 +199,39 @@ function runHome() {
                 fadeOut: true,
                 showCursor: false,
                 fadeOutClass: 'typed-fade-out',
+                onComplete: () => {
+                  gsap.fromTo(
+                    '.hero-images .swiper',
+                    {
+                      opacity: 0,
+                      y: '1rem',
+                    },
+                    {
+                      opacity: 1,
+                      y: '0rem',
+                      delay: 1,
+                      ease: 'base',
+                      duration: 0.5,
+                    }
+                  )
+                  gsap.fromTo(
+                    '.slider-visible-right .slider-item',
+                    {
+                      opacity: 0,
+                      y: '1rem',
+                    },
+                    {
+                      opacity: 1,
+                      y: '0rem',
+                      stagger: 0.25,
+                      ease: 'base',
+                      duration: 1,
+                      delay: 1.5,
+                    }
+                  )
+                },
               })
             },
-          }
-        )
-
-        gsap.fromTo(
-          '.hero-images .swiper',
-          {
-            opacity: 0,
-            y: '1rem',
-          },
-          {
-            opacity: 1,
-            y: '0rem',
-            delay: 1,
-            ease: 'base',
-            duration: 0.5,
-          }
-        )
-        gsap.fromTo(
-          '.slider-visible-right .slider-item',
-          {
-            opacity: 0,
-            y: '1rem',
-          },
-          {
-            opacity: 1,
-            y: '0rem',
-            stagger: 0.25,
-            ease: 'base',
-            duration: 1,
-            delay: 1.5,
           }
         )
 
@@ -306,25 +307,28 @@ function runHome() {
                 fadeOut: true,
                 showCursor: false,
                 fadeOutClass: 'typed-fade-out',
+                onComplete: () => {
+                  gsap.fromTo(
+                    '.hero-images .swiper',
+                    {
+                      opacity: 0,
+                      y: '1rem',
+                    },
+                    {
+                      opacity: 1,
+                      y: '0rem',
+                      delay: 0,
+                      ease: 'base',
+                      duration: 0.5,
+                    }
+                  )
+                },
               })
             },
           },
           '-=1.5'
         )
-        gsap.fromTo(
-          '.hero-images .swiper',
-          {
-            opacity: 0,
-            y: '1rem',
-          },
-          {
-            opacity: 1,
-            y: '0rem',
-            delay: 0,
-            ease: 'base',
-            duration: 0.5,
-          }
-        )
+
         gsap.fromTo(
           '.hero-width.is-grow .hero-slider-item',
           {
@@ -496,14 +500,11 @@ function runHome() {
         pinSpacer: true,
         pinnedContainer: '.media-wrapper',
         pinSpacing:
-          document.querySelector('.media-item').offsetWidth *
-          mediaItems.length *
-          2,
+          document.querySelector('.media-item').offsetWidth * mediaItems.length,
         end: () =>
           '+=' +
           document.querySelector('.media-item').offsetWidth *
-            (mediaItems.length - 1) *
-            2,
+            (mediaItems.length - 1),
       },
     })
 
