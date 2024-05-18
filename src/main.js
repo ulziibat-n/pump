@@ -496,7 +496,6 @@ function runHome() {
     const mediaItems = gsap.utils.toArray('.media-item')
     gsap.set('.message', {
       opacity: 0,
-      scale: 0.9,
       y: '1rem',
     })
     const blackBottomTimeline = gsap.timeline({
@@ -621,14 +620,10 @@ function runHome() {
                   {
                     y: '1rem',
                     opacity: 0,
-                    scale: 0.9,
-                    rotate: '3deg',
                   },
                   {
                     y: 0,
                     opacity: 1,
-                    scale: 1,
-                    rotate: '0deg',
                     duration: 0.35,
                     stagger: 0.2,
                     delay: 0.5,
@@ -642,14 +637,10 @@ function runHome() {
                   {
                     y: 0,
                     opacity: 1,
-                    scale: 1,
-                    rotate: '0deg',
                   },
                   {
                     y: '1rem',
                     opacity: 0,
-                    scale: 0.9,
-                    rotate: '3deg',
                     duration: 0.25,
                     stagger: 0.2,
                     delay: 0.5,
@@ -679,14 +670,10 @@ function runHome() {
                   {
                     y: '1rem',
                     opacity: 0,
-                    scale: 0.9,
-                    rotate: '3deg',
                   },
                   {
                     y: 0,
                     opacity: 1,
-                    scale: 1,
-                    rotate: '0deg',
                     duration: 0.1,
                     stagger: 0.1,
                     delay: 0.1,
@@ -700,14 +687,10 @@ function runHome() {
                   {
                     y: 0,
                     opacity: 1,
-                    scale: 1,
-                    rotate: '0deg',
                   },
                   {
                     y: '1rem',
                     opacity: 0,
-                    scale: 0.9,
-                    rotate: '3deg',
                     duration: 0.1,
                     stagger: 0.1,
                     delay: 0.1,
@@ -1350,14 +1333,10 @@ function runAbout() {
             {
               y: '1rem',
               opacity: 0,
-              scale: 0.9,
-              rotate: '3deg',
             },
             {
               y: 0,
               opacity: 1,
-              scale: 1,
-              rotate: '0deg',
               duration: 0.35,
               stagger: 0.2,
               delay: 0.5,
@@ -1371,14 +1350,10 @@ function runAbout() {
             {
               y: 0,
               opacity: 1,
-              scale: 1,
-              rotate: '0deg',
             },
             {
               y: '1rem',
               opacity: 0,
-              scale: 0.9,
-              rotate: '3deg',
               duration: 0.35,
               stagger: 0.2,
               ease: 'base',
