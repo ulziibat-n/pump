@@ -1067,8 +1067,8 @@ function runHome() {
           start: 'top venter',
           pinnedContainer: '.how-slider',
           pinSpacer: true,
-          pinSpacing: document.querySelector('.how').offsetHeight * 5,
-          end: () => '+=' + document.querySelector('.how').offsetHeight * 5,
+          pinSpacing: document.querySelector('.how').offsetHeight * 2,
+          end: () => '+=' + document.querySelector('.how').offsetHeight * 2,
         },
       })
 
