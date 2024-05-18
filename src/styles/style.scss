@@ -9,25 +9,33 @@
   z-index: 10;
 }
 
-.icon-featured svg > path,
-.icon-featured svg > rect {
+.icon-featured .icon-svg-bg {
   opacity: 0;
   visibility: hidden;
   transform: transform 4s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-  position: relative;
-  display: block;
-  transform: translate3d(0,0,0), translateZ(0), scale(0.2);
-  -webkit-transform: translate3d(0,0,0), translateZ(0), scale(0.2);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
   transition-delay: 0.1s;
+  transform: scale(0);
 }
 
-.icon-featured.done svg > path,
-.icon-featured.done svg > rect {
+.icon-featured .icon-svg-text {
+  opacity: 0;
+  visibility: hidden;
+  transform: transform 4s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-delay: 0.1s;
+  transform: scale(0) translateX(-50%);
+}
+
+.icon-featured.done .icon-svg-bg {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
+  transition-delay: 0;
+}
+
+.icon-featured.done .icon-svg-text {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateX(-50%);
   transition-delay: 0;
 }
 
