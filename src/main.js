@@ -86,7 +86,7 @@ function runHome() {
       paginationEl.classList.add('swiper-pagination')
       paginationEl.classList.add('hero-pagination')
       slider.appendChild(paginationEl)
-      const heroSlider = new Swiper(slider, {
+      var heroSlider = new Swiper(slider, {
         modules: [Pagination, EffectFade, Autoplay],
         spaceBetween: 2,
         slidesPerView: 1,
@@ -94,12 +94,24 @@ function runHome() {
         fadeEffect: {
           crossFade: true,
         },
+        autoplay: {
+          delay: 1500,
+        },
         pagination: {
           el: paginationEl,
           clickable: false,
         },
       })
       heroSlider.init()
+
+      window.addEventListener('resize', function () {
+        // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
+        if (window.innerWidth <= 768) {
+          heroSlider.stop()
+        } else {
+          heroSlider.stop()
+        }
+      })
 
       const heroSliderLong = new Swiper('.slider-visible-right', {
         modules: [Pagination, EffectFade, Autoplay],
@@ -134,7 +146,7 @@ function runHome() {
           delay: 0.1,
         }
       )
-      console.log('total:' + sliderItems.length)
+      //console.log('total:' + sliderItems.length)
 
       let heroMatchMedia = gsap.matchMedia()
 
@@ -320,6 +332,9 @@ function runHome() {
                       delay: 0,
                       ease: 'base',
                       duration: 0.5,
+                      onComplete: () => {
+                        heroSlider.play()
+                      },
                     }
                   )
                 },
@@ -407,7 +422,7 @@ function runHome() {
       },
       scrollTrigger: {
         trigger: '.black-top',
-        start: 'top 70%',
+        start: 'top 90%',
         scrub: 1,
       },
     })
@@ -514,8 +529,8 @@ function runHome() {
       },
       scrollTrigger: {
         trigger: '.black-bottom-header',
-        start: 'top center',
-        end: 'bottom center',
+        start: 'top 90%',
+        end: 'top 50%',
         scrub: 1,
       },
     })
@@ -763,20 +778,18 @@ function runHome() {
       '.card',
       {
         opacity: 0,
-        scale: 0.7,
         y: '3rem',
       },
       {
         opacity: 1,
         y: '0rem',
-        scale: 1,
         duration: 1,
         stagger: 0.2,
         ease: 'base',
         delay: 0.5,
         scrollTrigger: {
           trigger: '.card-col',
-          start: 'top 80%',
+          start: 'top center',
           scrub: 3,
           end: 'bottom center',
         },
@@ -1081,13 +1094,9 @@ function runHome() {
           '.how-step-1',
           {
             opacity: 0,
-            y: '3rem',
-            height: 0,
           },
           {
             opacity: 1,
-            y: 0,
-            height: 'auto',
             duration: 2,
             ease: 'base',
             onStart: () => {
@@ -1104,13 +1113,9 @@ function runHome() {
           '.how-step-1',
           {
             opacity: 1,
-            y: 0,
-            height: 'auto',
           },
           {
             opacity: 0,
-            y: '-3rem',
-            height: 0,
             duration: 2,
             ease: 'base',
             onStart: () => {
@@ -1145,13 +1150,9 @@ function runHome() {
           '.how-step-2',
           {
             opacity: 0,
-            y: '3rem',
-            height: 0,
           },
           {
             opacity: 1,
-            y: '0',
-            height: 'auto',
             duration: 2,
             ease: 'base',
             onStart: () => {
@@ -1168,13 +1169,9 @@ function runHome() {
           '.how-step-2',
           {
             opacity: 1,
-            y: 0,
-            height: 'auto',
           },
           {
             opacity: 0,
-            y: '-3rem',
-            height: 0,
             duration: 2,
             ease: 'base',
             onStart: () => {
@@ -1196,7 +1193,7 @@ function runHome() {
               swap(gsap.utils.toArray('.how-works, .how-mockup'))
               // Animate from the initial state to the end state
               Flip.from(state, {
-                duration: 1,
+                duration: 2,
                 ease: 'base',
                 onStart: () => {
                   gsap.to('.how-mockup', {
@@ -1220,15 +1217,12 @@ function runHome() {
         .fromTo(
           '.how-step-3',
           {
-            y: '3rem',
             opacity: 0,
-            height: 0,
           },
           {
             y: 0,
             opacity: 1,
             duration: 3,
-            height: 'auto',
             delay: 3,
             onReverseComplete: () => {
               gsap.to('.how-image-1', { opacity: 0 })
