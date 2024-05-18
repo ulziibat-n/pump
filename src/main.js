@@ -109,15 +109,6 @@ function runHome() {
       })
       heroSlider.init()
 
-      window.addEventListener('resize', function () {
-        // Check window width has actually changed and it's not just iOS triggering a resize event on scroll
-        if (window.innerWidth <= 768) {
-          heroSlider.stop()
-        } else {
-          heroSlider.stop()
-        }
-      })
-
       const heroSliderLong = new Swiper('.slider-visible-right', {
         modules: [Pagination, EffectFade, Autoplay],
         spaceBetween: 0,
@@ -315,6 +306,10 @@ function runHome() {
             scale: 1,
             delay: 0,
             duration: 0.5,
+            scrollTrigger: {
+              trigger: '.hero',
+              start: 'bottom bottom',
+            },
             onComplete: () => {
               new Typed('#heroTyped1', {
                 strings: [
