@@ -748,7 +748,7 @@ function runHome() {
     // ---------------------------------------
 
     const cardTitle = new SplitText('.cards h2', { type: 'lines' })
-
+    gsap.set(cardTitle.lines, { opacity: 0, y: '3rem' })
     gsap.fromTo(
       cardTitle.lines,
       {
@@ -762,9 +762,7 @@ function runHome() {
         stagger: 0.1,
         delay: 0.5,
         ease: 'base',
-        onComplete: () => {
-          console.log('cardsyes')
-        },
+        onComplete: () => {},
         scrollTrigger: {
           trigger: '.cards',
           start: 'top 80%',
@@ -774,6 +772,10 @@ function runHome() {
       }
     )
 
+    gsap.set('.card', {
+      opacity: 0,
+      y: '3rem',
+    })
     gsap.fromTo(
       '.card',
       {
@@ -806,7 +808,6 @@ function runHome() {
 
     let iconsTexts = gsap.utils.toArray(['.icons-texts a'])
     iconsTexts.unshift(iconsTitle.lines)
-
     const iconsTimeline = gsap.timeline({
       defaults: {
         ease: 'power2',
@@ -818,10 +819,10 @@ function runHome() {
         snap: true,
         pinnedContainer: '.icons-section',
         pinSpacer: true,
-        pinSpacing: document.querySelector('.icons-section').offsetHeight * 8,
+        pinSpacing: document.querySelector('.icons-section').offsetHeight * 4,
         start: 'top top',
         end: () =>
-          '+=' + document.querySelector('.icons-section').offsetHeight * 6,
+          '+=' + document.querySelector('.icons-section').offsetHeight * 4,
       },
     })
 
@@ -968,6 +969,9 @@ function runHome() {
     let reasonElements = gsap.utils.toArray(['.reason-p'])
 
     reasonElements.unshift(reasonTitle.lines)
+
+    gsap.set(reasonElements, { opacity: 0, y: '3rem' })
+    gsap.set('.reason-block', { opacity: 0, y: '3rem' })
 
     const reasonTimeline = gsap.timeline({
       scrollTrigger: {
