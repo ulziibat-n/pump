@@ -565,7 +565,7 @@ function runHome() {
         }
       )
       .fromTo(
-        '.black-bottom p',
+        '.black-bottom-p',
         {
           opacity: 0,
           y: '3rem',
