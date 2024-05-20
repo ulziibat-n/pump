@@ -539,7 +539,7 @@ function runHome() {
       opacity: 0,
       y: '3rem',
     })
-    gsap.set('.black-bottom p', {
+    gsap.set('.black-bottom-p', {
       opacity: 0,
       y: '3rem',
     })
