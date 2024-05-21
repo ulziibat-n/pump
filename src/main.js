@@ -1565,12 +1565,13 @@ function runReview() {
       .fromTo(
         '.review-wrapper',
         {
-          x: 0,
+          x: '100%',
         },
         {
           x: reviewsWidth,
           duration: 16,
           ease: 'linear',
+          delay: 2,
         }
       )
   }
