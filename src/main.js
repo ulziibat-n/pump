@@ -1690,6 +1690,20 @@ function runFaq(lenis) {
 
     const tabNavItems = document.querySelectorAll('[data-nav]')
     const tabContentItems = document.querySelectorAll('[data-category]')
+    faqTimeline.fromTo(
+      tabContentItems,
+      {
+        opacity: 0,
+        y: '3rem',
+      },
+      {
+        opacity: 1,
+        y: '0rem',
+        duration: 1,
+        stagger: 0.1,
+      },
+      '+0.5'
+    )
     const tabContent = document.querySelector('.faq-content-list')
 
     //let visibleFaqs = []
