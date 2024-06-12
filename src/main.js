@@ -1690,91 +1690,75 @@ function runFaq(lenis) {
 
     const tabNavItems = document.querySelectorAll('[data-nav]')
     const tabContentItems = document.querySelectorAll('[data-category]')
-    let visibleFaqs = []
+    const tabContent = document.querySelector('.faq-content-list')
+
+    //let visibleFaqs = []
+
     if (tabNavItems && tabContentItems) {
+      tabNavItems.forEach((tabNavItem) => {
+        tabContentItems.forEach((tabContentItem) => {
+          if (tabNavItem.dataset.nav == tabContentItem.dataset.category) {
+            tabContentItem.dataset.order = tabNavItem.dataset.order
+          }
+        })
+      })
+
+      if (tabContent) {
+        const itemsArray = Array.prototype.slice.call(tabContentItems)
+        itemsArray.sort((a, b) => {
+          const aValue = a.dataset.order
+          const bValue = b.dataset.order
+          return aValue - bValue
+        })
+
+        //tabContent.innerHTML = ''
+        const ids = []
+        itemsArray.forEach((item) => {
+          if (
+            !item.hasAttribute('id') &&
+            !ids.includes(item.dataset.category)
+          ) {
+            item.setAttribute('id', item.dataset.category)
+            ids.push(item.dataset.category)
+          }
+          tabContent.appendChild(item)
+          console.log(item)
+        })
+      }
       tabNavItems.forEach((tabNavItem, index) => {
         if (index == 0) {
           tabNavItem.classList.add('is-active')
-          let activeCat = tabNavItem.dataset.nav
-          tabContentItems.forEach((tabContentItem) => {
-            if (tabContentItem.dataset.category !== activeCat) {
-              tabContentItem.classList.add('hidden')
-            } else {
-              visibleFaqs.push(tabContentItem)
-              gsap.set(tabContentItem, { opacity: 0, y: '3rem' })
-            }
-          })
         }
       })
 
-      gsap.fromTo(
-        visibleFaqs,
-        {
-          opacity: 0,
-          y: '3rem',
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 1,
-          stagger: 0.1,
-          ease: 'base',
-          onComplete: () => {
-            lenis.resize()
-          },
-        }
-      )
-      lenis.resize()
       tabNavItems.forEach((tabNavItem) => {
         tabNavItem.addEventListener('click', (e) => {
-          visibleFaqs = []
+          //visibleFaqs = []
+          tabContentItems.forEach((tabContentItem) => {
+            gsap.to(tabContentItem.querySelector('.faq-toggle'), {
+              rotate: 0,
+              duration: 0.1,
+            })
+            gsap.to(tabContentItem.querySelector('.faq-item-content'), {
+              opacity: 0,
+              maxHeight: 0,
+              duration: 0.1,
+            })
+            tabContentItem
+              .querySelector('.faq-item')
+              .classList.remove('is-open')
+            lenis.resize()
+          })
+          gsap.killTweensOf('[data-category]')
           tabNavItems.forEach((tabNavButton) => {
             if (tabNavButton.classList.contains('is-active')) {
               tabNavButton.classList.remove('is-active')
             }
           })
           e.currentTarget.classList.add('is-active')
-          tabContentItems.forEach((tabContentItem) => {
-            if (
-              tabContentItem.dataset.category !== e.currentTarget.dataset.nav
-            ) {
-              gsap.set(tabContentItem, { opacity: 0, y: '3rem' })
-              gsap.set(tabContentItem.querySelector('.faq-toggle'), {
-                rotate: 0,
-              })
-              gsap.set(tabContentItem.querySelector('.faq-item-content'), {
-                opacity: 0,
-                maxHeight: 0,
-              })
-              tabContentItem.classList.add('hidden')
-              tabContentItem
-                .querySelector('.faq-item')
-                .classList.remove('is-open')
-            } else {
-              tabContentItem.classList.remove('hidden')
-              gsap.set(tabContentItem, { opacity: 0, y: '3rem' })
-              visibleFaqs.push(tabContentItem)
-            }
+          lenis.scrollTo('#' + e.currentTarget.dataset.nav, {
+            offset: -100,
           })
-          gsap.killTweensOf('[data-category]')
-          gsap.fromTo(
-            visibleFaqs,
-            {
-              opacity: 0,
-              y: '3rem',
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              stagger: 0.1,
-              ease: 'base',
-              onComplete: () => {
-                lenis.resize()
-              },
-            }
-          )
         })
       })
 
@@ -1818,6 +1802,7 @@ function runFaq(lenis) {
                       opacity: 0,
                       onComplete: () => {
                         faqElement.classList.remove('is-open')
+                        lenis.resize()
                       },
                     }
                   )
